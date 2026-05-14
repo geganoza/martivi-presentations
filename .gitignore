@@ -1,1 +1,8 @@
 .vercel
+config/credentials/
+workspace/
+_generated/
+*.pdf
+.DS_Store
+__pycache__/
+*.pyc

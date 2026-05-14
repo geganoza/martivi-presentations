@@ -1,0 +1,101 @@
+name: Thermorum Monthly Report
+
+on:
+  schedule:
+    # 06:00 UTC on the 1st of every month = 10:00 Tbilisi (UTC+4)
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+    inputs:
+      month:
+        description: 'Month (1-12). Leave empty for previous month.'
+        required: false
+      year:
+        description: 'Year. Leave empty for current year.'
+        required: false
+      skip_email:
+        description: 'Skip sending email'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: pip install google-api-python-client google-auth google-auth-oauthlib
+
+      - name: Restore credential files
+        env:
+          META_ADS_CREDENTIALS_JSON: ${{ secrets.META_ADS_CREDENTIALS_JSON }}
+          GOOGLE_ADS_CREDENTIALS_JSON: ${{ secrets.GOOGLE_ADS_CREDENTIALS_JSON }}
+          GMAIL_CREDENTIALS_JSON: ${{ secrets.GMAIL_CREDENTIALS_JSON }}
+          GMAIL_TOKEN_JSON: ${{ secrets.GMAIL_TOKEN_JSON }}
+        run: |
+          mkdir -p config/credentials
+          printf '%s' "$META_ADS_CREDENTIALS_JSON"  > config/credentials/meta_ads_credentials.json
+          printf '%s' "$GOOGLE_ADS_CREDENTIALS_JSON" > config/credentials/google_ads_credentials.json
+          printf '%s' "$GMAIL_CREDENTIALS_JSON"      > config/credentials/credentials.json
+          printf '%s' "$GMAIL_TOKEN_JSON"            > config/credentials/token.json
+          # quick sanity check
+          python -c "import json,sys; json.load(open('config/credentials/meta_ads_credentials.json')); json.load(open('config/credentials/google_ads_credentials.json')); json.load(open('config/credentials/token.json')); print('credentials OK')"
+
+      - name: Run monthly pipeline
+        id: pipeline
+        run: |
+          if [ -n "${{ inputs.month }}" ] && [ -n "${{ inputs.year }}" ]; then
+            python scripts/run_monthly_pipeline.py --month ${{ inputs.month }} --year ${{ inputs.year }}
+            echo "month=${{ inputs.month }}" >> $GITHUB_OUTPUT
+            echo "year=${{ inputs.year }}"   >> $GITHUB_OUTPUT
+          else
+            python scripts/run_monthly_pipeline.py
+            # compute previous month for downstream steps
+            python -c "
+            import datetime as dt, os
+            t = dt.date.today().replace(day=1) - dt.timedelta(days=1)
+            with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                f.write(f'month={t.month}\nyear={t.year}\n')
+            "
+          fi
+
+      - name: Commit and push (triggers Vercel deploy)
+        id: commit
+        run: |
+          git config user.name  "Thermorum Monthly Bot"
+          git config user.email "actions@github.com"
+          git add index.html thermorum/
+          if git diff --cached --quiet; then
+            echo "No changes to commit (report already deployed?)"
+            echo "deployed=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "Add Thermorum ${{ steps.pipeline.outputs.month }}/${{ steps.pipeline.outputs.year }} report"
+            git push
+            echo "deployed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Wait for Vercel deploy
+        if: steps.commit.outputs.deployed == 'true'
+        run: sleep 60
+
+      - name: Send email to mariam.kv
+        if: steps.commit.outputs.deployed == 'true' && inputs.skip_email != true
+        run: |
+          python scripts/send_report_email.py \
+            --month ${{ steps.pipeline.outputs.month }} \
+            --year ${{ steps.pipeline.outputs.year }}
+
+      - name: Cleanup
+        if: always()
+        run: rm -rf config/credentials

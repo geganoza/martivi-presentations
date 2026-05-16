@@ -52,23 +52,28 @@ jobs:
           # quick sanity check
           python -c "import json,sys; json.load(open('config/credentials/meta_ads_credentials.json')); json.load(open('config/credentials/google_ads_credentials.json')); json.load(open('config/credentials/token.json')); print('credentials OK')"
 
-      - name: Run monthly pipeline
-        id: pipeline
+      - name: Resolve target month
+        id: target
+        env:
+          IN_MONTH: ${{ inputs.month }}
+          IN_YEAR: ${{ inputs.year }}
         run: |
-          if [ -n "${{ inputs.month }}" ] && [ -n "${{ inputs.year }}" ]; then
-            python scripts/run_monthly_pipeline.py --month ${{ inputs.month }} --year ${{ inputs.year }}
-            echo "month=${{ inputs.month }}" >> $GITHUB_OUTPUT
-            echo "year=${{ inputs.year }}"   >> $GITHUB_OUTPUT
+          if [ -n "$IN_MONTH" ] && [ -n "$IN_YEAR" ]; then
+            MONTH="$IN_MONTH"
+            YEAR="$IN_YEAR"
           else
-            python scripts/run_monthly_pipeline.py
-            # compute previous month for downstream steps
-            python -c "
-            import datetime as dt, os
-            t = dt.date.today().replace(day=1) - dt.timedelta(days=1)
-            with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
-                f.write(f'month={t.month}\nyear={t.year}\n')
-            "
+            MONTH=$(python -c 'import datetime as dt; t=dt.date.today().replace(day=1)-dt.timedelta(days=1); print(t.month)')
+            YEAR=$(python  -c 'import datetime as dt; t=dt.date.today().replace(day=1)-dt.timedelta(days=1); print(t.year)')
           fi
+          echo "month=$MONTH" >> "$GITHUB_OUTPUT"
+          echo "year=$YEAR"   >> "$GITHUB_OUTPUT"
+          echo "Targeting $MONTH/$YEAR"
+
+      - name: Run monthly pipeline
+        env:
+          MONTH: ${{ steps.target.outputs.month }}
+          YEAR:  ${{ steps.target.outputs.year }}
+        run: python scripts/run_monthly_pipeline.py --month "$MONTH" --year "$YEAR"
 
       - name: Commit and push (triggers Vercel deploy)
         id: commit
@@ -80,7 +85,7 @@ jobs:
             echo "No changes to commit (report already deployed?)"
             echo "deployed=false" >> $GITHUB_OUTPUT
           else
-            git commit -m "Add Thermorum ${{ steps.pipeline.outputs.month }}/${{ steps.pipeline.outputs.year }} report"
+            git commit -m "Add Thermorum ${{ steps.target.outputs.month }}/${{ steps.target.outputs.year }} report"
             git push
             echo "deployed=true" >> $GITHUB_OUTPUT
           fi
@@ -91,10 +96,10 @@ jobs:
 
       - name: Send email to mariam.kv
         if: steps.commit.outputs.deployed == 'true' && inputs.skip_email != true
-        run: |
-          python scripts/send_report_email.py \
-            --month ${{ steps.pipeline.outputs.month }} \
-            --year ${{ steps.pipeline.outputs.year }}
+        env:
+          MONTH: ${{ steps.target.outputs.month }}
+          YEAR:  ${{ steps.target.outputs.year }}
+        run: python scripts/send_report_email.py --month "$MONTH" --year "$YEAR"
 
       - name: Cleanup
         if: always()

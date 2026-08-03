@@ -5,27 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="referrer" content="no-referrer">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#101010">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
 <title>გასაუბრების დაჯავშნა MARTIVI CONSULTING-თან</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap">
 <style>
+/* MARTIVI CONSULTING brand system, sourced from martiviconsulting.com.
+   Light editorial. NOT dark mode, NOT gradient-AI, teal is an accent and never
+   a fill surface. This is a different brand from MARTIVI DIGITAL (yellow/cyan)
+   and the two are never mixed. */
 :root{
-  --yellow:#ffc711;
-  --cyan:#3cc5ee;
-  --ink:#101010;
-  --ink-2:#171717;
-  --line:rgba(255,255,255,.10);
-  --line-2:rgba(255,255,255,.18);
-  --text:#f2f1ee;
-  --muted:#9d9a94;
-  --muted-2:#8b8880;
-  --surface:rgba(255,255,255,.035);
+  --bg:#FFFFFF;
+  --text:#12324C;        /* deep navy petrol, headlines and body */
+  --deep:#171717;        /* heaviest contrast where needed */
+  --accent:#1390AC;      /* teal, sparingly */
+  --accent-soft:rgba(19,144,172,.08);
+  --accent-line:rgba(19,144,172,.28);
+  --muted:#578096;       /* supporting text */
+  --muted-2:#9AA9B7;     /* captions, metadata */
+  --line:#E5E7EB;
+  --line-2:#D3D9E0;
+  --surface:#FFFFFF;
   --radius:18px;
   --f-head:'Montserrat','Noto Sans Georgian',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-  --f-body:'Inter','Noto Sans Georgian',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --f-body:'Montserrat','Noto Sans Georgian',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -33,11 +38,7 @@ html{-webkit-text-size-adjust:100%}
 body{
   min-height:100vh;
   min-height:100dvh;
-  background:
-    radial-gradient(1100px 620px at 50% -280px, rgba(255,199,17,.10), transparent 62%),
-    radial-gradient(760px 520px at 105% 100%, rgba(60,197,238,.055), transparent 60%),
-    var(--ink);
-  background-attachment:fixed;
+  background:var(--bg);
   color:var(--text);
   font-family:var(--f-body);
   font-size:16px;
@@ -62,17 +63,15 @@ body{
   text-transform:uppercase;
   margin:0 2px 20px;
 }
-.brand .m{color:var(--yellow)}
+.brand .m{color:var(--text)}
 .brand .c{color:var(--muted);font-weight:600;letter-spacing:.20em}
-.brand .dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);flex:none;margin-top:1px}
+.brand .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex:none;margin-top:1px}
 
 .card{
   background:var(--surface);
   border:1px solid var(--line);
   border-radius:var(--radius);
   padding:24px 20px;
-  backdrop-filter:blur(6px);
-  -webkit-backdrop-filter:blur(6px);
 }
 .card + .card{margin-top:14px}
 
@@ -91,14 +90,14 @@ h2{
 }
 p{margin:0 0 12px;color:var(--muted);font-size:15px}
 p:last-child{margin-bottom:0}
-a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(60,197,238,.35)}
-a:hover{border-bottom-color:var(--cyan)}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-line)}
+a:hover{border-bottom-color:var(--accent)}
 
-.rule{height:2px;width:32px;background:var(--yellow);border-radius:2px;margin:0 0 16px}
+.rule{height:2px;width:32px;background:var(--accent);border-radius:2px;margin:0 0 16px}
 
 .meta{list-style:none;margin:18px 0 0;padding:16px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:9px}
 .meta li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted)}
-.meta li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--yellow);flex:none;margin-top:8px;opacity:.85}
+.meta li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);flex:none;margin-top:8px}
 
 .day{margin-top:20px}
 .day:first-of-type{margin-top:0}
@@ -118,7 +117,7 @@ a:hover{border-bottom-color:var(--cyan)}
   font-size:16px;font-weight:500;
   font-variant-numeric:tabular-nums;
   color:var(--text);
-  background:rgba(255,255,255,.045);
+  background:#FFFFFF;
   border:1px solid var(--line);
   border-radius:12px;
   min-height:50px;padding:12px 6px;
@@ -128,17 +127,16 @@ a:hover{border-bottom-color:var(--cyan)}
   touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;
 }
-.slot:hover{background:rgba(255,255,255,.085);border-color:var(--line-2)}
+.slot:hover{background:var(--accent-soft);border-color:var(--accent-line)}
 .slot:active{transform:scale(.97)}
 .slot[aria-pressed="true"]{
-  background:var(--yellow);
-  border-color:var(--yellow);
-  color:#141210;
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#FFFFFF;
   font-weight:700;
-  box-shadow:0 6px 20px rgba(255,199,17,.20);
 }
 .slot:focus-visible,.btn:focus-visible,.link-btn:focus-visible,a:focus-visible{
-  outline:2px solid var(--cyan);outline-offset:2px;border-radius:12px;
+  outline:2px solid var(--accent);outline-offset:2px;border-radius:12px;
 }
 
 /* the sticky element must be #bar itself: its containing block (.wrap) is the
@@ -147,35 +145,35 @@ a:hover{border-bottom-color:var(--cyan)}
 #bar:empty{display:none}
 .bar{
   padding:16px 0 calc(6px + env(safe-area-inset-bottom));
-  background:linear-gradient(to top,var(--ink) 66%,rgba(16,16,16,.92) 82%,rgba(16,16,16,0));
+  background:linear-gradient(to top,var(--bg) 66%,rgba(255,255,255,.92) 82%,rgba(255,255,255,0));
 }
 .btn{
   appearance:none;-webkit-appearance:none;
   display:flex;align-items:center;justify-content:center;gap:8px;
   width:100%;min-height:54px;padding:15px 18px;
   font-family:var(--f-head);font-size:15.5px;font-weight:700;letter-spacing:.01em;
-  color:#141210;background:var(--yellow);
-  border:1px solid var(--yellow);border-radius:14px;
+  color:#FFFFFF;background:var(--accent);
+  border:1px solid var(--accent);border-radius:14px;
   cursor:pointer;
   transition:filter .16s ease,transform .10s ease,opacity .16s ease;
   touch-action:manipulation;-webkit-tap-highlight-color:transparent;
   text-align:center;
 }
-.btn:hover:not(:disabled){filter:brightness(1.07)}
+.btn:hover:not(:disabled){filter:brightness(1.08)}
 .btn:active:not(:disabled){transform:scale(.99)}
 .btn:disabled{opacity:.34;cursor:default}
 .btn:disabled[aria-busy="true"]{opacity:.62;cursor:progress}
 .btn.ghost{
-  background:transparent;color:var(--text);
+  background:#FFFFFF;color:var(--text);
   border-color:var(--line-2);
   font-weight:600;
 }
-.btn.ghost:hover:not(:disabled){background:rgba(255,255,255,.06)}
+.btn.ghost:hover:not(:disabled){background:var(--accent-soft);border-color:var(--accent-line)}
 .btn.meet{
-  background:transparent;color:var(--cyan);border-color:rgba(60,197,238,.45);
+  background:#FFFFFF;color:var(--accent);border-color:var(--accent-line);
   border-bottom-width:1px;
 }
-.btn.meet:hover{background:rgba(60,197,238,.09);border-color:var(--cyan)}
+.btn.meet:hover{background:var(--accent-soft);border-color:var(--accent)}
 .hint{margin:10px 0 0;text-align:center;font-size:13px;color:var(--muted-2)}
 .link-btn{
   appearance:none;-webkit-appearance:none;background:none;border:0;
@@ -187,8 +185,8 @@ a:hover{border-bottom-color:var(--cyan)}
 
 .spinner{
   width:16px;height:16px;flex:none;
-  border:2px solid rgba(20,18,16,.28);
-  border-top-color:#141210;
+  border:2px solid rgba(255,255,255,.42);
+  border-top-color:#FFFFFF;
   border-radius:50%;
   animation:spin .7s linear infinite;
 }
@@ -197,33 +195,33 @@ a:hover{border-bottom-color:var(--cyan)}
 .note{
   display:flex;gap:10px;align-items:flex-start;
   margin:0 0 16px;padding:12px 14px;
-  background:rgba(255,199,17,.07);
-  border:1px solid rgba(255,199,17,.22);
+  background:var(--accent-soft);
+  border:1px solid var(--accent-line);
   border-radius:12px;
-  font-size:14px;color:#f0e2bd;line-height:1.5;
+  font-size:14px;color:var(--text);line-height:1.5;
 }
-.note.bad{background:rgba(255,120,110,.07);border-color:rgba(255,120,110,.24);color:#f2d3d0}
-.note::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--yellow);flex:none;margin-top:7px}
-.note.bad::before{background:#ff8a80}
+.note.bad{background:rgba(178,44,38,.06);border-color:rgba(178,44,38,.26);color:#8C2018}
+.note::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;margin-top:7px}
+.note.bad::before{background:#B22C26}
 
 .when{
   font-family:var(--f-head);
-  font-size:22px;line-height:1.3;font-weight:700;color:var(--yellow);
+  font-size:22px;line-height:1.3;font-weight:700;color:var(--accent);
   margin:2px 0 16px;overflow-wrap:anywhere;
 }
 .check{
   width:40px;height:40px;border-radius:50%;
-  border:1px solid rgba(255,199,17,.4);
-  background:rgba(255,199,17,.10);
+  border:1px solid var(--accent-line);
+  background:var(--accent-soft);
   display:flex;align-items:center;justify-content:center;
   margin:0 0 14px;
 }
 .check svg{width:19px;height:19px;display:block}
 
-.sk{background:rgba(255,255,255,.06);border-radius:8px;position:relative;overflow:hidden}
+.sk{background:#EEF1F4;border-radius:8px;position:relative;overflow:hidden}
 .sk::after{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
   transform:translateX(-100%);
   animation:sweep 1.5s ease-in-out infinite;
 }
@@ -238,11 +236,11 @@ a:hover{border-bottom-color:var(--cyan)}
 }
 .foot .sig{
   font-family:var(--f-head);font-size:10.5px;font-weight:700;
-  letter-spacing:.13em;text-transform:uppercase;color:#6c6963;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--muted-2);
   margin-top:6px;
 }
-.foot a{color:var(--muted);border-bottom-color:rgba(255,255,255,.18)}
-.foot a:hover{color:var(--cyan)}
+.foot a{color:var(--muted);border-bottom-color:var(--line-2)}
+.foot a:hover{color:var(--accent)}
 
 .fade{animation:fade .32s ease both}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -663,7 +661,7 @@ a:hover{border-bottom-color:var(--cyan)}
 
     var check = el("div", "check");
     check.setAttribute("aria-hidden", "true");
-    check.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#ffc711" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.2 5.2L20 7"/></svg>';
+    check.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#1390AC" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.2 5.2L20 7"/></svg>';
     card.appendChild(check);
 
     card.appendChild(el("h1", null, existing ? T.existingHeading : T.bookedHeading));

@@ -1,0 +1,2 @@
+Deploy source check. Written 2026-08-03.
+If this file is reachable in production, GitHub push triggered the deploy.

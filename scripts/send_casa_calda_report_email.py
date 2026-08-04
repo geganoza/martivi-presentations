@@ -70,12 +70,14 @@ def build_message(year: int, month: int, sender: str, recipient: str) -> EmailMe
 
 
 def send(msg: EmailMessage) -> None:
-    host = os.environ.get("SMTP_HOST")
-    port = int(os.environ.get("SMTP_PORT", "587"))
-    user = os.environ.get("SMTP_USER")
-    password = os.environ.get("SMTP_PASSWORD")
+    host = os.environ.get("SMTP_HOST") or ""
+    port_raw = os.environ.get("SMTP_PORT") or ""
+    port = int(port_raw) if port_raw.strip() else 587
+    user = os.environ.get("SMTP_USER") or ""
+    password = os.environ.get("SMTP_PASSWORD") or ""
     if not host or not user or not password:
-        raise SystemExit("SMTP_HOST / SMTP_USER / SMTP_PASSWORD must all be set.")
+        missing = [k for k, v in (("SMTP_HOST", host), ("SMTP_USER", user), ("SMTP_PASSWORD", password)) if not v]
+        raise SystemExit(f"missing env: {', '.join(missing)} — add them as GitHub secrets")
 
     if port == 465:
         with smtplib.SMTP_SSL(host, port, timeout=30) as s:
@@ -115,7 +117,11 @@ def main() -> int:
               file=sys.stderr)
         return 0
 
-    sender = os.environ.get("SENDER_EMAIL", DEFAULT_SENDER)
+    # Sender: SENDER_EMAIL env → SMTP_USER (the auth'd mailbox) → DEFAULT_SENDER.
+    # Aligning From with the SMTP-auth'd mailbox is what passes SPF cleanly.
+    sender = (os.environ.get("SENDER_EMAIL") or "").strip() \
+             or (os.environ.get("SMTP_USER") or "").strip() \
+             or DEFAULT_SENDER
     msg = build_message(year, month, sender, recipient)
 
     if args.dry_run:

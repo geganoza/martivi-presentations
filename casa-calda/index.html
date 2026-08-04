@@ -3,114 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casa Calda — Reports</title>
+    <title>Casa Calda — სოციალური მედიის ანგარიშები</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700;800&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-            --cc-navy: #0A2956;
-            --cc-orange: #FF4812;
-            --cc-off: #FAFAFB;
-            --cc-mute: #6b7a90;
-            --cc-border: rgba(10, 41, 86, 0.08);
+            --navy:   #0A2956;
+            --orange: #FF4812;
+            --bg:     #FAFAFB;
+            --white:  #FFFFFF;
+            --ink:    #080808;
+            --mute:   #6b7a90;
+            --border: rgba(10, 41, 86, 0.08);
         }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { min-height: 100vh; }
         body {
             font-family: 'Noto Sans Georgian', 'Montserrat', -apple-system, sans-serif;
-            background: var(--cc-off);
-            color: var(--cc-navy);
-            min-height: 100vh;
+            background: var(--bg);
+            color: var(--navy);
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 64px 20px;
+            padding: 72px 24px 96px;
         }
-        .logo {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: var(--cc-navy);
-            margin-bottom: 6px;
+        .brand {
+            width: 100%;
+            max-width: 340px;
+            margin-bottom: 12px;
         }
-        .logo .accent { color: var(--cc-orange); }
+        .brand svg { width: 100%; height: auto; display: block; }
         h1 {
-            font-size: 16px;
-            color: var(--cc-mute);
-            margin-bottom: 56px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            color: var(--mute);
+            margin: 4px 0 8px;
+            text-align: center;
+        }
+        .sub {
+            font-size: 14px;
+            color: var(--mute);
+            font-weight: 400;
+            margin-bottom: 56px;
+            text-align: center;
         }
         .presentations {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 22px;
+            max-width: 1120px;
             width: 100%;
         }
         .card {
-            background: white;
-            border: 1px solid var(--cc-border);
-            border-radius: 12px;
-            padding: 24px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 26px 28px;
             text-decoration: none;
-            color: var(--cc-navy);
-            transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+            color: var(--navy);
+            transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
             display: block;
+            position: relative;
+        }
+        .card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 18px;
+            bottom: 18px;
+            width: 3px;
+            background: var(--orange);
+            border-radius: 0 3px 3px 0;
         }
         .card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(10, 41, 86, 0.10);
-            border-color: var(--cc-orange);
+            box-shadow: 0 14px 36px rgba(10, 41, 86, 0.10);
+            border-color: rgba(255, 72, 18, 0.35);
         }
         .card .client {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
-            color: var(--cc-orange);
-            letter-spacing: 1.2px;
+            color: var(--orange);
+            letter-spacing: 1.4px;
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .card .month {
             font-size: 22px;
             font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 14px;
         }
-        .empty {
-            max-width: 560px;
-            width: 100%;
-            text-align: center;
-            padding: 64px 24px;
-            background: white;
-            border: 1px solid var(--cc-border);
-            border-radius: 16px;
-        }
-        .empty p {
-            font-size: 18px;
-            line-height: 1.5;
-            color: var(--cc-navy);
-            margin-bottom: 8px;
-        }
-        .empty .sub {
-            font-size: 14px;
-            color: var(--cc-mute);
-            font-weight: 400;
+        .card .stats {
+            display: flex;
+            gap: 20px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
             font-family: 'Montserrat', sans-serif;
+        }
+        .card .stat { display: flex; flex-direction: column; }
+        .card .stat .v {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+        .card .stat .k {
+            font-size: 10px;
+            color: var(--mute);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-top: 2px;
+        }
+        @media (max-width: 600px) {
+            body { padding: 48px 16px 64px; }
+            .brand { max-width: 260px; }
+            .sub { margin-bottom: 40px; }
+            .card { padding: 22px 20px; }
         }
     </style>
 </head>
 <body>
-    <div class="logo">CASA <span class="accent">CALDA</span></div>
-    <h1>Monthly Reports</h1>
+    <div class="brand">
+        <!-- Casa Calda official logo (SVG, inlined from website-static/assets/logo-main.svg) -->
+        <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 2048 985.8">
+            <defs>
+                <style>
+                    .cc-navy { fill: #0a2956; }
+                    .cc-orange { fill: #ff4812; }
+                </style>
+            </defs>
+            <path class="cc-navy" d="M649.4,383.3v385.8H218.2v-385.8c0-7.9.6-15.7,1.6-23.4,1.6-11.3,4.3-22.3,8-32.8,15.2-42.7,47.2-77.4,88-96.2,8.8-4.1,18-7.4,27.6-9.9,13.5-3.5,27.8-5.4,42.4-5.4h95.7c8.2,0,16.3.6,24.3,1.8,47.6,6.9,88.7,33.9,114.6,71.9,18.2,26.8,28.9,59.2,28.9,94"/>
+            <path class="cc-orange" d="M649.4,383.3v385.8H218.2v-28.9h213.5c.6-8.2,1.6-16.3,3.1-24.2l-187.8-50.3-28.9-7.7v-29.9l28.9,7.7,195.3,52.3c2.7-7.7,5.8-15.3,9.3-22.6l-204.6-118.1-28.9-16.7v-33.3l28.9,16.7,219,126.5c4.6-6.8,9.6-13.2,15-19.4L219.8,359.9c1.6-11.3,4.3-22.3,8-32.8l273.6,273.6c6.2-5.3,12.6-10.4,19.4-15l-190.4-329.7-14.5-25.1c8.8-4.1,18-7.4,27.6-9.9l15.1,26.1,187.2,324.2c7.3-3.5,14.9-6.7,22.6-9.3l-85.1-317.5-7.7-28.9h6.1c8.2,0,16.3.6,24.3,1.8l8.3,31,82,306.2c7.9-1.5,16-2.6,24.2-3.1v-262.1c18.2,26.8,28.9,59.2,28.9,94"/>
+            <path class="cc-orange" d="M620.5,289.3c-25.9-38.1-67-65.1-114.6-71.9-7.9-1.2-16-1.8-24.3-1.8h-95.7c-14.6,0-28.9,1.9-42.4,5.4-9.5,2.5-18.8,5.8-27.6,9.9-40.8,18.8-72.8,53.5-88,96.2-3.7,10.5-6.5,21.5-8,32.8-1.1,7.6-1.6,15.5-1.6,23.4v385.8h431.2v-385.8c0-34.8-10.7-67.2-28.9-94M620.5,740.2H247.1v-356.9c0-11.4,1.4-22.4,4-33,10.3-42.3,40.2-77.1,79.4-94.3,8.9-3.9,18.4-7,28.2-8.9,8.8-1.8,18-2.7,27.3-2.7h97.4c10.6.1,21,1.5,30.9,3.9,60.9,14.7,106.3,69.6,106.3,135v356.9Z"/>
+            <path class="cc-orange" d="M620.5,289.3c-25.9-38.1-67-65.1-114.6-71.9-7.9-1.2-16-1.8-24.3-1.8h-95.7c-14.6,0-28.9,1.9-42.4,5.4-9.5,2.5-18.8,5.8-27.6,9.9-40.8,18.8-72.8,53.5-88,96.2-3.7,10.5-6.5,21.5-8,32.8-1.1,7.6-1.6,15.5-1.6,23.4v385.8h431.2v-385.8c0-34.8-10.7-67.2-28.9-94M620.5,740.2H247.1v-356.9c0-11.4,1.4-22.4,4-33,10.3-42.3,40.2-77.1,79.4-94.3,8.9-3.9,18.4-7,28.2-8.9,8.8-1.8,18-2.7,27.3-2.7h97.4c10.6.1,21,1.5,30.9,3.9,60.9,14.7,106.3,69.6,106.3,135v356.9Z"/>
+            <path class="cc-navy" d="M912.8,680.6v42.6c0,37.7-41.3,45.6-66.1,45.6h-35.3c-24.8,0-54.3-7.9-54.3-45.6v-139.4h54v139.4c0,12.5,6.3,13.6,12.1,13.6h23.5c5.9,0,12.1-1,12.1-13.6v-42.7c.2-7.9-2.6-13.2-8.3-15.8h-.3c-10-3.4-14.6-16-15.5-42l-.2-6h54.2v5.9c0,10.1,1,15.1,1.9,17.6l.5,1.4,1.4.6c13.5,5.4,20.3,18.4,20.3,38.4"/>
+            <path class="cc-navy" d="M1089.2,654.5l-.7,68.7c0,14.7-4.6,26-13.7,33.7-9.3,7.9-22.9,11.8-40.6,11.8h-46.9c-24.8,0-54.3-7.9-54.3-45.6v-62.3h54v62.3c0,12.5,6.3,13.6,12.1,13.6h23.5c5.9,0,12.1-1,12.1-13.6l.7-68.7c0-12.6-6.3-13.6-12.1-13.6h-12.9c-14.7,0-26.4-5-33.9-14.5-6.9-8.8-10.3-21.2-10.3-38v-4.5h53.9v4.5c0,10.3,1.1,15.6,2,18.3l.8,2.3h11.9c24.8,0,54.3,7.9,54.3,45.6"/>
+            <path class="cc-navy" d="M1210.8,630.4h-47.6v-46.6h-54v139.4c0,37.7,29.5,45.6,54.3,45.6h47.2c24.8,0,54.3-7.9,54.3-45.6v-47.2c0-37.7-29.5-45.6-54.3-45.6M1211,723.2c0,12.5-6.3,13.6-12.1,13.6h-23.5c-5.9,0-12.1-1-12.1-13.6v-60.9h35.6c5.9,0,12.1,1.1,12.1,13.7v47.2Z"/>
+            <path class="cc-navy" d="M1580.9,629.7l-4.4,84.1h-49.7l4.4-84.1v-.2c0-12.5-6.3-13.5-12.1-13.5l-5.1-.3c-5.9,0-12.1,1.1-12.1,13.7v51.8h-54v-51.8c0-12.7-6.3-13.7-12.2-13.7h-3.2c-5.9,0-12.1,1.1-12.1,13.7v51.8h-54v-51.8c0-12.7-6.3-13.7-12.1-13.7h-4c-5.9,0-12.1,1.1-12.1,13.6l1.4,51.8c0,8.2,10.2,24.4,58.7,54.9l.8.5,126.6.3-1.6,32-217.2-.3v-32h19.5l-7-6c-21.6-18.6-32.5-35.1-32.6-49.4l-1.4-51.7c0-37.7,29.4-45.6,54-45.6h20.8c12,0,22.5,3.1,31.1,9.3l2,1.4,2-1.4c8.6-6.2,19.1-9.3,31.1-9.3h15.2c11.9,0,22.3,3.1,30.9,9.2l2,1.4,2-1.4c8.7-6.1,19.4-9.2,31.6-9.2l18.9.3c24.7,0,54,7.9,54,45.6"/>
+            <path class="cc-navy" d="M1754.2,628.2l-1.4,140.9h-52l1.4-140.9c0-11.5-5.6-12.5-10.8-12.5h-27c-5.2,0-10.8,1-10.8,12.6l1.4,140.8h-52.6l-1.4-140.8c0-14.4,4.5-25.4,13.3-33,9-7.7,22.2-11.6,39.4-11.6h47.5c24.1,0,53,7.7,53,44.4"/>
+            <path class="cc-navy" d="M1342.9,389.6l-1.4,140.9h-52l1.4-140.9c0-11.5-5.6-12.5-10.8-12.5h-27c-5.2,0-10.8,1-10.8,12.6l1.4,140.8h-52.6l-1.4-140.8c0-14.4,4.5-25.4,13.3-33,9-7.7,22.2-11.6,39.4-11.6h47.5c24.1,0,53,7.7,53,44.4"/>
+            <path class="cc-navy" d="M1831.9,389.6l-1.4,140.9h-52l1.4-140.9c0-11.5-5.6-12.5-10.8-12.5h-27c-5.2,0-10.8,1-10.8,12.6l1.4,140.8h-52.6l-1.4-140.8c0-14.4,4.5-25.4,13.3-33,9-7.7,22.2-11.6,39.4-11.6h47.5c24.1,0,53,7.7,53,44.4"/>
+            <path class="cc-navy" d="M941.1,346.2h-35.5c-7.6,0-18.9,1.8-29.1,10.2l-2.2,1.8-2.2-1.8c-8.5-6.8-18.6-10.2-29.8-10.2h-32.7c-23.9,0-52.4,7.5-52.4,43.5v97.3c0,36,28.7,43.5,52.7,43.5h43c24,0,52.7-7.5,52.7-43.5v-93c0-17.3,6-16.7,16.2-16.7h8.3c5.2,0,10.8,1,10.8,12.4l-1.4,140.9h52.8l1.4-140.8c0-35.9-28.7-43.4-52.7-43.4M853.1,487c0,11.4-5.6,12.3-10.8,12.3h-20.3c-5.2,0-10.8-1-10.8-12.3v-97.3c0-11.5,5.6-12.5,10.8-12.5h20.3c5.2,0,10.8,1,10.8,12.5v97.3Z"/>
+            <path class="cc-navy" d="M1126.5,391l-7.8-.2.6-4.5c1-12.8-2.8-22-11.8-28.2-4.6-3.2-6.7-5.2-7.6-6.4l-.7-.9-.2-5.7h-61.2v5.6c0,10.4,6.1,18.2,18.1,23.1,6.6,2.7,9.8,6.2,10.2,11v.6s-1.3,5.4-1.3,5.4h-9c-13.3,0-41.8,7.7-41.8,44.6v50.4c0,36.9,29.4,44.6,54,44.6h47.6c24.7,0,54-7.8,54-44.6v-50.4c0-34.6-23.4-43.3-43.1-44.5M1115.6,485.8c0,12.4-6.3,13.5-12.2,13.5h-23.4c-5.9,0-12.2-1-12.2-13.5v-50.4c0-9.4,2.9-13.6,9.5-13.6h26.1c5.9,0,12.2,1,12.2,13.6v50.4Z"/>
+            <path class="cc-navy" d="M1658.6,391.4l-4.4,84.1h-49.7l4.4-84.1v-.2c0-12.5-6.3-13.5-12.1-13.5l-5.1-.3c-5.9,0-12.1,1.1-12.1,13.7v51.8h-54v-51.8c0-12.7-6.3-13.7-12.2-13.7h-3.2c-5.9,0-12.1,1.1-12.1,13.7v51.8h-54v-51.8c0-12.7-6.3-13.7-12.1-13.7h-4c-5.9,0-12.1,1.1-12.1,13.6l1.4,51.8c0,8.2,10.2,24.4,58.7,54.9l.8.5,126.6.3-1.6,32-217.2-.3v-32h19.5l-7-6c-21.6-18.6-32.5-35.1-32.6-49.4l-1.4-51.7c0-37.7,29.4-45.6,54-45.6h20.8c12,0,22.5,3.1,31.1,9.3l2,1.4,2-1.4c8.6-6.2,19.1-9.3,31.1-9.3h15.2c11.9,0,22.3,3.1,30.9,9.2l2,1.4,2-1.4c8.7-6.1,19.4-9.2,31.6-9.2l18.9.3c24.7,0,54,7.9,54,45.6"/>
+        </svg>
+    </div>
+    <h1>სოციალური მედიის ანგარიშები</h1>
+    <p class="sub">ყოველთვიური ეფექტურობის ანგარიშები</p>
 
     <!-- Do NOT delete or rename this <div class="presentations"> anchor.
-         run_monthly_pipeline.py matches it by exact string; cards will
-         be injected here by the monthly cron. -->
+         Future automation may inject cards here (mirror of the root
+         run_monthly_pipeline.py anchor pattern). Newest month on top. -->
     <div class="presentations">
-        <div class="empty">
-            <p>პირველი ანგარიში მალე გამოქვეყნდება</p>
-            <p class="sub">The first report will be published soon</p>
-        </div>
+        <a href="/casa-calda/july-2026" class="card">
+            <div class="client">Casa Calda</div>
+            <div class="month">2026 წლის ივლისი</div>
+            <div class="stats">
+                <div class="stat"><span class="v">$359.90</span><span class="k">ხარჯი</span></div>
+                <div class="stat"><span class="v">465K</span><span class="k">ჩვენებები</span></div>
+                <div class="stat"><span class="v">3,421</span><span class="k">დაწკაპ.</span></div>
+            </div>
+        </a>
+        <a href="/casa-calda/june-2026" class="card">
+            <div class="client">Casa Calda</div>
+            <div class="month">2026 წლის ივნისი</div>
+            <div class="stats">
+                <div class="stat"><span class="v">$59.77</span><span class="k">ხარჯი</span></div>
+                <div class="stat"><span class="v">107K</span><span class="k">ჩვენებები</span></div>
+                <div class="stat"><span class="v">922</span><span class="k">დაწკაპ.</span></div>
+            </div>
+        </a>
     </div>
 </body>
 </html>

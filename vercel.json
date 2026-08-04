@@ -6,7 +6,7 @@
     {
       "source": "/",
       "has": [{ "type": "host", "value": "reports.casacalda.com" }],
-      "destination": "/casa-calda/index.html"
+      "destination": "/casa-calda"
     }
   ]
 }

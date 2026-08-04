@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Calda — Reports</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700;800&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --cc-navy: #0A2956;
+            --cc-orange: #FF4812;
+            --cc-off: #FAFAFB;
+            --cc-mute: #6b7a90;
+            --cc-border: rgba(10, 41, 86, 0.08);
+        }
+        body {
+            font-family: 'Noto Sans Georgian', 'Montserrat', -apple-system, sans-serif;
+            background: var(--cc-off);
+            color: var(--cc-navy);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 64px 20px;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--cc-navy);
+            margin-bottom: 6px;
+        }
+        .logo .accent { color: var(--cc-orange); }
+        h1 {
+            font-size: 16px;
+            color: var(--cc-mute);
+            margin-bottom: 56px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .presentations {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--cc-border);
+            border-radius: 12px;
+            padding: 24px;
+            text-decoration: none;
+            color: var(--cc-navy);
+            transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+            display: block;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(10, 41, 86, 0.10);
+            border-color: var(--cc-orange);
+        }
+        .card .client {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--cc-orange);
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .card .month {
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .empty {
+            max-width: 560px;
+            width: 100%;
+            text-align: center;
+            padding: 64px 24px;
+            background: white;
+            border: 1px solid var(--cc-border);
+            border-radius: 16px;
+        }
+        .empty p {
+            font-size: 18px;
+            line-height: 1.5;
+            color: var(--cc-navy);
+            margin-bottom: 8px;
+        }
+        .empty .sub {
+            font-size: 14px;
+            color: var(--cc-mute);
+            font-weight: 400;
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">CASA <span class="accent">CALDA</span></div>
+    <h1>Monthly Reports</h1>
+
+    <!-- Do NOT delete or rename this <div class="presentations"> anchor.
+         run_monthly_pipeline.py matches it by exact string; cards will
+         be injected here by the monthly cron. -->
+    <div class="presentations">
+        <div class="empty">
+            <p>პირველი ანგარიში მალე გამოქვეყნდება</p>
+            <p class="sub">The first report will be published soon</p>
+        </div>
+    </div>
+</body>
+</html>

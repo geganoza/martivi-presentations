@@ -10,6 +10,60 @@
       "has": [{ "type": "host", "value": "reports.casacalda.com" }],
       "destination": "/casa-calda",
       "permanent": false
+    },
+    {
+      "source": "/thermorum/:path*",
+      "has": [{ "type": "host", "value": "reports.casacalda.com" }],
+      "destination": "/casa-calda",
+      "permanent": false
+    },
+    {
+      "source": "/thermorum",
+      "has": [{ "type": "host", "value": "reports.casacalda.com" }],
+      "destination": "/casa-calda",
+      "permanent": false
+    },
+    {
+      "source": "/hr/:path*",
+      "has": [{ "type": "host", "value": "reports.casacalda.com" }],
+      "destination": "/casa-calda",
+      "permanent": false
+    },
+    {
+      "source": "/hr",
+      "has": [{ "type": "host", "value": "reports.casacalda.com" }],
+      "destination": "/casa-calda",
+      "permanent": false
+    },
+    {
+      "source": "/autograph/:path*",
+      "has": [{ "type": "host", "value": "reports.casacalda.com" }],
+      "destination": "/casa-calda",
+      "permanent": false
+    },
+    {
+      "source": "/autograph",
+      "has": [{ "type": "host", "value": "reports.casacalda.com" }],
+      "destination": "/casa-calda",
+      "permanent": false
+    },
+    {
+      "source": "/interview/:path*",
+      "has": [{ "type": "host", "value": "reports.casacalda.com" }],
+      "destination": "/casa-calda",
+      "permanent": false
+    },
+    {
+      "source": "/interview",
+      "has": [{ "type": "host", "value": "reports.casacalda.com" }],
+      "destination": "/casa-calda",
+      "permanent": false
+    },
+    {
+      "source": "/api/:path*",
+      "has": [{ "type": "host", "value": "reports.casacalda.com" }],
+      "destination": "/casa-calda",
+      "permanent": false
     }
   ]
 }

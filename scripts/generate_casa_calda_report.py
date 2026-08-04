@@ -38,8 +38,18 @@ CASA_DIR = REPO_ROOT / "casa-calda"
 TEMPLATE_PATH = CASA_DIR / "template.html"
 INDEX_PATH = CASA_DIR / "index.html"
 
-CREDS_PATH = Path(
-    "/Users/giorginozadze/Projects/AZON/MAIA/config/credentials/meta_ads_credentials.json"
+import os
+
+# Credentials lookup order: env override → repo-relative (CI runners write here)
+# → MAIA workstation path (local dev fallback). First existing file wins.
+_CREDS_CANDIDATES = [
+    os.environ.get("META_ADS_CREDENTIALS_PATH", ""),
+    str(REPO_ROOT / "config" / "credentials" / "meta_ads_credentials.json"),
+    "/Users/giorginozadze/Projects/AZON/MAIA/config/credentials/meta_ads_credentials.json",
+]
+CREDS_PATH = next(
+    (Path(p) for p in _CREDS_CANDIDATES if p and Path(p).is_file()),
+    Path(_CREDS_CANDIDATES[1]),  # last-resort default (raises FileNotFoundError below)
 )
 
 AD_ACCOUNT_ID = "act_2040713473241527"   # Casa Calda

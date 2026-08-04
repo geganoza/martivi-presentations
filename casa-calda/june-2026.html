@@ -318,24 +318,44 @@
             .slide { page-break-after: always; }
             .iframe-wrap { display: none; }
         }
-    
-        .creatives-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 22px; margin-top: 12px; }
+        
+        .creatives-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 24px; margin-top: 12px; }
         .creative-card { background: #fff; border: 1px solid var(--border, rgba(10,41,86,.08)); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
-        .creative-card__head { padding: 16px 18px 10px; border-bottom: 1px solid var(--border, rgba(10,41,86,.06)); }
+        .creative-card__head { padding: 16px 18px 12px; border-bottom: 1px solid var(--border, rgba(10,41,86,.06)); }
         .creative-card__name { font-size: 14px; font-weight: 700; color: var(--navy, #0A2956); margin-bottom: 4px; line-height: 1.35; }
         .creative-card__meta { font-size: 11px; color: var(--mute, #6b7a90); text-transform: uppercase; letter-spacing: .5px; }
-        .creative-card__embed { position: relative; width: 100%; aspect-ratio: 9/16; background: #f4f5f7; }
+        /* aspect-ratio set inline per card to match each post's object_type */
+        .creative-card__embed { position: relative; width: 100%; background: #f4f5f7; overflow: hidden; }
         .creative-card__embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
         .creative-card__foot { display: flex; justify-content: space-between; padding: 12px 18px; font-family: Montserrat, sans-serif; font-size: 12px; border-top: 1px solid var(--border, rgba(10,41,86,.06)); }
         .creative-card__spend { font-weight: 700; color: var(--orange, #FF4812); }
         .creative-card__impr { color: var(--mute, #6b7a90); }
-        </style>
+        
+
+        /* --- creatives grid (added by refill_creatives) --- */
+        .creatives-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-top: 8px; }
+        .creative-card { background: #fff; border: 1px solid rgba(10,41,86,.10); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 2px 10px rgba(10,41,86,.04); }
+        .creative-card__head { padding: 14px 16px 10px; border-bottom: 1px solid rgba(10,41,86,.06); }
+        .creative-card__name { font-size: 13px; font-weight: 700; color: #0A2956; margin-bottom: 4px; line-height: 1.35; }
+        .creative-card__meta { font-size: 10.5px; color: #6b7a90; text-transform: uppercase; letter-spacing: .4px; }
+        /* aspect-ratio set inline per-card to match creative.object_type */
+        .creative-card__embed { position: relative; width: 100%; background: #f4f5f7; overflow: hidden; }
+        .creative-card__embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .creative-card__foot { display: flex; justify-content: space-between; padding: 10px 16px; font-family: Montserrat, sans-serif; font-size: 12px; border-top: 1px solid rgba(10,41,86,.06); }
+        .creative-card__spend { font-weight: 700; color: #FF4812; }
+        .creative-card__impr { color: #6b7a90; }
+
+        .cc-brand { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .cc-brand svg { max-width: 220px; height: auto; display: block; }
+        .cc-brand__word { font-family: Montserrat, sans-serif; font-weight: 800; font-size: 24px; letter-spacing: 8px; color: #0A2956; text-transform: uppercase; margin-top: 4px; }
+</style>
 </head>
 <body>
 
 <!-- Slide 1: Title -->
 <div class="slide title-slide">
-    <div class="logo"><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 2048 985.8">
+    <div class="logo"><div class="cc-brand">
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 2048 985.8">
   <defs>
     <style>
       .st0 {
@@ -361,7 +381,9 @@
   <path class="st0" d="M941.1,346.2h-35.5c-7.6,0-18.9,1.8-29.1,10.2l-2.2,1.8-2.2-1.8c-8.5-6.8-18.6-10.2-29.8-10.2h-32.7c-23.9,0-52.4,7.5-52.4,43.5v97.3c0,36,28.7,43.5,52.7,43.5h43c24,0,52.7-7.5,52.7-43.5v-93c0-17.3,6-16.7,16.2-16.7h8.3c5.2,0,10.8,1,10.8,12.4l-1.4,140.9h52.8l1.4-140.8c0-35.9-28.7-43.4-52.7-43.4M853.1,487c0,11.4-5.6,12.3-10.8,12.3h-20.3c-5.2,0-10.8-1-10.8-12.3v-97.3c0-11.5,5.6-12.5,10.8-12.5h20.3c5.2,0,10.8,1,10.8,12.5v97.3Z"/>
   <path class="st0" d="M1126.5,391l-7.8-.2.6-4.5c1-12.8-2.8-22-11.8-28.2-4.6-3.2-6.7-5.2-7.6-6.4l-.7-.9-.2-5.7h-61.2v5.6c0,10.4,6.1,18.2,18.1,23.1,6.6,2.7,9.8,6.2,10.2,11v.6s-1.3,5.4-1.3,5.4h-9c-13.3,0-41.8,7.7-41.8,44.6v50.4c0,36.9,29.4,44.6,54,44.6h47.6c24.7,0,54-7.8,54-44.6v-50.4c0-34.6-23.4-43.3-43.1-44.5M1115.6,485.8c0,12.4-6.3,13.5-12.2,13.5h-23.4c-5.9,0-12.2-1-12.2-13.5v-50.4c0-9.4,2.9-13.6,9.5-13.6h26.1c5.9,0,12.2,1,12.2,13.6v50.4Z"/>
   <path class="st0" d="M1658.6,391.4l-4.4,84.1h-49.7l4.4-84.1v-.2c0-12.5-6.3-13.5-12.1-13.5l-5.1-.3c-5.9,0-12.1,1.1-12.1,13.7v51.8h-54v-51.8c0-12.7-6.3-13.7-12.2-13.7h-3.2c-5.9,0-12.1,1.1-12.1,13.7v51.8h-54v-51.8c0-12.7-6.3-13.7-12.1-13.7h-4c-5.9,0-12.1,1.1-12.1,13.6l1.4,51.8c0,8.2,10.2,24.4,58.7,54.9l.8.5,126.6.3-1.6,32-217.2-.3v-32h19.5l-7-6c-21.6-18.6-32.5-35.1-32.6-49.4l-1.4-51.7c0-37.7,29.4-45.6,54-45.6h20.8c12,0,22.5,3.1,31.1,9.3l2,1.4,2-1.4c8.6-6.2,19.1-9.3,31.1-9.3h15.2c11.9,0,22.3,3.1,30.9,9.2l2,1.4,2-1.4c8.7-6.1,19.4-9.2,31.6-9.2l18.9.3c24.7,0,54,7.9,54,45.6"/>
-</svg></div>
+</svg>
+<div class="cc-brand__word">Casa Calda</div>
+</div></div>
     <h1>2026 წლის ივნისი</h1>
     <h2>სოციალური მედიის ანგარიში</h2>
     <div class="period">2026-06-01 → 2026-06-30</div>
@@ -388,95 +410,56 @@
     <div class="chips">
         <span class="chip"><b>319</b> <em>რეაქციები</em></span><span class="chip"><b>7</b> <em>კომენტარები</em></span><span class="chip"><b>3</b> <em>გაზიარებები</em></span><span class="chip"><b>4</b> <em>ბმულზე დაწკაპუნება</em></span><span class="chip"><b>365</b> <em>ფოტოს ნახვა</em></span><span class="chip"><b>2,267</b> <em>ვიდეოს ნახვა</em></span><span class="chip"><b>12</b> <em>მოწონებები (ფეისბუქი)</em></span>
     </div>
-    <div class="slide-footer"><div><b>MARTIVI</b> <em>DIGITAL</em></div><div>პერიოდი: 2026-06-01 → 2026-06-30</div></div>
-</div>
+    <div class="slide-footer"><div><b>MARTIVI</b> <em>DIGITAL</em></div>
 
-<!-- Slide 3: Meta Creatives -->
 <div class="slide">
     <div class="section-header">
         <h2>მეტას კრეატივები</h2>
-<div class="creatives-grid">
-
-            <article class="creative-card">
-                <header class="creative-card__head">
-                    <h4 class="creative-card__name">25 Years Of Quality ENG</h4>
-                    <p class="creative-card__meta">LEGACY Engagement</p>
-                </header>
-                <div class="creative-card__embed">
-                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1831452344503336&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
-                </div>
-                <footer class="creative-card__foot">
-                    <span class="creative-card__spend">$15.33</span>
-                    <span class="creative-card__impr">13,095 ჩვენება</span>
-                </footer>
-            </article>
-
-            <article class="creative-card">
-                <header class="creative-card__head">
-                    <h4 class="creative-card__name">გუნდის შესახებ პოსტი june 2026</h4>
-                    <p class="creative-card__meta">TEAM Engagement</p>
-                </header>
-                <div class="creative-card__embed">
-                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1833169600998277&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
-                </div>
-                <footer class="creative-card__foot">
-                    <span class="creative-card__spend">$8.94</span>
-                    <span class="creative-card__impr">8,636 ჩვენება</span>
-                </footer>
-            </article>
-
-            <article class="creative-card">
-                <header class="creative-card__head">
-                    <h4 class="creative-card__name">25 Years Of Quality GEO</h4>
-                    <p class="creative-card__meta">LEGACY Engagement</p>
-                </header>
-                <div class="creative-card__embed">
-                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1826122955036275&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
-                </div>
-                <footer class="creative-card__foot">
-                    <span class="creative-card__spend">$8.05</span>
-                    <span class="creative-card__impr">4,607 ჩვენება</span>
-                </footer>
-            </article>
-</div>
-
-        <div class="rule"></div>
-        <div class="meta">Top 3 by Spend</div>
     </div>
-    <div class="preview-grid">
-        
-        <div class="preview-card">
-            <div class="header">
-                <h4>25 Years Of Quality ENG</h4>
-                <span class="spend">$15.33</span>
-            </div>
-            <div class="meta">LEGACY Engagement · 13,095 ჩვენება</div>
-            <div class="iframe-wrap">
-                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1831452344503336&show_text=false&width=350" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-            </div>
-        </div>
-        <div class="preview-card">
-            <div class="header">
-                <h4>გუნდის შესახებ პოსტი june 2026</h4>
-                <span class="spend">$8.94</span>
-            </div>
-            <div class="meta">TEAM Engagement · 8,636 ჩვენება</div>
-            <div class="iframe-wrap">
-                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1833169600998277&show_text=false&width=350" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-            </div>
-        </div>
-        <div class="preview-card">
-            <div class="header">
-                <h4>25 Years Of Quality GEO</h4>
-                <span class="spend">$8.05</span>
-            </div>
-            <div class="meta">LEGACY Engagement · 4,607 ჩვენება</div>
-            <div class="iframe-wrap">
-                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1826122955036275&show_text=false&width=350" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-            </div>
-        </div>
+      <div class="creatives-grid">
+        <article class="creative-card">
+          <header class="creative-card__head">
+            <h4 class="creative-card__name">გუნდის შესახებ პოსტი june 2026</h4>
+            <p class="creative-card__meta">TEAM Engagement · 25 Jun 2026</p>
+          </header>
+          <div class="creative-card__embed" style="aspect-ratio: 1/1;">
+            <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1833169600998277&show_text=false&width=500" loading="lazy" scrolling="no" allowfullscreen></iframe>
+          </div>
+          <footer class="creative-card__foot">
+            <span class="creative-card__spend">$15.47</span>
+            <span class="creative-card__impr">15,078 ჩვენება</span>
+          </footer>
+        </article>
+        <article class="creative-card">
+          <header class="creative-card__head">
+            <h4 class="creative-card__name">25 Years Of Quality ENG</h4>
+            <p class="creative-card__meta">LEGACY Engagement · 23 Jun 2026</p>
+          </header>
+          <div class="creative-card__embed" style="aspect-ratio: 1/1;">
+            <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1831452344503336&show_text=false&width=500" loading="lazy" scrolling="no" allowfullscreen></iframe>
+          </div>
+          <footer class="creative-card__foot">
+            <span class="creative-card__spend">$28.53</span>
+            <span class="creative-card__impr">59,478 ჩვენება</span>
+          </footer>
+        </article>
+        <article class="creative-card">
+          <header class="creative-card__head">
+            <h4 class="creative-card__name">25 Years Of Quality GEO</h4>
+            <p class="creative-card__meta">LEGACY Engagement · 19 Jun 2026</p>
+          </header>
+          <div class="creative-card__embed" style="aspect-ratio: 1/1;">
+            <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1826122955036275&show_text=false&width=500" loading="lazy" scrolling="no" allowfullscreen></iframe>
+          </div>
+          <footer class="creative-card__foot">
+            <span class="creative-card__spend">$15.77</span>
+            <span class="creative-card__impr">32,761 ჩვენება</span>
+          </footer>
+        </article>
+      </div>
     </div>
-    <div class="slide-footer"><div><b>MARTIVI</b> <em>DIGITAL</em></div><div>პერიოდი: 2026-06-01 → 2026-06-30</div></div>
+<div class="slide-footer"><div><b>MARTIVI</b> <em>DIGITAL</em></div><div>პერიოდი: 2026-06-01 → 2026-06-30</div></div>
+<div>პერიოდი: 2026-06-01 → 2026-06-30</div></div>
 </div>
 
 <!-- Slide 4: Ads Table -->

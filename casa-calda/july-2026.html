@@ -1,563 +1,111 @@
-<!DOCTYPE html>
-<html lang="ka">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casa Calda — 2026 წლის ივლისი — სოციალური მედიის ანგარიში</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        :root {
-            --navy:  #0A2956;
-            --orange:#FF4812;
-            --bg:    #FAFAFB;
-            --white: #FFFFFF;
-            --ink:   #080808;
-            --mute:  #6b7a90;
-            --border:rgba(10,41,86,0.08);
-            --border-strong: rgba(10,41,86,0.14);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body { background: var(--bg); color: var(--navy); }
-        body {
-            font-family: 'Noto Sans Georgian', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-weight: 400;
-            line-height: 1.4;
-            -webkit-font-smoothing: antialiased;
-        }
-        .slide {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 40px;
-            background: var(--bg);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
 
-        /* Title slide */
-        .title-slide {
-            min-height: 100vh;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(180deg, var(--white) 0%, var(--bg) 100%);
-            gap: 32px;
-        }
-        .title-slide .logo-wrap {
-            width: 320px;
-            max-width: 60vw;
-        }
-        .title-slide .logo-wrap svg {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .title-slide h1 {
-            font-size: 68px;
-            font-weight: 800;
-            color: var(--navy);
-            letter-spacing: -1px;
-            line-height: 1.05;
-        }
-        .title-slide .subtitle {
-            font-size: 22px;
-            font-weight: 500;
-            color: var(--mute);
-            letter-spacing: 0.5px;
-        }
-        .title-slide .period-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--orange);
-            border: 2px solid var(--orange);
-            padding: 12px 28px;
-            border-radius: 999px;
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: 0.5px;
-        }
-        .title-slide .byline {
-            font-size: 13px;
-            color: var(--mute);
-            margin-top: 12px;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-        .title-slide .byline .m { color: var(--orange); }
 
-        /* Section header */
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--navy);
-        }
-        .section-header .bar {
-            width: 8px;
-            height: 30px;
-            background: var(--orange);
-            border-radius: 2px;
-        }
-        .section-header h2 {
-            font-size: 26px;
-            font-weight: 700;
-            color: var(--navy);
-            letter-spacing: -0.3px;
-        }
-        .section-header .count {
-            margin-left: auto;
-            font-size: 13px;
-            color: var(--mute);
-            font-weight: 500;
-        }
-
-        /* KPI grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-        .stat-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--orange);
-            border-radius: 10px;
-            padding: 20px 22px;
-            box-shadow: 0 1px 3px rgba(10,41,86,0.03);
-        }
-        .stat-card .value {
-            font-size: 30px;
-            font-weight: 800;
-            color: var(--navy);
-            letter-spacing: -0.5px;
-            font-family: 'Montserrat', 'Noto Sans Georgian', sans-serif;
-        }
-        .stat-card .label {
-            font-size: 12px;
-            color: var(--mute);
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            margin-top: 6px;
-            font-weight: 600;
-        }
-
-        /* Engagement chip row */
-        .eng-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .eng-chip {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            padding: 8px 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 12px;
-        }
-        .eng-chip .num {
-            color: var(--orange);
-            font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-        }
-        .eng-chip .lbl {
-            color: var(--navy);
-            font-weight: 500;
-        }
-
-        /* Creatives grid */
-        .preview-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        .preview-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 1px 3px rgba(10,41,86,0.03);
-        }
-        .preview-card .p-header {
-            padding: 14px 16px;
-            border-bottom: 1px solid var(--border);
-        }
-        .preview-card .p-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: 4px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .preview-card .p-meta {
-            font-size: 11px;
-            color: var(--mute);
-        }
-        .preview-card .p-spend {
-            color: var(--orange);
-            font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-        }
-        .preview-card .iframe-wrap {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 4/5;
-            background: #f0f2f5;
-            overflow: hidden;
-        }
-        .preview-card iframe {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .preview-card .p-campaign {
-            padding: 10px 16px;
-            border-top: 1px solid var(--border);
-            font-size: 10px;
-            color: var(--mute);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            font-weight: 600;
-        }
-
-        /* Table */
-        .table-wrap {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(10,41,86,0.03);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-        }
-        thead {
-            background: var(--navy);
-        }
-        th {
-            padding: 14px 16px;
-            text-align: left;
-            font-size: 11px;
-            text-transform: uppercase;
-            color: var(--white);
-            font-weight: 700;
-            letter-spacing: 0.8px;
-        }
-        th.num { text-align: right; }
-        td {
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border);
-            color: var(--navy);
-        }
-        tbody tr:last-child td { border-bottom: none; }
-        tbody tr:hover { background: rgba(255,72,18,0.04); }
-        tbody tr:nth-child(even) { background: rgba(10,41,86,0.015); }
-        tbody tr:nth-child(even):hover { background: rgba(255,72,18,0.05); }
-        td.ad-name { font-weight: 600; }
-        td.campaign { color: var(--mute); font-size: 12px; }
-        td.num {
-            text-align: right;
-            font-family: 'Montserrat', 'SF Mono', monospace;
-            font-weight: 600;
-            font-variant-numeric: tabular-nums;
-        }
-        td.currency { color: var(--orange); font-weight: 700; }
-
-        /* Charts */
-        .chart-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-        .chart-container {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 1px 3px rgba(10,41,86,0.03);
-        }
-        .chart-container h3 {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border);
-        }
-        .chart-canvas-wrap {
-            height: 360px;
-            position: relative;
-        }
-
-        /* Footer */
-        .footer {
-            padding: 24px 40px;
-            text-align: center;
-            font-size: 11px;
-            color: var(--mute);
-            border-top: 1px solid var(--border);
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: 0.5px;
-        }
-        .footer .brand .m { color: var(--orange); font-weight: 700; }
-        .footer .brand .d { color: var(--navy); font-weight: 600; }
-
-        @media (max-width: 900px) {
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .preview-grid { grid-template-columns: 1fr; }
-            .chart-row { grid-template-columns: 1fr; }
-            .title-slide h1 { font-size: 44px; }
-            .table-wrap { overflow-x: auto; }
-        }
-
-        @media print {
-            .slide { page-break-after: always; }
-            .iframe-wrap { background: #f0f2f5; }
-            .iframe-wrap::after {
-                content: "ვებ-ვერსია იხილეთ Facebook-ზე";
-                position: absolute; top: 50%; left: 0; right: 0;
-                text-align: center; color: var(--mute); font-size: 12px;
-            }
-        }
-    
-        .creatives-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 22px; margin-top: 12px; }
-        .creative-card { background: #fff; border: 1px solid var(--border, rgba(10,41,86,.08)); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
-        .creative-card__head { padding: 16px 18px 10px; border-bottom: 1px solid var(--border, rgba(10,41,86,.06)); }
-        .creative-card__name { font-size: 14px; font-weight: 700; color: var(--navy, #0A2956); margin-bottom: 4px; line-height: 1.35; }
-        .creative-card__meta { font-size: 11px; color: var(--mute, #6b7a90); text-transform: uppercase; letter-spacing: .5px; }
-        .creative-card__embed { position: relative; width: 100%; aspect-ratio: 9/16; background: #f4f5f7; }
-        .creative-card__embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-        .creative-card__foot { display: flex; justify-content: space-between; padding: 12px 18px; font-family: Montserrat, sans-serif; font-size: 12px; border-top: 1px solid var(--border, rgba(10,41,86,.06)); }
-        .creative-card__spend { font-weight: 700; color: var(--orange, #FF4812); }
-        .creative-card__impr { color: var(--mute, #6b7a90); }
-        </style>
-</head>
-<body>
-
-<!-- Slide 1: Title -->
-<section class="slide title-slide">
-    <div class="logo-wrap">
-        <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 2048 985.8">
-  
-  <defs>
-    <style>
-      .st0 {
-        fill: #0a2956;
-      }
-
-      .st1 {
-        fill: #ff4812;
-      }
-    </style>
-  </defs>
-  <path class="st0" d="M649.4,383.3v385.8H218.2v-385.8c0-7.9.6-15.7,1.6-23.4,1.6-11.3,4.3-22.3,8-32.8,15.2-42.7,47.2-77.4,88-96.2,8.8-4.1,18-7.4,27.6-9.9,13.5-3.5,27.8-5.4,42.4-5.4h95.7c8.2,0,16.3.6,24.3,1.8,47.6,6.9,88.7,33.9,114.6,71.9,18.2,26.8,28.9,59.2,28.9,94"/>
-  <path class="st1" d="M649.4,383.3v385.8H218.2v-28.9h213.5c.6-8.2,1.6-16.3,3.1-24.2l-187.8-50.3-28.9-7.7v-29.9l28.9,7.7,195.3,52.3c2.7-7.7,5.8-15.3,9.3-22.6l-204.6-118.1-28.9-16.7v-33.3l28.9,16.7,219,126.5c4.6-6.8,9.6-13.2,15-19.4L219.8,359.9c1.6-11.3,4.3-22.3,8-32.8l273.6,273.6c6.2-5.3,12.6-10.4,19.4-15l-190.4-329.7-14.5-25.1c8.8-4.1,18-7.4,27.6-9.9l15.1,26.1,187.2,324.2c7.3-3.5,14.9-6.7,22.6-9.3l-85.1-317.5-7.7-28.9h6.1c8.2,0,16.3.6,24.3,1.8l8.3,31,82,306.2c7.9-1.5,16-2.6,24.2-3.1v-262.1c18.2,26.8,28.9,59.2,28.9,94"/>
-  <path class="st1" d="M620.5,289.3c-25.9-38.1-67-65.1-114.6-71.9-7.9-1.2-16-1.8-24.3-1.8h-95.7c-14.6,0-28.9,1.9-42.4,5.4-9.5,2.5-18.8,5.8-27.6,9.9-40.8,18.8-72.8,53.5-88,96.2-3.7,10.5-6.5,21.5-8,32.8-1.1,7.6-1.6,15.5-1.6,23.4v385.8h431.2v-385.8c0-34.8-10.7-67.2-28.9-94M620.5,740.2H247.1v-356.9c0-11.4,1.4-22.4,4-33,10.3-42.3,40.2-77.1,79.4-94.3,8.9-3.9,18.4-7,28.2-8.9,8.8-1.8,18-2.7,27.3-2.7h97.4c10.6.1,21,1.5,30.9,3.9,60.9,14.7,106.3,69.6,106.3,135v356.9Z"/>
-  <path class="st1" d="M620.5,289.3c-25.9-38.1-67-65.1-114.6-71.9-7.9-1.2-16-1.8-24.3-1.8h-95.7c-14.6,0-28.9,1.9-42.4,5.4-9.5,2.5-18.8,5.8-27.6,9.9-40.8,18.8-72.8,53.5-88,96.2-3.7,10.5-6.5,21.5-8,32.8-1.1,7.6-1.6,15.5-1.6,23.4v385.8h431.2v-385.8c0-34.8-10.7-67.2-28.9-94M620.5,740.2H247.1v-356.9c0-11.4,1.4-22.4,4-33,10.3-42.3,40.2-77.1,79.4-94.3,8.9-3.9,18.4-7,28.2-8.9,8.8-1.8,18-2.7,27.3-2.7h97.4c10.6.1,21,1.5,30.9,3.9,60.9,14.7,106.3,69.6,106.3,135v356.9Z"/>
-  <path class="st0" d="M912.8,680.6v42.6c0,37.7-41.3,45.6-66.1,45.6h-35.3c-24.8,0-54.3-7.9-54.3-45.6v-139.4h54v139.4c0,12.5,6.3,13.6,12.1,13.6h23.5c5.9,0,12.1-1,12.1-13.6v-42.7c.2-7.9-2.6-13.2-8.3-15.8h-.3c-10-3.4-14.6-16-15.5-42l-.2-6h54.2v5.9c0,10.1,1,15.1,1.9,17.6l.5,1.4,1.4.6c13.5,5.4,20.3,18.4,20.3,38.4"/>
-  <path class="st0" d="M1089.2,654.5l-.7,68.7c0,14.7-4.6,26-13.7,33.7-9.3,7.9-22.9,11.8-40.6,11.8h-46.9c-24.8,0-54.3-7.9-54.3-45.6v-62.3h54v62.3c0,12.5,6.3,13.6,12.1,13.6h23.5c5.9,0,12.1-1,12.1-13.6l.7-68.7c0-12.6-6.3-13.6-12.1-13.6h-12.9c-14.7,0-26.4-5-33.9-14.5-6.9-8.8-10.3-21.2-10.3-38v-4.5h53.9v4.5c0,10.3,1.1,15.6,2,18.3l.8,2.3h11.9c24.8,0,54.3,7.9,54.3,45.6"/>
-  <path class="st0" d="M1210.8,630.4h-47.6v-46.6h-54v139.4c0,37.7,29.5,45.6,54.3,45.6h47.2c24.8,0,54.3-7.9,54.3-45.6v-47.2c0-37.7-29.5-45.6-54.3-45.6M1211,723.2c0,12.5-6.3,13.6-12.1,13.6h-23.5c-5.9,0-12.1-1-12.1-13.6v-60.9h35.6c5.9,0,12.1,1.1,12.1,13.7v47.2Z"/>
-  <path class="st0" d="M1580.9,629.7l-4.4,84.1h-49.7l4.4-84.1v-.2c0-12.5-6.3-13.5-12.1-13.5l-5.1-.3c-5.9,0-12.1,1.1-12.1,13.7v51.8h-54v-51.8c0-12.7-6.3-13.7-12.2-13.7h-3.2c-5.9,0-12.1,1.1-12.1,13.7v51.8h-54v-51.8c0-12.7-6.3-13.7-12.1-13.7h-4c-5.9,0-12.1,1.1-12.1,13.6l1.4,51.8c0,8.2,10.2,24.4,58.7,54.9l.8.5,126.6.3-1.6,32-217.2-.3v-32h19.5l-7-6c-21.6-18.6-32.5-35.1-32.6-49.4l-1.4-51.7c0-37.7,29.4-45.6,54-45.6h20.8c12,0,22.5,3.1,31.1,9.3l2,1.4,2-1.4c8.6-6.2,19.1-9.3,31.1-9.3h15.2c11.9,0,22.3,3.1,30.9,9.2l2,1.4,2-1.4c8.7-6.1,19.4-9.2,31.6-9.2l18.9.3c24.7,0,54,7.9,54,45.6"/>
-  <path class="st0" d="M1754.2,628.2l-1.4,140.9h-52l1.4-140.9c0-11.5-5.6-12.5-10.8-12.5h-27c-5.2,0-10.8,1-10.8,12.6l1.4,140.8h-52.6l-1.4-140.8c0-14.4,4.5-25.4,13.3-33,9-7.7,22.2-11.6,39.4-11.6h47.5c24.1,0,53,7.7,53,44.4"/>
-  <path class="st0" d="M1342.9,389.6l-1.4,140.9h-52l1.4-140.9c0-11.5-5.6-12.5-10.8-12.5h-27c-5.2,0-10.8,1-10.8,12.6l1.4,140.8h-52.6l-1.4-140.8c0-14.4,4.5-25.4,13.3-33,9-7.7,22.2-11.6,39.4-11.6h47.5c24.1,0,53,7.7,53,44.4"/>
-  <path class="st0" d="M1831.9,389.6l-1.4,140.9h-52l1.4-140.9c0-11.5-5.6-12.5-10.8-12.5h-27c-5.2,0-10.8,1-10.8,12.6l1.4,140.8h-52.6l-1.4-140.8c0-14.4,4.5-25.4,13.3-33,9-7.7,22.2-11.6,39.4-11.6h47.5c24.1,0,53,7.7,53,44.4"/>
-  <path class="st0" d="M941.1,346.2h-35.5c-7.6,0-18.9,1.8-29.1,10.2l-2.2,1.8-2.2-1.8c-8.5-6.8-18.6-10.2-29.8-10.2h-32.7c-23.9,0-52.4,7.5-52.4,43.5v97.3c0,36,28.7,43.5,52.7,43.5h43c24,0,52.7-7.5,52.7-43.5v-93c0-17.3,6-16.7,16.2-16.7h8.3c5.2,0,10.8,1,10.8,12.4l-1.4,140.9h52.8l1.4-140.8c0-35.9-28.7-43.4-52.7-43.4M853.1,487c0,11.4-5.6,12.3-10.8,12.3h-20.3c-5.2,0-10.8-1-10.8-12.3v-97.3c0-11.5,5.6-12.5,10.8-12.5h20.3c5.2,0,10.8,1,10.8,12.5v97.3Z"/>
-  <path class="st0" d="M1126.5,391l-7.8-.2.6-4.5c1-12.8-2.8-22-11.8-28.2-4.6-3.2-6.7-5.2-7.6-6.4l-.7-.9-.2-5.7h-61.2v5.6c0,10.4,6.1,18.2,18.1,23.1,6.6,2.7,9.8,6.2,10.2,11v.6s-1.3,5.4-1.3,5.4h-9c-13.3,0-41.8,7.7-41.8,44.6v50.4c0,36.9,29.4,44.6,54,44.6h47.6c24.7,0,54-7.8,54-44.6v-50.4c0-34.6-23.4-43.3-43.1-44.5M1115.6,485.8c0,12.4-6.3,13.5-12.2,13.5h-23.4c-5.9,0-12.2-1-12.2-13.5v-50.4c0-9.4,2.9-13.6,9.5-13.6h26.1c5.9,0,12.2,1,12.2,13.6v50.4Z"/>
-  <path class="st0" d="M1658.6,391.4l-4.4,84.1h-49.7l4.4-84.1v-.2c0-12.5-6.3-13.5-12.1-13.5l-5.1-.3c-5.9,0-12.1,1.1-12.1,13.7v51.8h-54v-51.8c0-12.7-6.3-13.7-12.2-13.7h-3.2c-5.9,0-12.1,1.1-12.1,13.7v51.8h-54v-51.8c0-12.7-6.3-13.7-12.1-13.7h-4c-5.9,0-12.1,1.1-12.1,13.6l1.4,51.8c0,8.2,10.2,24.4,58.7,54.9l.8.5,126.6.3-1.6,32-217.2-.3v-32h19.5l-7-6c-21.6-18.6-32.5-35.1-32.6-49.4l-1.4-51.7c0-37.7,29.4-45.6,54-45.6h20.8c12,0,22.5,3.1,31.1,9.3l2,1.4,2-1.4c8.6-6.2,19.1-9.3,31.1-9.3h15.2c11.9,0,22.3,3.1,30.9,9.2l2,1.4,2-1.4c8.7-6.1,19.4-9.2,31.6-9.2l18.9.3c24.7,0,54,7.9,54,45.6"/>
-</svg>
-    </div>
-    <h1>2026 წლის ივლისი</h1>
-    <div class="subtitle">სოციალური მედიის ანგარიში</div>
-    <div class="period-pill">2026-07-01 → 2026-07-31</div>
-    <div class="byline">by <span class="m">MARTIVI</span> DIGITAL</div>
-</section>
-
-<!-- Slide 2: Overview -->
-<section class="slide">
+<div class="slide">
     <div class="section-header">
-        <div class="bar"></div>
-        <h2>მიმოხილვა</h2>
-        <div class="count">14 რეკლამა · 14 სულ</div>
-    </div>
-    <div class="stats-grid">
-            <div class="stat-card">
-                <div class="value">$359.90</div>
-                <div class="label">ხარჯი</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">465,407</div>
-                <div class="label">ჩვენებები</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">119,097</div>
-                <div class="label">მოცვა</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">3,421</div>
-                <div class="label">დაწკაპუნებები</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">0.74%</div>
-                <div class="label">CTR</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">$0.77</div>
-                <div class="label">CPM</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">$0.11</div>
-                <div class="label">CPC</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">3,856</div>
-                <div class="label">ჩართულობა</div>
-            </div>
-    </div>
-    <div class="eng-row">
-            <div class="eng-chip"><span class="num">2,216</span><span class="lbl">რეაქციები</span></div>
-            <div class="eng-chip"><span class="num">15</span><span class="lbl">კომენტარები</span></div>
-            <div class="eng-chip"><span class="num">66</span><span class="lbl">გაზიარებები</span></div>
-            <div class="eng-chip"><span class="num">912</span><span class="lbl">ფოტოს ნახვები</span></div>
-            <div class="eng-chip"><span class="num">631</span><span class="lbl">ვიდეოს ნახვები</span></div>
-            <div class="eng-chip"><span class="num">8</span><span class="lbl">ბმულზე კლიკები</span></div>
-            <div class="eng-chip"><span class="num">3,875</span><span class="lbl">გვერდის ჩართულობა</span></div>
-    </div>
-</section>
-
-<!-- Slide 3: Meta creatives -->
-<section class="slide">
-    <div class="section-header">
-        <div class="bar"></div>
         <h2>მეტას კრეატივები</h2>
-        <div class="count">TOP 3</div>
     </div>
-    <div class="preview-grid">
+    <div class="creatives-grid">
 
-            <article class="creative-card">
-                <header class="creative-card__head">
-                    <h4 class="creative-card__name">სერვისების პოსტი july 2026</h4>
-                    <p class="creative-card__meta">Competence Engagement</p>
-                </header>
-                <div class="creative-card__embed">
-                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1838766720438565&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
-                </div>
-                <footer class="creative-card__foot">
-                    <span class="creative-card__spend">$49.63</span>
-                    <span class="creative-card__impr">18,626 ჩვენება</span>
-                </footer>
-            </article>
+                <article class="creative-card">
+                    <header class="creative-card__head">
+                        <h4 class="creative-card__name">პროფესიონალი გუნდი july 2026</h4>
+                        <p class="creative-card__meta">TEAM Engagement  july · 28 Jul 2026</p>
+                    </header>
+                    <div class="creative-card__embed" style="aspect-ratio: 1/1;">
+                        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1862806821367888&show_text=false&width=500" loading="lazy" scrolling="no" allowfullscreen></iframe>
+                    </div>
+                    <footer class="creative-card__foot">
+                        <span class="creative-card__spend">$8.95</span>
+                        <span class="creative-card__impr">6,460 ჩვენება</span>
+                    </footer>
+                </article>
 
-            <article class="creative-card">
-                <header class="creative-card__head">
-                    <h4 class="creative-card__name">გუნდის შესახებ პოსტი june 2026</h4>
-                    <p class="creative-card__meta">TEAM Awareness</p>
-                </header>
-                <div class="creative-card__embed">
-                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1833169600998277&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
-                </div>
-                <footer class="creative-card__foot">
-                    <span class="creative-card__spend">$43.21</span>
-                    <span class="creative-card__impr">30,413 ჩვენება</span>
-                </footer>
-            </article>
+                <article class="creative-card">
+                    <header class="creative-card__head">
+                        <h4 class="creative-card__name">თბილი სახლი-ხარისხი  july 2026</h4>
+                        <p class="creative-card__meta">LEGACY Engagement  july · 19 Jul 2026</p>
+                    </header>
+                    <div class="creative-card__embed" style="aspect-ratio: 1/1;">
+                        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1855072738807963&show_text=false&width=500" loading="lazy" scrolling="no" allowfullscreen></iframe>
+                    </div>
+                    <footer class="creative-card__foot">
+                        <span class="creative-card__spend">$42.77</span>
+                        <span class="creative-card__impr">74,302 ჩვენება</span>
+                    </footer>
+                </article>
 
-            <article class="creative-card">
-                <header class="creative-card__head">
-                    <h4 class="creative-card__name">ქველმოქმედების პოსტი july 2026</h4>
-                    <p class="creative-card__meta">Charity Engagement</p>
-                </header>
-                <div class="creative-card__embed">
-                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1846618896320014&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
-                </div>
-                <footer class="creative-card__foot">
-                    <span class="creative-card__spend">$38.02</span>
-                    <span class="creative-card__impr">11,028 ჩვენება</span>
-                </footer>
-            </article>
+                <article class="creative-card">
+                    <header class="creative-card__head">
+                        <h4 class="creative-card__name">ქველმოქმედების პოსტი july 2026</h4>
+                        <p class="creative-card__meta">Charity Engagement · 09 Jul 2026</p>
+                    </header>
+                    <div class="creative-card__embed" style="aspect-ratio: 1/1;">
+                        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1846618896320014&show_text=false&width=500" loading="lazy" scrolling="no" allowfullscreen></iframe>
+                    </div>
+                    <footer class="creative-card__foot">
+                        <span class="creative-card__spend">$69.47</span>
+                        <span class="creative-card__impr">35,206 ჩვენება</span>
+                    </footer>
+                </article>
 
-            <article class="creative-card">
-                <header class="creative-card__head">
-                    <h4 class="creative-card__name">თბილი სახლი-ხარისხი  july 2026</h4>
-                    <p class="creative-card__meta">LEGACY Engagement  july</p>
-                </header>
-                <div class="creative-card__embed">
-                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1855072738807963&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
-                </div>
-                <footer class="creative-card__foot">
-                    <span class="creative-card__spend">$22.58</span>
-                    <span class="creative-card__impr">12,459 ჩვენება</span>
-                </footer>
-            </article>
+                <article class="creative-card">
+                    <header class="creative-card__head">
+                        <h4 class="creative-card__name">სერვისების პოსტი july 2026</h4>
+                        <p class="creative-card__meta">Competence Engagement · 01 Jul 2026</p>
+                    </header>
+                    <div class="creative-card__embed" style="aspect-ratio: 1/1;">
+                        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1838766720438565&show_text=false&width=500" loading="lazy" scrolling="no" allowfullscreen></iframe>
+                    </div>
+                    <footer class="creative-card__foot">
+                        <span class="creative-card__spend">$98.83</span>
+                        <span class="creative-card__impr">173,432 ჩვენება</span>
+                    </footer>
+                </article>
 
-            <article class="creative-card">
-                <header class="creative-card__head">
-                    <h4 class="creative-card__name">25 Years Of Quality  ENG</h4>
-                    <p class="creative-card__meta">LEGACY Awareness</p>
-                </header>
-                <div class="creative-card__embed">
-                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1831452344503336&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
-                </div>
-                <footer class="creative-card__foot">
-                    <span class="creative-card__spend">$17.16</span>
-                    <span class="creative-card__impr">60,511 ჩვენება</span>
-                </footer>
-            </article>
+                <article class="creative-card">
+                    <header class="creative-card__head">
+                        <h4 class="creative-card__name">გუნდის შესახებ პოსტი june 2026</h4>
+                        <p class="creative-card__meta">TEAM Awareness · 25 Jun 2026</p>
+                    </header>
+                    <div class="creative-card__embed" style="aspect-ratio: 1/1;">
+                        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1833169600998277&show_text=false&width=500" loading="lazy" scrolling="no" allowfullscreen></iframe>
+                    </div>
+                    <footer class="creative-card__foot">
+                        <span class="creative-card__spend">$84.24</span>
+                        <span class="creative-card__impr">64,326 ჩვენება</span>
+                    </footer>
+                </article>
 
-            <article class="creative-card">
-                <header class="creative-card__head">
-                    <h4 class="creative-card__name">25 Years Of Quality GEO</h4>
-                    <p class="creative-card__meta">LEGACY Engagement</p>
-                </header>
-                <div class="creative-card__embed">
-                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1826122955036275&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
-                </div>
-                <footer class="creative-card__foot">
-                    <span class="creative-card__spend">$13.69</span>
-                    <span class="creative-card__impr">5,727 ჩვენება</span>
-                </footer>
-            </article>
+                <article class="creative-card">
+                    <header class="creative-card__head">
+                        <h4 class="creative-card__name">25 Years Of Quality  ENG</h4>
+                        <p class="creative-card__meta">LEGACY Awareness · 23 Jun 2026</p>
+                    </header>
+                    <div class="creative-card__embed" style="aspect-ratio: 1/1;">
+                        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1831452344503336&show_text=false&width=500" loading="lazy" scrolling="no" allowfullscreen></iframe>
+                    </div>
+                    <footer class="creative-card__foot">
+                        <span class="creative-card__spend">$30.06</span>
+                        <span class="creative-card__impr">66,631 ჩვენება</span>
+                    </footer>
+                </article>
 
-            <article class="creative-card">
-                <header class="creative-card__head">
-                    <h4 class="creative-card__name">პროფესიონალი გუნდი july 2026</h4>
-                    <p class="creative-card__meta">TEAM Engagement  july</p>
-                </header>
-                <div class="creative-card__embed">
-                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1862806821367888&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
-                </div>
-                <footer class="creative-card__foot">
-                    <span class="creative-card__spend">$4.67</span>
-                    <span class="creative-card__impr">2,117 ჩვენება</span>
-                </footer>
-            </article>
-            </div>
+                <article class="creative-card">
+                    <header class="creative-card__head">
+                        <h4 class="creative-card__name">25 Years Of Quality GEO</h4>
+                        <p class="creative-card__meta">LEGACY Engagement · 19 Jun 2026</p>
+                    </header>
+                    <div class="creative-card__embed" style="aspect-ratio: 1/1;">
+                        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1826122955036275&show_text=false&width=500" loading="lazy" scrolling="no" allowfullscreen></iframe>
+                    </div>
+                    <footer class="creative-card__foot">
+                        <span class="creative-card__spend">$25.58</span>
+                        <span class="creative-card__impr">45,050 ჩვენება</span>
+                    </footer>
+                </article>
     </div>
-</section>
-
-<!-- Slide 4: Ads table -->
+</div>
+<div class="slide-footer"><div><b>MARTIVI</b> <em>DIGITAL</em></div><div>პერიოდი: 2026-07-01 → 2026-07-31</div></div>
 <section class="slide">
     <div class="section-header">
         <div class="bar"></div>

@@ -342,7 +342,18 @@
                 text-align: center; color: var(--mute); font-size: 12px;
             }
         }
-    </style>
+    
+        .creatives-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 22px; margin-top: 12px; }
+        .creative-card { background: #fff; border: 1px solid var(--border, rgba(10,41,86,.08)); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+        .creative-card__head { padding: 16px 18px 10px; border-bottom: 1px solid var(--border, rgba(10,41,86,.06)); }
+        .creative-card__name { font-size: 14px; font-weight: 700; color: var(--navy, #0A2956); margin-bottom: 4px; line-height: 1.35; }
+        .creative-card__meta { font-size: 11px; color: var(--mute, #6b7a90); text-transform: uppercase; letter-spacing: .5px; }
+        .creative-card__embed { position: relative; width: 100%; aspect-ratio: 9/16; background: #f4f5f7; }
+        .creative-card__embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .creative-card__foot { display: flex; justify-content: space-between; padding: 12px 18px; font-family: Montserrat, sans-serif; font-size: 12px; border-top: 1px solid var(--border, rgba(10,41,86,.06)); }
+        .creative-card__spend { font-weight: 700; color: var(--orange, #FF4812); }
+        .creative-card__impr { color: var(--mute, #6b7a90); }
+        </style>
 </head>
 <body>
 
@@ -444,35 +455,104 @@
         <div class="count">TOP 3</div>
     </div>
     <div class="preview-grid">
-            <div class="preview-card">
-                <div class="p-header">
-                    <div class="p-title">სერვისების პოსტი july 2026</div>
-                    <div class="p-meta"><span class="p-spend">$49.63</span> · 18,626 ჩვენება</div>
+
+            <article class="creative-card">
+                <header class="creative-card__head">
+                    <h4 class="creative-card__name">სერვისების პოსტი july 2026</h4>
+                    <p class="creative-card__meta">Competence Engagement</p>
+                </header>
+                <div class="creative-card__embed">
+                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1838766720438565&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
                 </div>
-                <div class="iframe-wrap">
-                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1838766720438565&show_text=false&width=350" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>
+                <footer class="creative-card__foot">
+                    <span class="creative-card__spend">$49.63</span>
+                    <span class="creative-card__impr">18,626 ჩვენება</span>
+                </footer>
+            </article>
+
+            <article class="creative-card">
+                <header class="creative-card__head">
+                    <h4 class="creative-card__name">გუნდის შესახებ პოსტი june 2026</h4>
+                    <p class="creative-card__meta">TEAM Awareness</p>
+                </header>
+                <div class="creative-card__embed">
+                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1833169600998277&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
                 </div>
-                <div class="p-campaign">Competence Engagement</div>
-            </div>
-            <div class="preview-card">
-                <div class="p-header">
-                    <div class="p-title">გუნდის შესახებ პოსტი june 2026</div>
-                    <div class="p-meta"><span class="p-spend">$43.21</span> · 30,413 ჩვენება</div>
+                <footer class="creative-card__foot">
+                    <span class="creative-card__spend">$43.21</span>
+                    <span class="creative-card__impr">30,413 ჩვენება</span>
+                </footer>
+            </article>
+
+            <article class="creative-card">
+                <header class="creative-card__head">
+                    <h4 class="creative-card__name">ქველმოქმედების პოსტი july 2026</h4>
+                    <p class="creative-card__meta">Charity Engagement</p>
+                </header>
+                <div class="creative-card__embed">
+                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1846618896320014&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
                 </div>
-                <div class="iframe-wrap">
-                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1833169600998277&show_text=false&width=350" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>
+                <footer class="creative-card__foot">
+                    <span class="creative-card__spend">$38.02</span>
+                    <span class="creative-card__impr">11,028 ჩვენება</span>
+                </footer>
+            </article>
+
+            <article class="creative-card">
+                <header class="creative-card__head">
+                    <h4 class="creative-card__name">თბილი სახლი-ხარისხი  july 2026</h4>
+                    <p class="creative-card__meta">LEGACY Engagement  july</p>
+                </header>
+                <div class="creative-card__embed">
+                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1855072738807963&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
                 </div>
-                <div class="p-campaign">TEAM Awareness</div>
-            </div>
-            <div class="preview-card">
-                <div class="p-header">
-                    <div class="p-title">ქველმოქმედების პოსტი july 2026</div>
-                    <div class="p-meta"><span class="p-spend">$38.02</span> · 11,028 ჩვენება</div>
+                <footer class="creative-card__foot">
+                    <span class="creative-card__spend">$22.58</span>
+                    <span class="creative-card__impr">12,459 ჩვენება</span>
+                </footer>
+            </article>
+
+            <article class="creative-card">
+                <header class="creative-card__head">
+                    <h4 class="creative-card__name">25 Years Of Quality  ENG</h4>
+                    <p class="creative-card__meta">LEGACY Awareness</p>
+                </header>
+                <div class="creative-card__embed">
+                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1831452344503336&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
                 </div>
-                <div class="iframe-wrap">
-                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1846618896320014&show_text=false&width=350" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>
+                <footer class="creative-card__foot">
+                    <span class="creative-card__spend">$17.16</span>
+                    <span class="creative-card__impr">60,511 ჩვენება</span>
+                </footer>
+            </article>
+
+            <article class="creative-card">
+                <header class="creative-card__head">
+                    <h4 class="creative-card__name">25 Years Of Quality GEO</h4>
+                    <p class="creative-card__meta">LEGACY Engagement</p>
+                </header>
+                <div class="creative-card__embed">
+                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1826122955036275&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
                 </div>
-                <div class="p-campaign">Charity Engagement</div>
+                <footer class="creative-card__foot">
+                    <span class="creative-card__spend">$13.69</span>
+                    <span class="creative-card__impr">5,727 ჩვენება</span>
+                </footer>
+            </article>
+
+            <article class="creative-card">
+                <header class="creative-card__head">
+                    <h4 class="creative-card__name">პროფესიონალი გუნდი july 2026</h4>
+                    <p class="creative-card__meta">TEAM Engagement  july</p>
+                </header>
+                <div class="creative-card__embed">
+                    <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F391986960923797%2Fposts%2F1862806821367888&show_text=false&width=350" loading="lazy" scrolling="no" allowfullscreen></iframe>
+                </div>
+                <footer class="creative-card__foot">
+                    <span class="creative-card__spend">$4.67</span>
+                    <span class="creative-card__impr">2,117 ჩვენება</span>
+                </footer>
+            </article>
             </div>
     </div>
 </section>

@@ -2,11 +2,14 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/interview/api/:path*", "destination": "/api/:path*" },
+    { "source": "/interview/api/:path*", "destination": "/api/:path*" }
+  ],
+  "redirects": [
     {
       "source": "/",
       "has": [{ "type": "host", "value": "reports.casacalda.com" }],
-      "destination": "/casa-calda"
+      "destination": "/casa-calda",
+      "permanent": false
     }
   ]
 }

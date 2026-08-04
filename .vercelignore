@@ -1,0 +1,17 @@
+# Anything listed here is never uploaded, even by a manual `vercel --prod`.
+#
+# This file exists because `vercel --prod` uploads the local folder rather than
+# the repo, so untracked working files get published silently. That is how the
+# Autograph client offer deck — plus all 15 of its draft versions — ended up
+# publicly readable at /autograph with no password.
+
+# Client offer decks and their drafts. Never public.
+autograph/
+
+# Internal handover notes.
+docs/
+
+# Local noise
+.DS_Store
+*.log
+versions/

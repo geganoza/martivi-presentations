@@ -99,12 +99,48 @@ jobs:
           YEAR:  ${{ steps.target.outputs.year }}
           # test_recipient input (if set) overrides the CASA_CALDA_REPORT_RECIPIENT secret
           CASA_CALDA_REPORT_RECIPIENT: ${{ inputs.test_recipient || secrets.CASA_CALDA_REPORT_RECIPIENT }}
+          REPORT_BCC:    ${{ secrets.REPORT_BCC }}
           SMTP_HOST:     ${{ secrets.SMTP_HOST }}
           SMTP_PORT:     ${{ secrets.SMTP_PORT }}
           SMTP_USER:     ${{ secrets.SMTP_USER }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           SENDER_EMAIL:  ${{ secrets.SENDER_EMAIL }}
         run: python scripts/send_casa_calda_report_email.py --year "$YEAR" --month "$MONTH"
+
+      - name: Telegram notify — success
+        if: success()
+        env:
+          MONTH: ${{ steps.target.outputs.month }}
+          YEAR:  ${{ steps.target.outputs.year }}
+          TG_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT:  ${{ secrets.TG_CHAT_ID }}
+        run: |
+          [ -z "$TG_TOKEN" ] && { echo "TG_BOT_TOKEN not set — skipping"; exit 0; }
+          MONTHS=("" "იანვარი" "თებერვალი" "მარტი" "აპრილი" "მაისი" "ივნისი" "ივლისი" "აგვისტო" "სექტემბერი" "ოქტომბერი" "ნოემბერი" "დეკემბერი")
+          MONTH_KA=${MONTHS[$MONTH]}
+          MONTH_EN=$(python -c "import calendar; print(calendar.month_name[$MONTH].lower())")
+          MSG="✅ Casa Calda ${MONTH_KA} ${YEAR} report shipped
+          https://reports.casacalda.com/casa-calda/${MONTH_EN}-${YEAR}"
+          curl -sS "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TG_CHAT}" \
+            --data-urlencode "text=${MSG}" \
+            --data-urlencode "disable_web_page_preview=true" > /dev/null
+
+      - name: Telegram notify — failure
+        if: failure()
+        env:
+          MONTH: ${{ steps.target.outputs.month }}
+          YEAR:  ${{ steps.target.outputs.year }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          TG_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT:  ${{ secrets.TG_CHAT_ID }}
+        run: |
+          [ -z "$TG_TOKEN" ] && { echo "TG_BOT_TOKEN not set — skipping"; exit 0; }
+          MSG="❌ Casa Calda monthly report FAILED (${MONTH}/${YEAR})
+          Logs: ${RUN_URL}"
+          curl -sS "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TG_CHAT}" \
+            --data-urlencode "text=${MSG}" > /dev/null
 
       - name: Cleanup
         if: always()

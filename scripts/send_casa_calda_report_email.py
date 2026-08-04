@@ -62,6 +62,10 @@ def build_message(year: int, month: int, sender: str, recipient: str) -> EmailMe
     msg = EmailMessage()
     msg["From"] = sender
     msg["To"] = recipient
+    # Optional BCC — set REPORT_BCC (comma-sep) to always get a personal copy.
+    bcc = (os.environ.get("REPORT_BCC") or "").strip()
+    if bcc:
+        msg["Bcc"] = bcc
     msg["Subject"] = subject
     msg["Date"] = formatdate(localtime=True)
     msg["Message-ID"] = make_msgid(domain="casacalda.com")

@@ -1,0 +1,103 @@
+name: Casa Calda Monthly Report
+
+on:
+  schedule:
+    # 04:00 UTC on the 1st of every month = 08:00 Tbilisi (UTC+4)
+    # Generates the report for the PREVIOUS calendar month.
+    - cron: '0 4 1 * *'
+  workflow_dispatch:
+    inputs:
+      month:
+        description: 'Month (1-12). Leave empty for previous month.'
+        required: false
+      year:
+        description: 'Year. Leave empty for the year of the previous month.'
+        required: false
+      skip_email:
+        description: 'Skip sending the notification email'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Restore Meta credentials
+        env:
+          META_ADS_CREDENTIALS_JSON: ${{ secrets.META_ADS_CREDENTIALS_JSON }}
+        run: |
+          mkdir -p config/credentials
+          printf '%s' "$META_ADS_CREDENTIALS_JSON" > config/credentials/meta_ads_credentials.json
+          python -c "import json; json.load(open('config/credentials/meta_ads_credentials.json')); print('credentials OK')"
+
+      - name: Resolve target month
+        id: target
+        env:
+          IN_MONTH: ${{ inputs.month }}
+          IN_YEAR: ${{ inputs.year }}
+        run: |
+          if [ -n "$IN_MONTH" ] && [ -n "$IN_YEAR" ]; then
+            MONTH="$IN_MONTH"
+            YEAR="$IN_YEAR"
+          else
+            MONTH=$(python -c 'import datetime as dt; t=dt.date.today().replace(day=1)-dt.timedelta(days=1); print(t.month)')
+            YEAR=$(python  -c 'import datetime as dt; t=dt.date.today().replace(day=1)-dt.timedelta(days=1); print(t.year)')
+          fi
+          echo "month=$MONTH" >> "$GITHUB_OUTPUT"
+          echo "year=$YEAR"   >> "$GITHUB_OUTPUT"
+          echo "Targeting $MONTH/$YEAR"
+
+      - name: Generate report
+        env:
+          MONTH: ${{ steps.target.outputs.month }}
+          YEAR:  ${{ steps.target.outputs.year }}
+        run: python scripts/generate_casa_calda_report.py --year "$YEAR" --month "$MONTH"
+
+      - name: Commit and push (triggers Vercel deploy)
+        id: commit
+        run: |
+          git config user.name  "Casa Calda Monthly Bot"
+          git config user.email "actions@github.com"
+          git add casa-calda/
+          if git diff --cached --quiet; then
+            echo "No changes to commit (report already deployed?)"
+            echo "deployed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Add Casa Calda ${{ steps.target.outputs.month }}/${{ steps.target.outputs.year }} report"
+            git push
+            echo "deployed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Wait for Vercel deploy
+        if: steps.commit.outputs.deployed == 'true'
+        run: sleep 60
+
+      - name: Send notification email
+        if: steps.commit.outputs.deployed == 'true' && inputs.skip_email != true
+        env:
+          MONTH: ${{ steps.target.outputs.month }}
+          YEAR:  ${{ steps.target.outputs.year }}
+          CASA_CALDA_REPORT_RECIPIENT: ${{ secrets.CASA_CALDA_REPORT_RECIPIENT }}
+          SMTP_HOST:     ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:     ${{ secrets.SMTP_PORT }}
+          SMTP_USER:     ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SENDER_EMAIL:  ${{ secrets.SENDER_EMAIL }}
+        run: python scripts/send_casa_calda_report_email.py --year "$YEAR" --month "$MONTH"
+
+      - name: Cleanup
+        if: always()
+        run: rm -rf config/credentials

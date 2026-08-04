@@ -17,6 +17,13 @@ on:
         description: 'Skip sending the notification email'
         type: boolean
         default: false
+      force_email:
+        description: 'Send email even if no file changes (useful for testing)'
+        type: boolean
+        default: false
+      test_recipient:
+        description: 'Override CASA_CALDA_REPORT_RECIPIENT for this run only (comma-separated)'
+        required: false
 
 permissions:
   contents: write
@@ -86,11 +93,12 @@ jobs:
         run: sleep 60
 
       - name: Send notification email
-        if: steps.commit.outputs.deployed == 'true' && inputs.skip_email != true
+        if: (steps.commit.outputs.deployed == 'true' || inputs.force_email == true) && inputs.skip_email != true
         env:
           MONTH: ${{ steps.target.outputs.month }}
           YEAR:  ${{ steps.target.outputs.year }}
-          CASA_CALDA_REPORT_RECIPIENT: ${{ secrets.CASA_CALDA_REPORT_RECIPIENT }}
+          # test_recipient input (if set) overrides the CASA_CALDA_REPORT_RECIPIENT secret
+          CASA_CALDA_REPORT_RECIPIENT: ${{ inputs.test_recipient || secrets.CASA_CALDA_REPORT_RECIPIENT }}
           SMTP_HOST:     ${{ secrets.SMTP_HOST }}
           SMTP_PORT:     ${{ secrets.SMTP_PORT }}
           SMTP_USER:     ${{ secrets.SMTP_USER }}

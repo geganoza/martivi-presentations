@@ -51,7 +51,7 @@ def _parse_period(period: str) -> tuple[int, int]:
 def build_message(year: int, month: int, sender: str, recipient: str) -> EmailMessage:
     slug = f"{MONTH_EN_LOWER[month]}-{year}"
     month_ka = f"{MONTH_KA[month]} {year}"
-    subject = f"Casa Calda — {month_ka} სოციალური მედიის ანგარიში მზადაა"
+    subject = f"REPORT — Casa Calda — {month_ka} სოციალური მედიის ანგარიში მზადაა"
     body = (
         "მოგესალმებით,\n\n"
         f"{month_ka}-ის სოციალური მედიის ანგარიში ხელმისაწვდომია აქ:\n"

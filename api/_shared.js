@@ -57,12 +57,18 @@ const MONTHS_KA = [
 ];
 
 /** Calendar event copy, also produced by `ka`. {position} / {name} are filled in. */
+// Position and brand are per-round, so they come from env with the original
+// Project Assistant values as fallback. They used to be hardcoded, which meant
+// the designer round's first test booking landed titled "გასაუბრება: პროექტის
+// ასისტენტი" — the wrong role, on a calendar invite the candidate receives.
+// Set BOOKING_POSITION_KA and BOOKING_BRAND per round.
 const EVENT_KA = {
-  position: 'პროექტის ასისტენტი',
+  position: process.env.BOOKING_POSITION_KA || 'პროექტის ასისტენტი',
+  brand: process.env.BOOKING_BRAND || 'MARTIVI CONSULTING',
   summary: 'გასაუბრება: {position}, {name}',
   description:
     'ონლაინ გასაუბრება {position} პოზიციაზე.\n' +
-    'ინტერვიუერი: გიორგი ნოზაძე, MARTIVI CONSULTING.\n' +
+    'ინტერვიუერი: გიორგი ნოზაძე, {brand}.\n' +
     'ხანგრძლივობა: 30 წუთი.\n' +
     'Google Meet-ის ბმული თან ერთვის ამ მოწვევას.',
 };

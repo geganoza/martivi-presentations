@@ -70,6 +70,8 @@ function buildEvent(candidate, slot) {
   const description = EVENT_KA.description
     .split('{position}')
     .join(EVENT_KA.position)
+    .split('{brand}')
+    .join(EVENT_KA.brand)
     .split('{name}')
     .join(candidate.name);
 

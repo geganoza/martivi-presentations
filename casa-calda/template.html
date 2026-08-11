@@ -18,6 +18,10 @@
             --mute:  #6b7a90;
             --border:rgba(10,41,86,0.08);
             --border-strong: rgba(10,41,86,0.14);
+            /* Martivi Digital wordmark — agency brand, not Casa Calda's palette.
+               Yellow is darkened from brand #ffc711 for legibility on the light ground. */
+            --mtv-yellow: #d9a300;
+            --mtv-cyan:   #3cc5ee;
         }}
         * {{ box-sizing: border-box; margin: 0; padding: 0; }}
         html, body {{ background: var(--bg); color: var(--navy); }}
@@ -90,7 +94,8 @@
             text-transform: uppercase;
             font-weight: 600;
         }}
-        .title-slide .byline .m {{ color: var(--orange); }}
+        .title-slide .byline .m {{ color: var(--mtv-yellow); }}
+        .title-slide .byline .d {{ color: var(--mtv-cyan); }}
 
         /* Section header */
         .section-header {{
@@ -322,8 +327,8 @@
             font-family: 'Montserrat', sans-serif;
             letter-spacing: 0.5px;
         }}
-        .footer .brand .m {{ color: var(--orange); font-weight: 700; }}
-        .footer .brand .d {{ color: var(--navy); font-weight: 600; }}
+        .footer .brand .m {{ color: var(--mtv-yellow); font-weight: 700; }}
+        .footer .brand .d {{ color: var(--mtv-cyan); font-weight: 600; }}
 
         @media (max-width: 900px) {{
             .stats-grid {{ grid-template-columns: repeat(2, 1fr); }}
@@ -402,7 +407,7 @@
     <h1>{month_label_ka}</h1>
     <div class="subtitle">სოციალური მედიის ანგარიში</div>
     <div class="period-pill">{period_since} → {period_until}</div>
-    <div class="byline">by <span class="m">MARTIVI</span> DIGITAL</div>
+    <div class="byline">by <span class="m">MARTIVI</span> <span class="d">DIGITAL</span></div>
 </section>
 
 <!-- Slide 2: Overview -->
@@ -427,7 +432,7 @@
             </div>
             <div class="stat-card">
                 <div class="value">{clicks_display}</div>
-                <div class="label">დაწკაპუნებები</div>
+                <div class="label">კლიკები</div>
             </div>
             <div class="stat-card">
                 <div class="value">{ctr_display}</div>
@@ -485,7 +490,7 @@
                 <th class="num">ხარჯი</th>
                 <th class="num">ჩვენებები</th>
                 <th class="num">მოცვა</th>
-                <th class="num">დაწკაპუნებები</th>
+                <th class="num">კლიკები</th>
                 <th class="num">CTR</th>
             </tr>
         </thead>
@@ -507,7 +512,7 @@
             <div class="chart-canvas-wrap"><canvas id="spendChart"></canvas></div>
         </div>
         <div class="chart-container">
-            <h3>საუკეთესო რეკლამები დაწკაპუნებების მიხედვით</h3>
+            <h3>საუკეთესო რეკლამები კლიკების მიხედვით</h3>
             <div class="chart-canvas-wrap"><canvas id="clicksChart"></canvas></div>
         </div>
     </div>
@@ -576,7 +581,7 @@
         data: {{
             labels: {clicks_chart_labels},
             datasets: [{{
-                label: 'დაწკაპუნებები',
+                label: 'კლიკები',
                 data: {clicks_chart_data},
                 backgroundColor: ORANGE,
                 borderColor: ORANGE,

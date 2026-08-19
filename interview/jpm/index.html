@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<title>გასაუბრების დაჯავშნა MARTIVI CONSULTING-თან</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap">
+<style>
+/* MARTIVI CONSULTING brand system, sourced from martiviconsulting.com.
+   Light editorial. NOT dark mode, NOT gradient-AI, teal is an accent and never
+   a fill surface. This is a different brand from MARTIVI DIGITAL (yellow/cyan)
+   and the two are never mixed. */
+:root{
+  --bg:#FFFFFF;
+  --text:#12324C;        /* deep navy petrol, headlines and body */
+  --deep:#171717;        /* heaviest contrast where needed */
+  --accent:#1390AC;      /* teal, sparingly */
+  --accent-soft:rgba(19,144,172,.08);
+  --accent-line:rgba(19,144,172,.28);
+  --muted:#578096;       /* supporting text */
+  --muted-2:#9AA9B7;     /* captions, metadata */
+  --line:#E5E7EB;
+  --line-2:#D3D9E0;
+  --surface:#FFFFFF;
+  --radius:18px;
+  --f-head:'Montserrat','Noto Sans Georgian',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --f-body:'Montserrat','Noto Sans Georgian',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  min-height:100vh;
+  min-height:100dvh;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--f-body);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+.wrap{
+  width:100%;
+  max-width:520px;
+  margin:0 auto;
+  padding:28px 16px calc(24px + env(safe-area-inset-bottom));
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  min-height:100dvh;
+}
+.brand{
+  display:flex;align-items:center;gap:9px;
+  font-family:var(--f-head);
+  font-size:12.5px;font-weight:800;letter-spacing:.20em;
+  text-transform:uppercase;
+  margin:0 2px 20px;
+}
+.brand .m{color:var(--text)}
+.brand .c{color:var(--muted);font-weight:600;letter-spacing:.20em}
+.brand .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex:none;margin-top:1px}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px 20px;
+}
+.card + .card{margin-top:14px}
+
+h1{
+  font-family:var(--f-head);
+  font-size:23px;line-height:1.28;font-weight:700;
+  margin:0 0 10px;
+  letter-spacing:-.005em;
+  overflow-wrap:anywhere;
+}
+h2{
+  font-family:var(--f-head);
+  font-size:11.5px;font-weight:700;letter-spacing:.07em;
+  color:var(--muted-2);
+  margin:0 0 14px;
+}
+p{margin:0 0 12px;color:var(--muted);font-size:15px}
+p:last-child{margin-bottom:0}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-line)}
+a:hover{border-bottom-color:var(--accent)}
+
+.rule{height:2px;width:32px;background:var(--accent);border-radius:2px;margin:0 0 16px}
+
+.meta{list-style:none;margin:18px 0 0;padding:16px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:9px}
+.meta li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted)}
+.meta li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);flex:none;margin-top:8px}
+
+.day{margin-top:20px}
+.day:first-of-type{margin-top:0}
+.day-label{
+  font-family:var(--f-head);
+  font-size:12.5px;font-weight:700;letter-spacing:.03em;
+  color:var(--text);
+  margin:0 0 10px;
+  display:flex;align-items:center;gap:10px;
+}
+.day-label::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:9px}
+.slot{
+  appearance:none;-webkit-appearance:none;
+  font-family:var(--f-body);
+  font-size:16px;font-weight:500;
+  font-variant-numeric:tabular-nums;
+  color:var(--text);
+  background:#FFFFFF;
+  border:1px solid var(--line);
+  border-radius:12px;
+  min-height:50px;padding:12px 6px;
+  cursor:pointer;
+  width:100%;
+  transition:background .16s ease,border-color .16s ease,transform .10s ease,color .16s ease;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+.slot:hover{background:var(--accent-soft);border-color:var(--accent-line)}
+.slot:active{transform:scale(.97)}
+.slot[aria-pressed="true"]{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#FFFFFF;
+  font-weight:700;
+}
+.slot:focus-visible,.btn:focus-visible,.link-btn:focus-visible,a:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;border-radius:12px;
+}
+
+/* the sticky element must be #bar itself: its containing block (.wrap) is the
+   tall one, so the CTA stays pinned above the fold while the grid scrolls */
+#bar{position:sticky;bottom:0;z-index:5}
+#bar:empty{display:none}
+.bar{
+  padding:16px 0 calc(6px + env(safe-area-inset-bottom));
+  background:linear-gradient(to top,var(--bg) 66%,rgba(255,255,255,.92) 82%,rgba(255,255,255,0));
+}
+.btn{
+  appearance:none;-webkit-appearance:none;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;min-height:54px;padding:15px 18px;
+  font-family:var(--f-head);font-size:15.5px;font-weight:700;letter-spacing:.01em;
+  color:#FFFFFF;background:var(--accent);
+  border:1px solid var(--accent);border-radius:14px;
+  cursor:pointer;
+  transition:filter .16s ease,transform .10s ease,opacity .16s ease;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  text-align:center;
+}
+.btn:hover:not(:disabled){filter:brightness(1.08)}
+.btn:active:not(:disabled){transform:scale(.99)}
+.btn:disabled{opacity:.34;cursor:default}
+.btn:disabled[aria-busy="true"]{opacity:.62;cursor:progress}
+.btn.ghost{
+  background:#FFFFFF;color:var(--text);
+  border-color:var(--line-2);
+  font-weight:600;
+}
+.btn.ghost:hover:not(:disabled){background:var(--accent-soft);border-color:var(--accent-line)}
+.btn.meet{
+  background:#FFFFFF;color:var(--accent);border-color:var(--accent-line);
+  border-bottom-width:1px;
+}
+.btn.meet:hover{background:var(--accent-soft);border-color:var(--accent)}
+.hint{margin:10px 0 0;text-align:center;font-size:13px;color:var(--muted-2)}
+.link-btn{
+  appearance:none;-webkit-appearance:none;background:none;border:0;
+  color:var(--muted);font-family:var(--f-body);font-size:14px;
+  padding:12px 4px;min-height:44px;cursor:pointer;width:100%;
+  border-bottom:0;
+}
+.link-btn:hover{color:var(--text)}
+
+.spinner{
+  width:16px;height:16px;flex:none;
+  border:2px solid rgba(255,255,255,.42);
+  border-top-color:#FFFFFF;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.note{
+  display:flex;gap:10px;align-items:flex-start;
+  margin:0 0 16px;padding:12px 14px;
+  background:var(--accent-soft);
+  border:1px solid var(--accent-line);
+  border-radius:12px;
+  font-size:14px;color:var(--text);line-height:1.5;
+}
+.note.bad{background:rgba(178,44,38,.06);border-color:rgba(178,44,38,.26);color:#8C2018}
+.note::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;margin-top:7px}
+.note.bad::before{background:#B22C26}
+
+.when{
+  font-family:var(--f-head);
+  font-size:22px;line-height:1.3;font-weight:700;color:var(--accent);
+  margin:2px 0 16px;overflow-wrap:anywhere;
+}
+.check{
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--accent-line);
+  background:var(--accent-soft);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 0 14px;
+}
+.check svg{width:19px;height:19px;display:block}
+
+.sk{background:#EEF1F4;border-radius:8px;position:relative;overflow:hidden}
+.sk::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+  transform:translateX(-100%);
+  animation:sweep 1.5s ease-in-out infinite;
+}
+@keyframes sweep{100%{transform:translateX(100%)}}
+.sk-line{height:13px;margin-bottom:11px}
+.sk-slot{height:50px;border-radius:12px}
+.loading-label{margin:18px 0 0;text-align:center;font-size:13.5px;color:var(--muted-2)}
+
+.foot{
+  margin-top:22px;padding:0 4px;
+  font-size:12.5px;color:var(--muted-2);line-height:1.6;
+}
+.foot .sig{
+  font-family:var(--f-head);font-size:10.5px;font-weight:700;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--muted-2);
+  margin-top:6px;
+}
+.foot a{color:var(--muted);border-bottom-color:var(--line-2)}
+.foot a:hover{color:var(--accent)}
+
+.fade{animation:fade .32s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+@media (max-width:360px){
+  .wrap{padding-left:13px;padding-right:13px}
+  .card{padding:20px 16px}
+  h1{font-size:21px}
+  .when{font-size:19px}
+  .slots{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;scroll-behavior:auto !important;
+  }
+  .sk::after{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><span class="m">MARTIVI</span><span class="dot"></span><span class="c">Consulting</span></div>
+  <main id="view" aria-live="polite" aria-busy="true"></main>
+  <div id="bar"></div>
+  <footer class="foot" id="foot" hidden></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Georgian copy (produced with the `ka` tool, do not hand edit) ---------- */
+  var T = {
+    loading:        "ხელმისაწვდომი დროები იტვირთება",
+    greeting:       "გამარჯობა, {name}",
+    intro:          "გმადლობთ Junior Project Manager-ის ვაკანსიით დაინტერესებისთვის. გთხოვთ, აირჩიოთ თქვენთვის მოსახერხებელი დრო და ონლაინ შევხვდებით.",
+    metaDuration:   "30 წუთი",
+    metaOnline:     "ონლაინ, Google Meet-ში",
+    metaWith:       "გიორგი ნოზაძესთან და გიორგი უჯმაჯურიძესთან, MARTIVI CONSULTING",
+    pickHeading:    "აირჩიეთ დრო",
+    tzNote:         "ყველა დრო მოცემულია თბილისის დროით.",
+    confirmBtn:     "ამ დროის დადასტურება",
+    confirmBusy:    "გთხოვთ, დაელოდოთ",
+    pickHint:       "გასაგრძელებლად აირჩიეთ დრო.",
+    slotTaken:      "ეს დრო ახლახან დაიკავეს. გთხოვთ, აირჩიოთ სხვა.",
+    bookedHeading:  "თქვენი გასაუბრება დაჯავშნილია",
+    bookedSub:      "მოუთმენლად ველით თქვენთან შეხვედრას.",
+    existingHeading:"თქვენ უკვე დაჯავშნილი გაქვთ გასაუბრება",
+    meetLabel:      "შემოერთება Google Meet-ით",
+    meetPending:    "Google Meet-ის ბმულს კალენდრის მოსაწვევთან ერთად მიიღებთ.",
+    inviteNote:     "თქვენს ელფოსტაზე გამოიგზავნა კალენდრის მოსაწვევი, რომელშიც მოცემულია შეხვედრის ბმულიც.",
+    changeBtn:      "სხვა დროის არჩევა",
+    keepBtn:        "არსებული დროის დატოვება",
+    invalidHeading: "ეს ბმული არ მუშაობს",
+    invalidBody:    "გთხოვთ, გვერდი გახსნათ იმ ბმულით, რომელიც ელფოსტით გამოგიგზავნეთ. თუ ბმული მაინც არ იმუშავებს, მოგვწერეთ მისამართზე: {hr}.",
+    errorHeading:   "დაფიქსირდა შეცდომა",
+    errorSlotsBody: "ხელმისაწვდომი დროების ჩატვირთვა ვერ მოხერხდა. გთხოვთ, სცადოთ თავიდან რამდენიმე წუთში, ან მოგვწერეთ მისამართზე: {hr}.",
+    errorBookBody:  "არჩეული დროის დადასტურება ვერ მოხერხდა. გთხოვთ, სცადოთ თავიდან, ან მოგვწერეთ მისამართზე: {hr}.",
+    retryBtn:       "თავიდან ცდა",
+    emptyHeading:   "თავისუფალი დროები აღარ არის",
+    emptyBody:      "ყველა დრო უკვე დაკავებულია. მოგვწერეთ მისამართზე: {hr} და ერთად შევარჩევთ სხვა დროს.",
+    contact:        "კითხვების შემთხვევაში, მოგვწერეთ მისამართზე: {hr}.",
+    selected:       "არჩეულია",
+    footer:         "MARTIVI CONSULTING, თბილისი"
+  };
+
+  var HR = "hr@martiviconsulting.com";
+  var TZ = "Asia/Tbilisi";
+
+  /* API base: never derive from location.pathname, it differs per host. */
+  var API = location.hostname.endsWith("martiviconsulting.com") ? "/interview/api" : "/api";
+
+  var view = document.getElementById("view");
+  var bar  = document.getElementById("bar");
+  var foot = document.getElementById("foot");
+
+  var S = {
+    token: null,
+    candidate: null,
+    days: [],
+    booking: null,
+    selected: null,
+    busy: false,
+    notice: null,
+    /* set when a booked candidate asked for the picker and we had to refetch */
+    wantPicker: false
+  };
+
+  /* ---------- tiny DOM helpers ---------- */
+  function el(tag, cls, text){
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function clear(n){ while (n.firstChild) n.removeChild(n.firstChild); }
+
+  /* Writes text into `node`, replacing {hr} with a real mailto link and
+     {name} with the candidate name. Always uses text nodes, never innerHTML. */
+  function fill(node, text, name){
+    var parts = String(text).split(/(\{hr\}|\{name\})/);
+    for (var i = 0; i < parts.length; i++){
+      var p = parts[i];
+      if (p === "{hr}"){
+        var a = el("a", null, HR);
+        a.href = "mailto:" + HR;
+        node.appendChild(a);
+      } else if (p === "{name}"){
+        node.appendChild(document.createTextNode(name || ""));
+      } else if (p){
+        node.appendChild(document.createTextNode(p));
+      }
+    }
+    return node;
+  }
+
+  /* ---------- date fallbacks (only used if the server omits a label) ----------
+     Every ISO string in the contract carries an explicit +04:00 offset, which is
+     Tbilisi all year round (no DST), so the literal fields already ARE local
+     time and no timezone maths is needed. If an unexpected offset shows up we
+     fall back to Intl with an explicit timeZone. Never trust the device clock
+     or the device timezone. Weekday and month names below came from `ka`. */
+  var WD = ["კვირა","ორშაბათი","სამშაბათი","ოთხშაბათი","ხუთშაბათი","პარასკევი","შაბათი"];
+  var MON = ["იანვარი","თებერვალი","მარტი","აპრილი","მაისი","ივნისი",
+             "ივლისი","აგვისტო","სექტემბერი","ოქტომბერი","ნოემბერი","დეკემბერი"];
+  var TBILISI = /^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2}))?(?::\d{2})?(?:\.\d+)?(\+04:00)?$/;
+
+  function parts(iso){
+    var m = TBILISI.exec(String(iso || "").trim());
+    if (!m) return null;
+    if (m[4] != null && !m[6]) return null;   /* has a time but not the +04:00 offset */
+    return { y:+m[1], mo:+m[2], d:+m[3], h:m[4] != null ? m[4] : null, mi:m[5] != null ? m[5] : null };
+  }
+  function intl(iso, opts){
+    try {
+      var d = new Date(iso);
+      if (isNaN(d.getTime())) return "";
+      opts.timeZone = TZ;
+      return new Intl.DateTimeFormat("ka-GE", opts).format(d);
+    } catch (e){ return ""; }
+  }
+  function timeLabel(iso){
+    var p = parts(iso);
+    if (p && p.h != null) return p.h + ":" + p.mi;
+    return intl(iso, { hour:"2-digit", minute:"2-digit", hour12:false });
+  }
+  function dayLabel(iso){
+    var p = parts(iso);
+    if (p){
+      var wd = new Date(Date.UTC(p.y, p.mo - 1, p.d)).getUTCDay();
+      return WD[wd] + ", " + p.d + " " + MON[p.mo - 1];
+    }
+    return intl(iso, { weekday:"long", day:"numeric", month:"long" });
+  }
+  function whenLabel(iso){
+    var day = dayLabel(iso);
+    var t = timeLabel(iso);
+    if (day && t) return day + ", " + t;
+    return day || t || "";
+  }
+
+  /* Once the page scrolls, the sticky #bar is lifted out of flow and lands on
+     top of the tail of #view, which otherwise hides the last paragraph of the
+     confirmation card. Reserve exactly the bar's height at the bottom of the
+     content, and only when the page really does scroll, so short screens keep
+     their natural spacing. */
+  function syncBarSpace(){
+    view.style.paddingBottom = "0px";
+    if (!bar.firstChild) return;
+    var doc = document.documentElement;
+    if (doc.scrollHeight <= window.innerHeight + 1) return;
+    view.style.paddingBottom = (bar.offsetHeight + 14) + "px";
+  }
+  window.addEventListener("resize", syncBarSpace);
+  window.addEventListener("orientationchange", syncBarSpace);
+  /* webfonts land after first paint and change every height */
+  try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncBarSpace); } catch (e){}
+
+  /* A failure notice rendered above the current scroll position is a notice
+     nobody reads. Bring it into the viewport. */
+  function revealNotice(){
+    var n = view.querySelector(".note");
+    if (!n) return;
+    try { n.scrollIntoView({ block:"center" }); }
+    catch (e){ try { n.scrollIntoView(); } catch (e2){} }
+  }
+
+  /* ---------- states ---------- */
+  /* withContact=false on screens whose body text already carries the address */
+  function showFooter(withContact){
+    clear(foot);
+    if (withContact !== false){
+      var p = el("div");
+      fill(p, T.contact);
+      foot.appendChild(p);
+    }
+    foot.appendChild(el("div", "sig", T.footer));
+    foot.hidden = false;
+  }
+
+  function renderLoading(){
+    view.setAttribute("aria-busy", "true");
+    clear(view); clear(bar); foot.hidden = true;
+
+    var card = el("div", "card");
+    card.appendChild(el("div", "rule"));
+    var a = el("div", "sk sk-line"); a.style.width = "62%";
+    var b = el("div", "sk sk-line"); b.style.width = "94%";
+    var c = el("div", "sk sk-line"); c.style.width = "78%";
+    card.appendChild(a); card.appendChild(b); card.appendChild(c);
+
+    var grid = el("div", "slots");
+    grid.style.marginTop = "22px";
+    for (var i = 0; i < 6; i++) grid.appendChild(el("div", "sk sk-slot"));
+    card.appendChild(grid);
+
+    card.appendChild(fill(el("p", "loading-label"), T.loading));
+    view.appendChild(card);
+    syncBarSpace();
+  }
+
+  function renderMessage(heading, body, retry){
+    view.setAttribute("aria-busy", "false");
+    clear(view); clear(bar);
+
+    var card = el("div", "card fade");
+    card.appendChild(el("div", "rule"));
+    card.appendChild(el("h1", null, heading));
+    card.appendChild(fill(el("p"), body));
+    view.appendChild(card);
+
+    if (retry){
+      var btn = el("button", "btn ghost", T.retryBtn);
+      btn.type = "button";
+      btn.addEventListener("click", load);
+      var wrapper = el("div", "bar");
+      wrapper.appendChild(btn);
+      bar.appendChild(wrapper);
+    }
+    showFooter(String(body).indexOf("{hr}") === -1);
+    syncBarSpace();
+  }
+
+  function totalSlots(){
+    var n = 0;
+    for (var i = 0; i < S.days.length; i++){
+      n += (S.days[i] && S.days[i].slots ? S.days[i].slots.length : 0);
+    }
+    return n;
+  }
+
+  function renderPicker(){
+    view.setAttribute("aria-busy", "false");
+    clear(view); clear(bar);
+
+    var name = (S.candidate && S.candidate.name) ? S.candidate.name : "";
+
+    var intro = el("div", "card fade");
+    intro.appendChild(el("div", "rule"));
+    var h = el("h1");
+    fill(h, T.greeting, name);
+    intro.appendChild(h);
+    intro.appendChild(fill(el("p"), T.intro));
+
+    var meta = el("ul", "meta");
+    meta.appendChild(el("li", null, T.metaDuration));
+    meta.appendChild(el("li", null, T.metaOnline));
+    meta.appendChild(el("li", null, T.metaWith));
+    intro.appendChild(meta);
+    view.appendChild(intro);
+
+    if (totalSlots() === 0){
+      var empty = el("div", "card fade");
+      empty.appendChild(el("div", "rule"));
+      empty.appendChild(el("h1", null, T.emptyHeading));
+      empty.appendChild(fill(el("p"), T.emptyBody));
+      view.appendChild(empty);
+      showFooter(false);
+      syncBarSpace();
+      return;
+    }
+
+    var pick = el("div", "card fade");
+    pick.appendChild(el("h2", null, T.pickHeading));
+
+    if (S.notice){
+      var note = el("div", "note" + (S.notice.bad ? " bad" : ""));
+      note.setAttribute("role", "status");
+      fill(note, S.notice.text);
+      pick.appendChild(note);
+    } else if (S.booking){
+      /* they arrived here from an existing booking: say so, and their current
+         slot stays pre-selected below */
+      var has = el("div", "note");
+      has.setAttribute("role", "status");
+      var when = S.booking.label || whenLabel(S.booking.startISO);
+      has.appendChild(document.createTextNode(
+        T.existingHeading + (when ? ", " + when : "")
+      ));
+      pick.appendChild(has);
+    }
+
+    for (var i = 0; i < S.days.length; i++){
+      var day = S.days[i];
+      if (!day || !day.slots || !day.slots.length) continue;
+
+      var block = el("div", "day");
+      block.appendChild(el("div", "day-label",
+        day.label || dayLabel(day.date) || (day.date || "")));
+
+      var grid = el("div", "slots");
+      grid.setAttribute("role", "group");
+      grid.setAttribute("aria-label", day.label || day.date || "");
+
+      for (var j = 0; j < day.slots.length; j++){
+        grid.appendChild(slotButton(day.slots[j]));
+      }
+      block.appendChild(grid);
+      pick.appendChild(block);
+    }
+
+    pick.appendChild(fill(el("p", "hint"), T.tzNote));
+    view.appendChild(pick);
+
+    /* sticky confirm bar */
+    var wrapper = el("div", "bar");
+    var btn = el("button", "btn");
+    btn.type = "button";
+    btn.id = "confirm";
+    btn.disabled = !S.selected;
+    btn.appendChild(document.createTextNode(T.confirmBtn));
+    btn.addEventListener("click", book);
+    wrapper.appendChild(btn);
+
+    /* A booked candidate who only came to look must be able to leave without
+       touching their booking. Without this the only prominent control is the
+       confirm button. */
+    if (S.booking){
+      var keep = el("button", "btn ghost", T.keepBtn);
+      keep.type = "button";
+      keep.style.marginTop = "9px";
+      keep.addEventListener("click", function(){
+        if (S.busy) return;
+        S.notice = null;
+        renderConfirmed(S.booking, true);
+        window.scrollTo(0, 0);
+      });
+      wrapper.appendChild(keep);
+    }
+
+    var hint = el("p", "hint");
+    hint.id = "confirm-hint";
+    hint.textContent = T.pickHint;
+    hint.hidden = !!S.selected;
+    wrapper.appendChild(hint);
+
+    bar.appendChild(wrapper);
+    showFooter();
+    syncBarSpace();
+    if (S.notice) revealNotice();
+  }
+
+  function slotButton(slot){
+    var b = el("button", "slot");
+    b.type = "button";
+    b.textContent = slot.label || timeLabel(slot.start) || "";
+    b.setAttribute("aria-pressed", S.selected === slot.start ? "true" : "false");
+    b.dataset.start = slot.start;
+    b.dataset.end = slot.end || "";
+    b.dataset.label = slot.label || "";
+    b.addEventListener("click", function(){
+      if (S.busy) return;
+      select(slot.start);
+    });
+    return b;
+  }
+
+  function select(startISO){
+    S.selected = startISO;
+    S.notice = null;
+    var nodes = view.querySelectorAll(".slot");
+    for (var i = 0; i < nodes.length; i++){
+      nodes[i].setAttribute("aria-pressed", nodes[i].dataset.start === startISO ? "true" : "false");
+    }
+    var btn = document.getElementById("confirm");
+    if (btn) btn.disabled = false;
+    var hint = document.getElementById("confirm-hint");
+    if (hint) hint.hidden = true;
+  }
+
+  function setBusy(on){
+    S.busy = on;
+    var btn = document.getElementById("confirm");
+    if (!btn) return;
+    btn.disabled = on || !S.selected;
+    clear(btn);
+    if (on){
+      btn.appendChild(el("span", "spinner"));
+      btn.appendChild(document.createTextNode(T.confirmBusy));
+      btn.setAttribute("aria-busy", "true");
+    } else {
+      btn.appendChild(document.createTextNode(T.confirmBtn));
+      btn.removeAttribute("aria-busy");
+    }
+  }
+
+  /* noticeText: optional extra line, e.g. "there is nothing else free" after a
+     booked candidate asked for the picker and there were no slots to show. */
+  function renderConfirmed(booking, existing, noticeText){
+    view.setAttribute("aria-busy", "false");
+    clear(view); clear(bar);
+    S.busy = false;
+
+    var card = el("div", "card fade");
+
+    var check = el("div", "check");
+    check.setAttribute("aria-hidden", "true");
+    check.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#1390AC" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.2 5.2L20 7"/></svg>';
+    card.appendChild(check);
+
+    card.appendChild(el("h1", null, existing ? T.existingHeading : T.bookedHeading));
+    card.appendChild(el("div", "when", booking.label || whenLabel(booking.startISO)));
+    card.appendChild(el("p", null, T.bookedSub));
+
+    var meta = el("ul", "meta");
+    meta.appendChild(el("li", null, T.metaDuration));
+    meta.appendChild(el("li", null, T.metaWith));
+    /* this is the screen people screenshot, so the timezone has to live here
+       too and not only on the picker */
+    meta.appendChild(el("li", null, T.tzNote));
+    card.appendChild(meta);
+    view.appendChild(card);
+
+    var second = el("div", "card fade");
+    if (noticeText){
+      var msg = el("div", "note");
+      msg.setAttribute("role", "status");
+      fill(msg, noticeText);
+      second.appendChild(msg);
+    }
+    if (booking.meetLink){
+      var a = el("a", "btn meet", T.meetLabel);
+      a.href = booking.meetLink;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      second.appendChild(a);
+      var link = el("p", "hint");
+      link.style.wordBreak = "break-all";
+      link.textContent = booking.meetLink;
+      second.appendChild(link);
+    } else {
+      second.appendChild(el("p", null, T.meetPending));
+    }
+    second.appendChild(fill(el("p", "hint"), T.inviteNote));
+    view.appendChild(second);
+
+    var wrapper = el("div", "bar");
+    var change = el("button", "btn ghost", T.changeBtn);
+    change.type = "button";
+    change.addEventListener("click", function(){
+      S.selected = booking.startISO || null;
+      S.notice = null;
+      /* nothing cached to show: refetch, and remember that they asked for the
+         picker so the reload can explain itself if there is still nothing */
+      if (!S.days.length || totalSlots() === 0){ S.wantPicker = true; load(); return; }
+      renderPicker();
+      window.scrollTo(0, 0);
+    });
+    wrapper.appendChild(change);
+    bar.appendChild(wrapper);
+    showFooter();
+    syncBarSpace();
+    if (noticeText) revealNotice();
+  }
+
+  /* ---------- network ---------- */
+  function parseJSON(res){
+    return res.text().then(function(txt){
+      try { return JSON.parse(txt); } catch (e){ return null; }
+    });
+  }
+
+  function load(){
+    renderLoading();
+    var url = API + "/slots?t=" + encodeURIComponent(S.token);
+    fetch(url, { method:"GET", headers:{ "Accept":"application/json" }, cache:"no-store" })
+      .then(function(res){
+        return parseJSON(res).then(function(data){ return { status:res.status, data:data }; });
+      })
+      .then(function(r){
+        if (r.status === 403){ renderMessage(T.invalidHeading, T.invalidBody); return; }
+        if (!r.data || r.data.ok !== true){
+          renderMessage(T.errorHeading, T.errorSlotsBody, true);
+          return;
+        }
+        S.candidate = r.data.candidate || null;
+        S.days = r.data.days || [];
+        S.booking = r.data.booking || null;
+        S.selected = S.booking ? (S.booking.startISO || null) : null;
+        S.notice = null;
+
+        var asked = S.wantPicker;
+        S.wantPicker = false;
+
+        if (!S.booking){
+          renderPicker();
+        } else if (asked && totalSlots() > 0){
+          renderPicker();
+          window.scrollTo(0, 0);
+        } else {
+          /* they asked to move and there is genuinely nothing else free: say so
+             instead of silently repainting the same screen */
+          renderConfirmed(S.booking, true, asked ? T.emptyBody : null);
+        }
+      })
+      .catch(function(){
+        renderMessage(T.errorHeading, T.errorSlotsBody, true);
+      });
+  }
+
+  function book(){
+    if (S.busy || !S.selected) return;
+    setBusy(true);
+
+    fetch(API + "/book", {
+      method: "POST",
+      headers: { "Content-Type":"application/json", "Accept":"application/json" },
+      cache: "no-store",
+      body: JSON.stringify({ t: S.token, startISO: S.selected })
+    })
+      .then(function(res){
+        return parseJSON(res).then(function(data){ return { status:res.status, data:data }; });
+      })
+      .then(function(r){
+        var d = r.data;
+
+        if (r.status === 200 && d && d.ok === true){
+          S.booking = {
+            startISO: d.startISO,
+            endISO: d.endISO,
+            meetLink: d.meetLink || null,
+            label: d.label || ""
+          };
+          renderConfirmed(S.booking, false);
+          window.scrollTo(0, 0);
+          return;
+        }
+
+        if (r.status === 403){
+          renderMessage(T.invalidHeading, T.invalidBody);
+          return;
+        }
+
+        if (r.status === 409){
+          /* somebody took it between page load and tap: re-render from the
+             fresh grid the server handed back, keep them on the same screen */
+          S.busy = false;
+          S.selected = null;
+          S.notice = { text: T.slotTaken, bad: false };
+          if (d && d.days){
+            S.days = d.days;
+            renderPicker();
+          } else {
+            refreshAfterBadSlot();
+          }
+          return;
+        }
+
+        if (r.status === 400){
+          /* stale grid (slot expired or no longer legal): refresh quietly */
+          S.notice = { text: T.slotTaken, bad: false };
+          S.selected = null;
+          refreshAfterBadSlot();
+          return;
+        }
+
+        setBusy(false);
+        S.notice = { text: T.errorBookBody, bad: true };
+        renderPicker();
+      })
+      .catch(function(){
+        setBusy(false);
+        S.notice = { text: T.errorBookBody, bad: true };
+        renderPicker();
+      });
+  }
+
+  function refreshAfterBadSlot(){
+    var keep = S.notice;
+    fetch(API + "/slots?t=" + encodeURIComponent(S.token), {
+      method:"GET", headers:{ "Accept":"application/json" }, cache:"no-store"
+    })
+      .then(function(res){ return parseJSON(res); })
+      .then(function(data){
+        if (data && data.ok === true){
+          S.days = data.days || [];
+          S.booking = data.booking || null;
+        }
+        S.notice = keep;
+        S.busy = false;
+        renderPicker();
+      })
+      .catch(function(){
+        S.busy = false;
+        S.notice = { text: T.errorBookBody, bad: true };
+        renderPicker();
+      });
+  }
+
+  /* ---------- boot ---------- */
+  var token = "";
+  try { token = new URLSearchParams(location.search).get("t") || ""; } catch (e){ token = ""; }
+  S.token = token.trim();
+
+  if (!S.token){
+    renderMessage(T.invalidHeading, T.invalidBody);
+  } else {
+    load();
+  }
+})();
+</script>
+</body>
+</html>

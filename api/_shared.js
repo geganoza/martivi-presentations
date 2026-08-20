@@ -22,7 +22,46 @@ const TZ_SUFFIX = '+04:00';
 
 const GOOGLE_TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const GCAL_BASE = 'https://www.googleapis.com/calendar/v3';
+
+/**
+ * The calendar the interview event is WRITTEN to, and the only one we can read
+ * events from. Everything else below is availability-only.
+ */
 const CALENDAR_ID = 'primary';
+
+/**
+ * Co-hosts: people who must also be free for a slot to be offered, and who get
+ * invited to the event.
+ *
+ * Comma-separated in BOOKING_COHOSTS, e.g.
+ *   BOOKING_COHOSTS=giorgi.ujmajuridze@martiviconsulting.com
+ *
+ * Free/busy across a Google Workspace tenant needs no sharing setup: members of
+ * the same tenant can read each other's busy blocks by default, across domains
+ * (verified 2026-08-08 for martividigital.com -> martiviconsulting.com). A
+ * personal @gmail.com address is NOT in the tenant and returns `notFound`, so
+ * such a person must share their calendar with the booking account first.
+ *
+ * Read at call time, not module load: Vercel injects env vars per invocation.
+ *
+ * @returns {string[]}
+ */
+function cohostCalendars() {
+  return String(process.env.BOOKING_COHOSTS || '')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+/**
+ * Every calendar that gets a say in whether a slot is offered: the host's, plus
+ * each co-host's. A slot survives only if it is free on ALL of them.
+ *
+ * @returns {string[]}
+ */
+function busyCalendars() {
+  return [CALENDAR_ID].concat(cohostCalendars());
+}
 
 /**
  * Georgian localisation constants.
@@ -56,11 +95,11 @@ const MONTHS_KA = [
   'დეკემბერი',
 ];
 
-/** Calendar event copy, also produced by `ka`. {position} / {name} are filled in. */
+/** Calendar event copy, also produced by `ka`. {position} / {brand} / {name} are filled in. */
 // Position and brand are per-round, so they come from env with the original
 // Project Assistant values as fallback. They used to be hardcoded, which meant
 // the designer round's first test booking landed titled "გასაუბრება: პროექტის
-// ასისტენტი" — the wrong role, on a calendar invite the candidate receives.
+// ასისტენტი", the wrong role, on a calendar invite the candidate receives.
 // Set BOOKING_POSITION_KA and BOOKING_BRAND per round.
 const EVENT_KA = {
   position: process.env.BOOKING_POSITION_KA || 'პროექტის ასისტენტი',
@@ -609,7 +648,64 @@ function overlaps(aStart, aEnd, bStart, bEnd) {
 // ---------------------------------------------------------------------------
 
 /**
- * Query free/busy for the primary calendar.
+ * Query free/busy across one or more calendars and return the UNION of their
+ * busy blocks. Union of busy is intersection of free: a slot survives only if
+ * every listed calendar is free for it.
+ *
+ * Fails closed. If any calendar errors (typically `notFound`, meaning it was
+ * never shared with the booking account) the whole call throws rather than
+ * quietly treating that person as free all week, which is exactly how you
+ * double-book someone. A loud 500 is recoverable; a silent double-booking of a
+ * real interview is not.
+ *
+ * @param {string} accessToken
+ * @param {string[]} ids Calendar ids to query.
+ * @param {number|string} timeMin Epoch ms or an ISO string.
+ * @param {number|string} timeMax Epoch ms or an ISO string.
+ * @returns {Promise<Array<{startMs:number, endMs:number}>>} Busy blocks.
+ */
+async function freeBusyFor(accessToken, ids, timeMin, timeMax) {
+  const wanted = (Array.isArray(ids) ? ids : [ids]).filter(Boolean);
+  if (!wanted.length) return [];
+
+  const min = typeof timeMin === 'number' ? isoTbilisi(timeMin) : String(timeMin);
+  const max = typeof timeMax === 'number' ? isoTbilisi(timeMax) : String(timeMax);
+
+  const data = await gcal(accessToken, '/freeBusy', {
+    method: 'POST',
+    body: {
+      timeMin: min,
+      timeMax: max,
+      timeZone: TZ,
+      items: wanted.map((id) => ({ id })),
+    },
+  });
+
+  const calendars = (data && data.calendars) || {};
+  const blocks = [];
+
+  for (const id of wanted) {
+    const entry = calendars[id] || {};
+    if (Array.isArray(entry.errors) && entry.errors.length) {
+      const reason = entry.errors.map((e) => e && e.reason).filter(Boolean).join(', ');
+      throw new Error(
+        `freeBusy error for ${id}: ${String(reason || 'unknown').slice(0, 120)}`,
+      );
+    }
+    for (const b of Array.isArray(entry.busy) ? entry.busy : []) {
+      const startMs = Date.parse(b.start);
+      const endMs = Date.parse(b.end);
+      if (Number.isFinite(startMs) && Number.isFinite(endMs) && endMs > startMs) {
+        blocks.push({ startMs, endMs });
+      }
+    }
+  }
+
+  return blocks.sort((a, b) => a.startMs - b.startMs);
+}
+
+/**
+ * Busy blocks for everyone who has a say: the host plus every co-host.
  *
  * @param {string} accessToken
  * @param {number|string} timeMin Epoch ms or an ISO string.
@@ -617,24 +713,7 @@ function overlaps(aStart, aEnd, bStart, bEnd) {
  * @returns {Promise<Array<{startMs:number, endMs:number}>>} Busy blocks.
  */
 async function freeBusy(accessToken, timeMin, timeMax) {
-  const min = typeof timeMin === 'number' ? isoTbilisi(timeMin) : String(timeMin);
-  const max = typeof timeMax === 'number' ? isoTbilisi(timeMax) : String(timeMax);
-
-  const data = await gcal(accessToken, '/freeBusy', {
-    method: 'POST',
-    body: { timeMin: min, timeMax: max, timeZone: TZ, items: [{ id: CALENDAR_ID }] },
-  });
-
-  const calendars = (data && data.calendars) || {};
-  const entry = calendars[CALENDAR_ID] || Object.values(calendars)[0] || {};
-  if (Array.isArray(entry.errors) && entry.errors.length) {
-    const reason = entry.errors.map((e) => e && e.reason).filter(Boolean).join(', ');
-    throw new Error(`freeBusy error: ${String(reason || 'unknown').slice(0, 120)}`);
-  }
-
-  return (Array.isArray(entry.busy) ? entry.busy : [])
-    .map((b) => ({ startMs: Date.parse(b.start), endMs: Date.parse(b.end) }))
-    .filter((b) => Number.isFinite(b.startMs) && Number.isFinite(b.endMs) && b.endMs > b.startMs);
+  return freeBusyFor(accessToken, busyCalendars(), timeMin, timeMax);
 }
 
 /**
@@ -742,10 +821,44 @@ async function eventsInWindow(accessToken, startMs, endMs) {
  * @param {number} endMs
  * @param {string|null} ignoreEventId Event allowed to occupy the slot (a
  *        reschedule onto the candidate's own current time).
+ * @param {{startMs:number, endMs:number}|null} [ownWindow] The candidate's
+ *        existing booking window, if they hold one.
  * @returns {Promise<boolean>}
  */
-async function slotIsFree(accessToken, startMs, endMs, ignoreEventId) {
-  const busy = await freeBusy(accessToken, startMs, endMs);
+async function slotIsFree(accessToken, startMs, endMs, ignoreEventId, ownWindow) {
+  // Re-selecting the slot you already hold is a no-op, and it must succeed.
+  //
+  // We invite the co-hosts to the booking, so the candidate's own event sits on
+  // the co-host's calendar too and reads as busy there. Without this escape the
+  // co-host check below rejects the candidate's own current time, while
+  // computeAvailability deliberately keeps that slot on their grid. The
+  // candidate would see their slot offered and get a 409 every time they picked
+  // it, forever.
+  //
+  // Matched on start time alone, exactly as computeAvailability matches when it
+  // puts the slot back on the grid. Matching start AND end here instead would
+  // reopen the loop for any event whose end was edited by hand: the grid would
+  // keep offering the slot while this refused it. Whatever the grid re-adds,
+  // this excuses.
+  //
+  // A different slot gets the full strict check, so this can never let a
+  // booking land on a time a co-host is genuinely busy. Re-confirming the slot
+  // you already occupy changes nothing on anyone's calendar, so there is no
+  // conflict for it to create.
+  const isOwnSlot = Boolean(ownWindow && ownWindow.startMs === startMs);
+
+  // Co-hosts otherwise checked first, and strictly. `ignoreEventId` excuses
+  // exactly one event on the HOST calendar; it can never excuse a co-host's busy
+  // block. We could not honour it there anyway: we hold free/busy access to a
+  // co-host's calendar, not read access, so their busy blocks carry no event ids
+  // to compare against.
+  const cohosts = cohostCalendars();
+  if (cohosts.length && !isOwnSlot) {
+    const cohostBusy = await freeBusyFor(accessToken, cohosts, startMs, endMs);
+    if (cohostBusy.some((b) => overlaps(startMs, endMs, b.startMs, b.endMs))) return false;
+  }
+
+  const busy = await freeBusyFor(accessToken, [CALENDAR_ID], startMs, endMs);
   const hits = busy.filter((b) => overlaps(startMs, endMs, b.startMs, b.endMs));
   if (hits.length === 0) return true;
   if (!ignoreEventId) return false;
@@ -864,6 +977,9 @@ module.exports = {
   buildGrid,
   publicDays,
   overlaps,
+  cohostCalendars,
+  busyCalendars,
+  freeBusyFor,
   freeBusy,
   findBooking,
   eventsInWindow,

@@ -21,6 +21,7 @@ const {
   getAccessToken,
   gcal,
   buildGrid,
+  cohostCalendars,
   findBooking,
   slotIsFree,
   meetLinkOf,
@@ -75,12 +76,20 @@ function buildEvent(candidate, slot) {
     .split('{name}')
     .join(candidate.name);
 
+  // One event with the co-hosts invited, never a mirrored copy per calendar.
+  // The invitation puts it on their calendar, an unanswered invitation already
+  // counts as busy, and a later reschedule or cancellation propagates from this
+  // single event. Two parallel events drift apart the first time one is moved.
+  const attendees = [{ email: candidate.email, displayName: candidate.name }].concat(
+    cohostCalendars().map((email) => ({ email, optional: false })),
+  );
+
   return {
     summary,
     description,
     start: { dateTime: slot.start, timeZone: TZ },
     end: { dateTime: slot.end, timeZone: TZ },
-    attendees: [{ email: candidate.email, displayName: candidate.name }],
+    attendees,
     conferenceData: {
       createRequest: {
         requestId: crypto.randomUUID(),
@@ -160,7 +169,7 @@ module.exports = async function handler(req, res) {
 
     // The double-booking race: re-check this exact slot immediately before the
     // insert, not the stale list the page was rendered from.
-    const free = await slotIsFree(accessToken, slot.startMs, slot.endMs, ignoreEventId);
+    const free = await slotIsFree(accessToken, slot.startMs, slot.endMs, ignoreEventId, existing);
     if (!free) {
       const refreshed = await computeAvailability(accessToken, candidate.id, Date.now());
       sendJson(res, 409, { ok: false, error: 'slot_taken', days: refreshed.days });

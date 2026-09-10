@@ -6,14 +6,15 @@
   <meta name="robots" content="noindex, nofollow">
   <title>MARTIVI CONSULTING</title>
   <style>
-    /* Built 1:1 from the Figma one-pager (file U0DQ1i2AW88ko8Oa0L2BQw, frame 2:2).
-       Everything is laid out on the design's own 1728px canvas at the design's
-       own coordinates, then the whole canvas is scaled to the window width, so
-       the page matches the design at any screen size instead of reflowing. */
+    /* Built 1:1 from the designer's "2 OPTION" frame (Figma file
+       U0DQ1i2AW88ko8Oa0L2BQw, node 17:169). Everything is laid out on the
+       design's own 1728px canvas at the design's coordinates, then the whole
+       canvas is scaled to the window width, so the page matches the design at
+       any screen size instead of reflowing. */
     @font-face {
       font-family: 'Montserrat';
       font-style: normal;
-      font-weight: 400 900;
+      font-weight: 100 900;
       font-display: block;
       src: url('assets/fonts/montserrat-latin.woff2') format('woff2');
     }
@@ -24,62 +25,99 @@
     img { display: block; }
 
     .stage { position: relative; width: 100%; overflow: hidden; }
-    .page { position: relative; width: 1728px; height: 7690.54px; transform-origin: 0 0; background: #fff; }
-    .section { position: absolute; left: 0; width: 1728px; overflow: hidden; }
+    .page { position: relative; width: 1728px; height: 8099px; transform-origin: 0 0; background: #fff; }
+    .section { position: absolute; left: 0; width: 1728px; overflow: hidden; background: #fff; }
 
     /* Hero */
-    .hero { top: 0; height: 866px; background: #f3f3f3; }
-    .hero__logo { position: absolute; left: 140px; top: 91px; width: 264px; height: 51px; }
-    .hero__image { position: absolute; left: 0; top: 174px; width: 1728px; height: 693px; overflow: hidden; }
+    .hero { top: 0; height: 854px; }
+    .hero__image { position: absolute; left: -18px; top: 168px; width: 1758.963px; height: 705px; overflow: hidden; }
     .hero__image img { position: absolute; left: 0; top: -23.91%; width: 100%; height: 134.45%; max-width: none; }
+    .hero__nav { position: absolute; left: 0; top: 0; width: 1728px; height: 174px; background: #f3f3f3; }
+    .hero__logo { position: absolute; left: 140px; top: 72px; width: 264px; height: 51px; }
 
-    /* About */
-    .about { top: 867px; height: 953px; background: #f3f3f3; }
-    .about__photo { position: absolute; left: 140px; top: 257px; width: 591px; height: 591px; border-radius: 40px; background: #999; }
-    .about__title { position: absolute; left: 848px; top: 477px; font-weight: 900; font-size: 104px; line-height: normal; color: #12324c; text-transform: uppercase; white-space: nowrap; }
-    .about__mark { position: absolute; left: 1218px; top: -403px; width: 450px; height: 1423px; display: flex; align-items: center; justify-content: center; }
-    .about__mark p { flex: none; transform: rotate(-90deg); font-weight: 900; font-size: 369.323px; line-height: normal; color: #ebebeb; text-transform: uppercase; white-space: nowrap; }
-    .about__sub { position: absolute; left: 851px; top: 584px; font-weight: 400; font-size: 26px; line-height: normal; color: #000; text-transform: uppercase; white-space: nowrap; }
-    .about__icon { position: absolute; left: 856px; width: 21px; height: 28px; object-fit: cover; }
-    .about__bullet { position: absolute; left: 883px; font-weight: 400; font-size: 18px; line-height: normal; color: #000; white-space: nowrap; }
+    /* Team */
+    .team { top: 854px; height: 1281px; }
+    .team__mark { position: absolute; left: calc(50% + 17.5px); top: calc(50% - 274.5px); transform: translateX(-50%); font-weight: 900; font-size: 479.677px; line-height: normal; color: #f7f7f7; text-align: center; white-space: nowrap; }
+    .team__photo { position: absolute; overflow: hidden; }
+    .team__photo img { position: absolute; max-width: none; }
+    .team__photo--left { left: 238px; top: 698px; width: 362px; height: 590px; }
+    .team__photo--left img { left: -16.44%; top: -4.24%; width: 127.82%; height: 104.24%; }
+    .team__photo--right { left: 1119px; top: 692px; width: 356px; height: 619px; }
+    .team__photo--right img { left: -20.22%; top: -4.24%; width: 135.39%; height: 104.29%; }
+    .team__photo--center { left: calc(50% + 0.5px); top: 533px; width: 489px; height: 748px; transform: translateX(-50%); }
+    .team__photo--center img { left: -1.9%; top: 0; width: 105.79%; height: 100%; }
+    .team__title { position: absolute; left: 703px; top: 187px; width: 322px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: #1a92a7; text-align: center; }
+    .team__meet { width: 100%; height: 122px; font-weight: 300; font-size: 126px; line-height: normal; white-space: pre; }
+    .team__our { width: 100%; font-weight: 700; font-size: 54px; line-height: normal; text-transform: uppercase; }
 
-    /* Divider slides */
-    .slide { height: 443px; isolation: isolate; }
-    .slide__bg { position: absolute; left: 0; top: -35.14%; width: 104.5%; height: 194.65%; max-width: none; }
-    .slide__tint { position: absolute; inset: 0; mix-blend-mode: multiply; background-image: linear-gradient(-0.41110373923156374deg, rgb(4, 112, 121) 2.402%, rgb(0, 236, 255) 41.498%, rgb(4, 112, 121) 97.94%); }
-    .slide__title { position: absolute; left: calc(50% + 0.5px); top: calc(50% - 47.5px); transform: translateX(-50%); font-weight: 700; font-size: 78.86px; line-height: normal; color: #fff; text-align: center; white-space: nowrap; }
-    .slide__title--centre { left: 50%; }
-    .slide__title .light { font-weight: 400; }
+    /* Banners (the three dividers and the footer share this) */
+    .banner { height: 443px; isolation: isolate; }
+    .banner__bg { position: absolute; left: 0; top: -35.14%; width: 104.5%; height: 194.65%; max-width: none; }
+    .banner__tint { position: absolute; inset: 0; mix-blend-mode: multiply; background-image: linear-gradient(-0.41110373923156374deg, rgb(4, 112, 121) 2.402%, rgb(0, 236, 255) 41.498%, rgb(4, 112, 121) 97.94%); }
+    .banner__title { position: absolute; left: 50%; top: calc(50% - 38.5px); transform: translateX(-50%); font-weight: 700; font-size: 64px; line-height: normal; color: #fff; text-align: center; white-space: nowrap; }
+    .banner__title--half { left: calc(50% + 0.5px); }
+    .banner__title .light { font-weight: 400; }
 
     /* Cards (projects + modules) */
-    .card-row { position: absolute; left: 140px; display: flex; align-items: center; gap: 20px; }
-    .card { position: relative; flex: none; height: 286px; overflow: hidden; border-radius: 20px; background: #00aecc; isolation: isolate; }
-    .card__texture { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 20px; mix-blend-mode: multiply; }
-    .card__label { position: absolute; display: flex; flex-direction: column; align-items: center; }
-    .card__title { font-weight: 700; line-height: normal; color: #fff; white-space: nowrap; }
-    .card__line { position: relative; flex: none; width: 134px; height: 0; }
-    .card__line img { position: absolute; left: 0; top: -2px; width: 100%; height: 2px; }
-    .card__num { width: 100%; font-weight: 400; font-size: 16.72px; line-height: normal; color: #fff; text-align: center; }
+    .card-row { position: absolute; display: flex; align-items: center; }
+    .card { position: relative; flex: none; overflow: hidden; background: #00aecc; isolation: isolate; }
+    .card__texture { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; mix-blend-mode: multiply; }
+    .card__label { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .card__title { font-weight: 700; font-size: 28px; line-height: normal; color: #fff; white-space: nowrap; }
+    .card__line { position: relative; flex: none; height: 0; }
+    .card__line img { position: absolute; left: 0; top: -1.66px; width: 100%; }
+    .card__num { width: 100%; font-weight: 400; font-size: 16px; line-height: normal; color: #fff; text-align: center; }
 
-    .projects { top: 2264px; height: 1175px; background: #f3f3f3; }
-    .card--project { width: 469px; }
-    .card--project .card__label { left: calc(50% + 0.5px); top: 124px; width: 132px; transform: translateX(-50%); }
-    .card--project .card__title { font-size: 40px; }
+    .projects { top: 2578px; height: 1091.34px; }
+    .projects .card-row { left: 262px; gap: 16.628px; }
+    .card--project { width: 389.915px; height: 237.773px; border-radius: 16.628px; }
+    .card--project .card__label { left: calc(50% + 0.42px); top: 103.09px; width: 109.742px; transform: translateX(-50%); }
+    .card--project .card__line { width: 111.404px; }
+    .card--project .card__line img { height: 1.66275px; }
 
-    .modules { top: 3882px; height: 1640px; background: #f3f3f3; }
-    .card--module { width: 347px; }
-    .card--module .card__label { left: 20px; width: 307px; }
-    .card--module .card__title { font-size: 37px; text-align: center; }
+    .modules { top: 4154px; height: 1596.96px; }
+    .modules .card-row { left: 263px; gap: 16.602px; }
+    .card--module { width: 288.048px; height: 237.412px; border-radius: 16.602px; }
+    .card--module .card__label { left: 16.6px; width: 254.844px; }
+    .card--module .card__title { text-align: center; }
+    .card--module .card__line { width: 111.235px; }
+    .card--module .card__line img { height: 1.66022px; }
+
+    /* Module flip cards. Same mechanics as the CAIB landing page
+       (caib-landing/app/globals.css): 3D flip on hover or keyboard focus,
+       tap-to-flip on touch screens, instant for reduced-motion users.
+       The front face is the Figma card untouched; the card also grows while
+       flipped so the description reads comfortably. */
+    .flip { position: relative; flex: none; width: 288.048px; height: 237.412px; border-radius: 16.602px; perspective: 1200px; cursor: pointer; outline: none; z-index: 0; transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
+    .flip-inner { display: grid; height: 100%; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
+    .flip-face { grid-area: 1 / 1; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+    .flip-back { transform: rotateY(180deg); box-shadow: 0 16px 36px rgba(10, 31, 48, 0.28); }
+    @media (hover: hover) {
+      .flip:hover, .flip:focus-visible { transform: scale(1.25); z-index: 2; }
+      .flip:hover .flip-inner, .flip:focus-visible .flip-inner { transform: rotateY(180deg); }
+    }
+    @media (hover: none) {
+      .flip.is-flipped { transform: scale(1.25); z-index: 2; }
+      .flip.is-flipped .flip-inner { transform: rotateY(180deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .flip, .flip-inner { transition: none !important; }
+    }
+    .card__back { position: absolute; inset: 0; padding: 16px 18px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #fff; }
+    .card__back-num { font-weight: 400; font-size: 14px; line-height: normal; }
+    .card__back-title { margin-top: 1px; font-weight: 700; font-size: 18px; line-height: 1.2; white-space: nowrap; }
+    .card__back .card__line { margin: 8px 0 10px; }
+    .card__back-text { font-weight: 400; font-size: 12.5px; line-height: 1.42; }
 
     /* Company logos */
-    .logos { top: 5965px; height: 1249.54px; background: #f3f3f3; }
+    .logos { top: 6194px; height: 1462.07px; }
     .logo-row { position: absolute; left: 139px; height: 275.15px; display: flex; align-items: center; gap: 18.313px; }
     .logo-row img { flex: none; width: 275.15px; height: 275.15px; object-fit: cover; }
 
-    /* Footer */
-    .footer { top: 7214.54px; height: 476px; background: #2ec3dd; isolation: isolate; }
-    .footer__texture { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
-    .footer__row { position: absolute; left: calc(50% + 0.5px); top: 252px; transform: translateX(-50%); display: flex; align-items: flex-end; gap: 47px; }
+    /* Footer (drawn as a banner in the design, shifted 1px left) */
+    .footer { top: 7656px; left: -1px; }
+    .footer .banner__bg { top: -35.69%; height: 197.73%; }
+    .footer__row { position: absolute; left: 140px; right: 140px; top: 243px; height: 24px; display: flex; align-items: flex-end; gap: 31px; }
     .footer__row p { font-weight: 400; font-size: 18px; line-height: normal; color: #fff; white-space: nowrap; }
     .footer__place { display: inline-grid; grid-template-columns: max-content; grid-template-rows: max-content; line-height: 0; }
     .footer__place img { grid-area: 1 / 1; width: 24px; height: 24px; }
@@ -90,134 +128,141 @@
   <div class="stage" id="stage">
     <main class="page" id="page">
 
-      <!-- Hero (2:23) -->
+      <!-- Hero (17:350) -->
       <section class="section hero">
-        <img class="hero__logo" src="assets/logo.svg" alt="MARTIVI CONSULTING">
         <div class="hero__image"><img src="assets/hero-image.png" alt="Make success simple again"></div>
+        <div class="hero__nav"></div>
+        <img class="hero__logo" src="assets/logo.svg" alt="MARTIVI CONSULTING">
       </section>
 
-      <!-- About us (6:429) -->
-      <section class="section about">
-        <div class="about__photo"></div>
-        <p class="about__title">about</p>
-        <div class="about__mark" aria-hidden="true"><p>about</p></div>
-        <p class="about__sub">our services</p>
-        <img class="about__icon" style="top:645px" src="assets/bullet-arrow.png" alt="">
-        <p class="about__bullet" style="top:648px">Build your brand strategy</p>
-        <img class="about__icon" style="top:679px" src="assets/bullet-arrow.png" alt="">
-        <p class="about__bullet" style="top:682px">Run digital campaigns</p>
-        <img class="about__icon" style="top:713px" src="assets/bullet-arrow.png" alt="">
-        <p class="about__bullet" style="top:716px">Build or improve your sales process</p>
-        <img class="about__icon" style="top:747px" src="assets/bullet-arrow.png" alt="">
-        <p class="about__bullet" style="top:750px">Generate quality leads</p>
-        <img class="about__icon" style="top:781px" src="assets/bullet-arrow.png" alt="">
-        <p class="about__bullet" style="top:784px">Plan entry into new markets</p>
-        <img class="about__icon" style="top:815px" src="assets/bullet-arrow.png" alt="">
-        <p class="about__bullet" style="top:818px">Get ready to scale</p>
+      <!-- Meet our team (17:373) -->
+      <section class="section team">
+        <p class="team__mark" aria-hidden="true">TEAM</p>
+        <div class="team__photo team__photo--left"><img src="assets/team-left.webp" alt="Team member"></div>
+        <div class="team__title"><p class="team__meet">Meet </p><p class="team__our">Our Team</p></div>
+        <div class="team__photo team__photo--right"><img src="assets/team-right.webp" alt="Team member"></div>
+        <div class="team__photo team__photo--center"><img src="assets/team-center.webp" alt="Team member"></div>
       </section>
 
-      <!-- Slide 16:9 - 30 (17:159) -->
-      <section class="section slide" style="top:1821px">
-        <img class="slide__bg" src="assets/slide-bg.png" alt="">
-        <div class="slide__tint"></div>
-        <p class="slide__title"><span class="light">Recent </span>Projects</p>
+      <!-- Slide 16:9 - 30 (17:367) -->
+      <section class="section banner" style="top:2135px">
+        <img class="banner__bg" src="assets/slide-bg.png" alt="">
+        <div class="banner__tint"></div>
+        <p class="banner__title"><span class="light">Recent </span>Projects</p>
       </section>
 
-      <!-- Recent Projects (6:472) -->
+      <!-- Recent Projects (17:292) -->
       <section class="section projects">
-        <div class="card-row" style="top:292px">
+        <div class="card-row" style="top:300px">
           <div class="card card--project"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label"><p class="card__title">SULAKAURI</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">01</p></div></div>
+            <div class="card__label"><p class="card__title">SULAKAURI</p><span class="card__line"><img src="assets/line-projects.svg" alt=""></span><p class="card__num">01</p></div></div>
           <div class="card card--project"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label"><p class="card__title">THERMORUM</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">02</p></div></div>
+            <div class="card__label"><p class="card__title">THERMORUM</p><span class="card__line"><img src="assets/line-projects.svg" alt=""></span><p class="card__num">02</p></div></div>
           <div class="card card--project"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label"><p class="card__title">CASA CALDA</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">03</p></div></div>
+            <div class="card__label"><p class="card__title">CASA CALDA</p><span class="card__line"><img src="assets/line-projects.svg" alt=""></span><p class="card__num">03</p></div></div>
         </div>
-        <div class="card-row" style="top:597px">
+        <div class="card-row" style="top:553.57px">
           <div class="card card--project"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label"><p class="card__title">BEBIAS</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">04</p></div></div>
+            <div class="card__label"><p class="card__title">BEBIAS</p><span class="card__line"><img src="assets/line-projects.svg" alt=""></span><p class="card__num">04</p></div></div>
           <div class="card card--project"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label"><p class="card__title">TRUEDATA</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">05</p></div></div>
+            <div class="card__label"><p class="card__title">TRUEDATA</p><span class="card__line"><img src="assets/line-projects.svg" alt=""></span><p class="card__num">05</p></div></div>
           <div class="card card--project"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label"><p class="card__title">HEINEKEN</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">06</p></div></div>
+            <div class="card__label"><p class="card__title">ALCORIUM</p><span class="card__line"><img src="assets/line-projects.svg" alt=""></span><p class="card__num">06</p></div></div>
         </div>
       </section>
 
-      <!-- Slide 16:9 - 31 (17:165) -->
-      <section class="section slide" style="top:3439px">
-        <img class="slide__bg" src="assets/slide-bg.png" alt="">
-        <div class="slide__tint"></div>
-        <p class="slide__title slide__title--centre">Modules</p>
+      <!-- Slide 16:9 - 31 (17:371) -->
+      <section class="section banner" style="top:3711px">
+        <img class="banner__bg" src="assets/slide-bg.png" alt="">
+        <div class="banner__tint"></div>
+        <p class="banner__title banner__title--half">Modules</p>
       </section>
 
-      <!-- Modules (6:40). Line breaks sit exactly where Figma wraps each title. -->
+      <!-- Modules (17:206). Line breaks sit exactly where Figma wraps each title;
+           each label keeps the design's own position. Back faces carry the descriptions. -->
       <section class="section modules">
-        <div class="card-row" style="top:219px">
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:104px"><p class="card__title">Board &amp;<br>Governance</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">01</p></div></div>
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:104px"><p class="card__title">Smart Task<br>Manager</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">02</p></div></div>
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:126px"><p class="card__title">Data Wizard</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">03</p></div></div>
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:126px"><p class="card__title">Chatbot Queen</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">04</p></div></div>
+        <div class="card-row" style="top:300px">
+          <div class="flip" tabindex="0" role="button" aria-label="Board &amp; Governance: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="top:86.33px"><p class="card__title">Board &amp;<br>Governance</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">01</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">01</p><p class="card__back-title">Board &amp; Governance</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">Capture every meeting, turn discussion into formal decisions, run weighted voting from inbox — and keep a permanent searchable record of every call your company ever made.</p></div></div></div></div>
+          <div class="flip" tabindex="0" role="button" aria-label="Smart Task Manager: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="top:86.33px"><p class="card__title">Smart Task<br>Manager</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">02</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">02</p><p class="card__back-title">Smart Task Manager</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">Tasks don’t get marked done — they get proven done. AI follows every delegation from the boardroom to the moment evidence is reviewed and approved.</p></div></div></div></div>
+          <div class="flip" tabindex="0" role="button" aria-label="Data Wizard: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="top:104.59px"><p class="card__title">Data Wizard</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">03</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">03</p><p class="card__back-title">Data Wizard</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">Ask any question about your business in plain language. Get the answer, the chart, and the why — in seconds, against your live data.</p></div></div></div></div>
+          <div class="flip" tabindex="0" role="button" aria-label="Chatbot Queen: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="top:104.59px"><p class="card__title">Chatbot Queen</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">04</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">04</p><p class="card__back-title">Chatbot Queen</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">Runs the full client sales journey on its own — presenting products, advising, quoting prices, handling delivery options, payments and checkout, then driving the delivery and warehouse steps.</p></div></div></div></div>
         </div>
-        <div class="card-row" style="top:524px">
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:126px"><p class="card__title">Sales Planning</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">05</p></div></div>
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:127px"><p class="card__title">Procurement</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">06</p></div></div>
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:104px"><p class="card__title">Market<br>Research</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">07</p></div></div>
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:126px"><p class="card__title">Invoicing</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">08</p></div></div>
+        <div class="card-row" style="top:553.18px">
+          <div class="flip" tabindex="0" role="button" aria-label="Sales Planning: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="top:104.59px"><p class="card__title">Sales Planning</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">05</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">05</p><p class="card__back-title">Sales Planning</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">Know exactly what to order, how much, and when. The math under every reorder decision — auditable, defensible, and pulled live from your own sales history.</p></div></div></div></div>
+          <div class="flip" tabindex="0" role="button" aria-label="Procurement: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="top:105.42px"><p class="card__title">Procurement</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">06</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">06</p><p class="card__back-title">Procurement</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">One screen turns “we’re running low” into a clean PO in your supplier’s inbox. Every order tracked from draft to delivery — without a spreadsheet in sight.</p></div></div></div></div>
+          <div class="flip" tabindex="0" role="button" aria-label="Market Research: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="left:calc(50% + 0.1px);top:calc(50% + 20.09px);transform:translate(-50%,-50%)"><p class="card__title">Market Research</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">07</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">07</p><p class="card__back-title">Market Research</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">See where your prices beat the market and where they don’t — across categories, brands, and retailers, with the gap quantified.</p></div></div></div></div>
+          <div class="flip" tabindex="0" role="button" aria-label="Invoicing: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="top:104.59px"><p class="card__title">Invoicing</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">08</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">08</p><p class="card__back-title">Invoicing</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">Creates and sends invoices in seconds — from a simple order, or even by pasting an email or chat conversation and letting it build the invoice for you.</p></div></div></div></div>
         </div>
-        <div class="card-row" style="top:829px">
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:104px"><p class="card__title">Social Media<br>Manager</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">09</p></div></div>
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:104px"><p class="card__title">Content<br>Creator</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">10</p></div></div>
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:104px"><p class="card__title">Store<br>Replenishment</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">11</p></div></div>
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:104px"><p class="card__title">Contract<br>Creator</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">12</p></div></div>
+        <div class="card-row" style="top:806.37px">
+          <div class="flip" tabindex="0" role="button" aria-label="Social Media Manager: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="top:86.33px"><p class="card__title">Social Media<br>Manager</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">09</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">09</p><p class="card__back-title">Social Media Manager</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">Automates social media management and advertising across Facebook, Instagram, Google, Meta, and more — content scheduling, posting, and ad campaigns, run for you.</p></div></div></div></div>
+          <div class="flip" tabindex="0" role="button" aria-label="Content Creator: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="top:calc(50% - 0.09px);transform:translateY(-50%)"><p class="card__title">Content Creator</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">10</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">10</p><p class="card__back-title">Content Creator</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">Automates content production end to end — generates photo and video content with AI tools, ready to publish.</p></div></div></div></div>
+          <div class="flip" tabindex="0" role="button" aria-label="Store Replenishment: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="top:86.33px"><p class="card__title">Store<br>Replenishment</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">11</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">11</p><p class="card__back-title">Store Replenishment</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">Keeps every store stocked. Tracks what each location sells and tells you what to send where, before the shelves run empty.</p></div></div></div></div>
+          <div class="flip" tabindex="0" role="button" aria-label="Contract Creator: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="top:86.33px"><p class="card__title">Contract Creator</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">12</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">12</p><p class="card__back-title">Contract Creator</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">Drafts contracts from your own templates in minutes, ready to review, adjust and send.</p></div></div></div></div>
         </div>
-        <div class="card-row" style="top:1134px">
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:126px"><p class="card__title">Reporting</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">13</p></div></div>
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:104px"><p class="card__title">Shipping<br>Master</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">14</p></div></div>
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:104px"><p class="card__title">Warehouse<br>Manager</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">15</p></div></div>
-          <div class="card card--module"><img class="card__texture" src="assets/texture.png" alt="">
-            <div class="card__label" style="top:104px"><p class="card__title">Financial<br>Analytics</p><span class="card__line"><img src="assets/line.svg" alt=""></span><p class="card__num">16</p></div></div>
+        <div class="card-row" style="top:1059.55px">
+          <div class="flip" tabindex="0" role="button" aria-label="Reporting: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="left:calc(50% + 0.4px);top:calc(50% - 0.28px);transform:translate(-50%,-50%)"><p class="card__title">Reporting</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">13</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">13</p><p class="card__back-title">Reporting</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">Turns your business data into clear reports that arrive on schedule, so nobody has to build them by hand.</p></div></div></div></div>
+          <div class="flip" tabindex="0" role="button" aria-label="Shipping Master: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="top:calc(50% - 0.28px);transform:translateY(-50%)"><p class="card__title">Shipping Master</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">14</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">14</p><p class="card__back-title">Shipping Master</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">Manages outgoing shipments in one place, from checking the delivery address to tracking each order until it arrives.</p></div></div></div></div>
+          <div class="flip" tabindex="0" role="button" aria-label="Warehouse Manager: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="top:86.33px"><p class="card__title">Warehouse<br>Manager</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">15</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">15</p><p class="card__back-title">Warehouse Manager</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">Runs day-to-day warehouse work on one screen: stock levels, picking and packing, and incoming deliveries.</p></div></div></div></div>
+          <div class="flip" tabindex="0" role="button" aria-label="Financial Analytics: show description"><div class="flip-inner">
+            <div class="card card--module flip-face"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__label" style="top:86.33px"><p class="card__title">Financial<br>Analytics</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__num">16</p></div></div>
+            <div class="card card--module flip-face flip-back"><img class="card__texture" src="assets/texture.png" alt=""><div class="card__back"><p class="card__back-num">16</p><p class="card__back-title">Financial Analytics</p><span class="card__line"><img src="assets/line-modules.svg" alt=""></span><p class="card__back-text">Shows the financial health of your business at a glance: revenue, costs and margins, and the trends behind them.</p></div></div></div></div>
         </div>
       </section>
 
-      <!-- Slide 16:9 - 32 (17:167) -->
-      <section class="section slide" style="top:5522px">
-        <img class="slide__bg" src="assets/slide-bg.png" alt="">
-        <div class="slide__tint"></div>
-        <p class="slide__title"><span class="light">Business </span>Experience</p>
+      <!-- Slide 16:9 - 32 (17:369) -->
+      <section class="section banner" style="top:5751px">
+        <img class="banner__bg" src="assets/slide-bg.png" alt="">
+        <div class="banner__tint"></div>
+        <p class="banner__title"><span class="light">Business </span>Experience</p>
       </section>
 
-      <!-- Company logos (17:26) -->
+      <!-- Company logos (17:182) -->
       <section class="section logos">
-        <div class="logo-row" style="top:240px">
+        <div class="logo-row" style="top:300px">
           <img src="assets/logos/heineken.png" alt="Heineken">
           <img src="assets/logos/henkel.png" alt="Henkel">
           <img src="assets/logos/hennessy.png" alt="Hennessy">
           <img src="assets/logos/microsoft.png" alt="Microsoft">
           <img src="assets/logos/sun-motors.png" alt="Sun Motors">
         </div>
-        <div class="logo-row" style="top:533.46px">
+        <div class="logo-row" style="top:593.46px">
           <img src="assets/logos/thermorum.png" alt="Thermorum">
           <img src="assets/logos/truedata.png" alt="Truedata">
           <img src="assets/logos/whisky-house.png" alt="Whisky House">
           <img src="assets/logos/alcorium.png" alt="Alcorium">
           <img src="assets/logos/autodesk.png" alt="Autodesk">
         </div>
-        <div class="logo-row" style="top:826.92px">
+        <div class="logo-row" style="top:886.92px">
           <img src="assets/logos/bebias.png" alt="Bebias">
           <img src="assets/logos/cisco.png" alt="Cisco">
           <img src="assets/logos/dell-technologies.png" alt="Dell Technologies">
@@ -226,9 +271,10 @@
         </div>
       </section>
 
-      <!-- Footer (17:142) -->
-      <footer class="section footer">
-        <img class="footer__texture" src="assets/texture.png" alt="">
+      <!-- Footer (47:471) -->
+      <footer class="section banner footer">
+        <img class="banner__bg" src="assets/slide-bg.png" alt="">
+        <div class="banner__tint"></div>
         <div class="footer__row">
           <p>© 2025 Martivi consulting</p>
           <p>CAIB - AI Brain For business</p>
@@ -244,7 +290,7 @@
   </div>
   <script>
     (function () {
-      var DESIGN_W = 1728, DESIGN_H = 7690.54;
+      var DESIGN_W = 1728, DESIGN_H = 8099;
       var page = document.getElementById('page');
       var stage = document.getElementById('stage');
       function fit() {
@@ -254,6 +300,24 @@
       }
       window.addEventListener('resize', fit);
       fit();
+    })();
+  </script>
+  <script>
+    // Touch screens have no hover, so a tap flips the card instead. Only one
+    // card stays flipped at a time; Enter or Space does the same from the keyboard.
+    (function () {
+      var cards = document.querySelectorAll('.flip');
+      function toggle(card) {
+        var open = !card.classList.contains('is-flipped');
+        cards.forEach(function (c) { c.classList.remove('is-flipped'); });
+        if (open) card.classList.add('is-flipped');
+      }
+      cards.forEach(function (card) {
+        card.addEventListener('click', function () { toggle(card); });
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(card); }
+        });
+      });
     })();
   </script>
 </body>

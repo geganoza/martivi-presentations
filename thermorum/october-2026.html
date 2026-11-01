@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thermorum - October 2026 Social Media Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Montserrat', sans-serif; background: #191919; color: white; }
+        .slide { min-height: 100vh; padding: 50px 60px; display: flex; flex-direction: column; border-bottom: 3px solid #262626; position: relative; }
+        .title-slide { justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg, #0c0c0c 0%, #191919 100%); }
+        .title-slide h1 { font-size: 72px; font-weight: 800; margin-bottom: 20px; letter-spacing: 4px; }
+        .title-slide h1 .yellow { color: #ffc711; }
+        .title-slide h1 .cyan { color: #3cc5ee; }
+        .title-slide h2 { font-size: 28px; color: #888; margin-bottom: 40px; }
+        .title-slide .period { font-size: 22px; color: #3cc5ee; border: 2px solid #3cc5ee; padding: 12px 35px; border-radius: 50px; }
+        .section-header { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
+        .section-header h2 { font-size: 28px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+        .platform-logo { height: 28px; width: auto; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 25px; }
+        .stat-card { background: #262626; border-radius: 12px; padding: 22px; text-align: center; border-left: 4px solid #ffc711; }
+        .stat-card.cyan { border-left-color: #3cc5ee; }
+        .stat-card .value { font-size: 32px; font-weight: 800; color: #ffc711; }
+        .stat-card.cyan .value { color: #3cc5ee; }
+        .stat-card .label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
+
+        table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 25px; background: #1e1e1e; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        thead { background: linear-gradient(135deg, #262626 0%, #1a1a1a 100%); }
+        th { padding: 16px 14px; text-align: left; font-size: 11px; text-transform: uppercase; color: #ffc711; border-bottom: 2px solid #ffc711; font-weight: 700; letter-spacing: 0.5px; }
+        th:first-child { border-radius: 12px 0 0 0; }
+        th:last-child { border-radius: 0 12px 0 0; }
+        tbody tr { transition: background 0.2s ease; }
+        td { padding: 14px; border-bottom: 1px solid #2a2a2a; }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:last-child td:first-child { border-radius: 0 0 0 12px; }
+        tbody tr:last-child td:last-child { border-radius: 0 0 12px 0; }
+        tr:hover { background: rgba(255,199,17,0.08); }
+        tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+        tr:nth-child(even):hover { background: rgba(255,199,17,0.08); }
+        .num { text-align: right; font-family: 'SF Mono', 'Courier New', monospace; font-weight: 600; }
+        .currency { color: #3cc5ee; font-weight: 700; font-size: 14px; }
+
+        .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 25px; }
+        .chart-container { background: linear-gradient(135deg, #262626 0%, #1e1e1e 100%); border-radius: 12px; padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.25); border: 1px solid #333; }
+        .preview-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; flex: 1; }
+        .preview-grid.videos { grid-template-columns: repeat(2, 1fr); }
+        .preview-grid.videos.single { grid-template-columns: 1fr; max-width: 50%; margin: 0 auto; }
+        .preview-card { background: #f5f5f5; border-radius: 10px; padding: 10px; overflow: hidden; }
+        .preview-card .header { display: flex; justify-content: space-between; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #ddd; }
+        .preview-card h4 { font-size: 10px; color: #333; max-width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+        .preview-card .spend { color: #0066cc; font-weight: 700; font-size: 12px; }
+        .preview-card .iframe-wrap { width: 100%; overflow: hidden; border-radius: 8px; position: relative; }
+        .preview-card .iframe-wrap.photo { aspect-ratio: 4/5; max-width: 80%; margin: 0 auto; }
+        .preview-card .iframe-wrap.video { aspect-ratio: 9/16; }
+        .preview-card iframe { position: absolute; top: 0; left: 0; width: 100%; height: 115%; border: none; }
+        .google-section { background: #262626; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .google-section h4 { font-size: 14px; margin-bottom: 3px; }
+        .google-section .stats { font-size: 11px; color: #888; margin-bottom: 15px; }
+        .google-section .stats span { color: #3cc5ee; }
+        .formats-row { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .format-item { text-align: center; }
+        .format-label { font-size: 10px; color: #ffc711; text-transform: uppercase; margin-bottom: 8px; }
+        .g-card { background: #1e1e1e; border-radius: 8px; overflow: hidden; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .g-card img { width: 100%; display: block; object-fit: cover; }
+        .g-card .content { padding: 10px; }
+        .g-card .ad-tag { background: #333; color: #888; font-size: 9px; padding: 2px 5px; border-radius: 3px; display: inline-block; margin-bottom: 4px; }
+        .g-card h5 { font-size: 11px; color: #ffc711; margin-bottom: 3px; }
+        .g-card p { font-size: 9px; color: #ccc; }
+        .sq { width: 180px; } .sq img { height: 180px; }
+        .ls { width: 250px; } .ls img { height: 131px; }
+        .pt { width: 140px; } .pt img { height: 233px; }
+        .footer { position: absolute; bottom: 20px; left: 60px; right: 60px; display: flex; justify-content: space-between; font-size: 10px; color: #555; }
+        .footer .brand { font-weight: 700; }
+        .footer .brand .yellow { color: #ffc711; }
+        .footer .brand .blue { color: #3cc5ee; font-weight: 300; }
+
+        @media print {
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+            html, body { width: 1920px; margin: 0; padding: 0; background: #191919; }
+            .slide { width: 1920px; height: auto !important; min-height: auto !important; max-height: none !important; page-break-after: always; page-break-inside: avoid; break-after: page; break-inside: avoid; overflow: visible !important; box-sizing: border-box; padding-bottom: 60px; }
+            .slide:last-child { page-break-after: avoid; }
+            .footer { position: relative !important; bottom: auto !important; margin-top: 40px; }
+            .iframe-wrap { display: none; }
+            .preview-card::after { content: "View on web version"; color: #666; font-size: 14px; display: block; text-align: center; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title -->
+<div class="slide title-slide">
+    <h1 style="color: #ffc711;">THERMORUM</h1>
+    <h2>Social Media Performance Report</h2>
+    <div class="period">October 2026</div>
+    <div style="position: absolute; bottom: 40px; font-size: 16px; letter-spacing: 1px;">by <span style="color: #ffc711; font-weight: 700;">MARTIVI</span> <span style="color: #3cc5ee; font-weight: 300;">DIGITAL</span></div>
+</div>
+
+<!-- Slide 2: Meta Overview -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="metaGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0668E1"/><stop offset="50%" stop-color="#7319E8"/><stop offset="100%" stop-color="#F70A8D"/></linearGradient></defs><text x="0" y="16" font-family="Montserrat, sans-serif" font-size="18" font-weight="800" fill="url(#metaGrad)">Meta</text></svg>
+        <h2>Performance Overview</h2>
+    </div>
+    <div class="stats-grid">
+        <div class="stat-card"><div class="value">1,052,142</div><div class="label">Total Reach</div></div>
+        <div class="stat-card cyan"><div class="value">1,730,744</div><div class="label">Total Impressions</div></div>
+        <div class="stat-card"><div class="value">117,487</div><div class="label">Post Engagements</div></div>
+        <div class="stat-card cyan"><div class="value">$636</div><div class="label">Total Spend</div></div>
+    </div>
+    <table>
+        <thead>
+            <tr><th>Ad Name</th><th>Campaign</th><th class="num">Reach</th><th class="num">Impressions</th><th class="num">Engagements</th><th class="num">CPM</th><th class="num">Spend</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>kalde Image post Sempteber 2026</td><td>Thermorum</td><td class="num">39,211</td><td class="num">77,000</td><td class="num">1,510</td><td class="num">$0.91</td><td class="num currency">$70</td></tr>
+            <tr><td>თაკო - 3 რჩევა ტუმბოზე</td><td>Thermorum</td><td class="num">138,672</td><td class="num">285,777</td><td class="num">17,376</td><td class="num">$0.24</td><td class="num currency">$68</td></tr>
+            <tr><td>თაკო - Simeს ქვაბის განხილვა</td><td>SIME</td><td class="num">125,495</td><td class="num">228,543</td><td class="num">14,734</td><td class="num">$0.23</td><td class="num currency">$53</td></tr>
+            <tr><td>Sime PROMO October 2026</td><td>SIME</td><td class="num">136,326</td><td class="num">243,470</td><td class="num">266</td><td class="num">$0.21</td><td class="num currency">$52</td></tr>
+            <tr><td>Dab Image post September 2026</td><td>DAB</td><td class="num">18,127</td><td class="num">32,300</td><td class="num">652</td><td class="num">$1.35</td><td class="num currency">$43</td></tr>
+            <tr><td>DAB Image VIDEO October 2026</td><td>DAB</td><td class="num">91,194</td><td class="num">157,586</td><td class="num">16,613</td><td class="num">$0.23</td><td class="num currency">$36</td></tr>
+            <tr><td>თაკო - აქციის ანონსი</td><td>Thermorum</td><td class="num">81,669</td><td class="num">137,987</td><td class="num">6,799</td><td class="num">$0.24</td><td class="num currency">$33</td></tr>
+            <tr><td>თაკო - 3 რჩევა ტუმბოზე</td><td>Thermorum</td><td class="num">14,870</td><td class="num">20,084</td><td class="num">11,538</td><td class="num">$1.48</td><td class="num currency">$30</td></tr>
+            <tr><td>TESY promo October 2026</td><td>Tesy</td><td class="num">104,574</td><td class="num">139,930</td><td class="num">133</td><td class="num">$0.21</td><td class="num currency">$29</td></tr>
+            <tr><td>თაკო - Simeს ქვაბის განხილვა</td><td>SIME</td><td class="num">17,439</td><td class="num">29,997</td><td class="num">14,558</td><td class="num">$0.91</td><td class="num currency">$27</td></tr>
+            <tr><td>SIME Image post September 2026</td><td>SIME</td><td class="num">14,171</td><td class="num">23,257</td><td class="num">529</td><td class="num">$1.15</td><td class="num currency">$27</td></tr>
+            <tr><td>Sime PROMO October 2026</td><td>SIME</td><td class="num">12,161</td><td class="num">18,770</td><td class="num">465</td><td class="num">$1.39</td><td class="num currency">$26</td></tr>
+            <tr><td>ბათუმის ხიმშიაშვილის პროექტი</td><td>Thermorum</td><td class="num">76,667</td><td class="num">104,297</td><td class="num">2,551</td><td class="num">$0.23</td><td class="num currency">$24</td></tr>
+            <tr><td>Macro PROMO October 2026</td><td>MACRO</td><td class="num">9,562</td><td class="num">14,500</td><td class="num">460</td><td class="num">$1.45</td><td class="num currency">$21</td></tr>
+            <tr><td>DAB Image VIDEO October 2026</td><td>DAB</td><td class="num">15,921</td><td class="num">33,792</td><td class="num">20,059</td><td class="num">$0.49</td><td class="num currency">$17</td></tr>
+            <tr><td>TESY promo October 2026</td><td>Tesy</td><td class="num">7,282</td><td class="num">11,254</td><td class="num">362</td><td class="num">$1.20</td><td class="num currency">$13</td></tr>
+            <tr><td>Macro PROMO October 2026</td><td>MACRO</td><td class="num">46,715</td><td class="num">57,246</td><td class="num">44</td><td class="num">$0.23</td><td class="num currency">$13</td></tr>
+            <tr><td>თაკო - აქციის ანონსი</td><td>Thermorum</td><td class="num">6,151</td><td class="num">7,472</td><td class="num">4,238</td><td class="num">$1.69</td><td class="num currency">$13</td></tr>
+            <tr><td>Macro Image post September 2026</td><td>MACRO</td><td class="num">6,762</td><td class="num">8,310</td><td class="num">171</td><td class="num">$1.24</td><td class="num currency">$10</td></tr>
+            <tr><td>ბათუმის ხიმშიაშვილის პროექტი</td><td>Thermorum</td><td class="num">10,271</td><td class="num">13,630</td><td class="num">454</td><td class="num">$0.63</td><td class="num currency">$9</td></tr>
+            <tr><td>თორნიკე - Caleffi-ის რადიატორის სარქველზე</td><td>Caleffi</td><td class="num">30,359</td><td class="num">33,407</td><td class="num">1,709</td><td class="num">$0.22</td><td class="num currency">$7</td></tr>
+            <tr><td>Macro PROMO October 2026</td><td>MACRO</td><td class="num">26,711</td><td class="num">29,261</td><td class="num">16</td><td class="num">$0.22</td><td class="num currency">$6</td></tr>
+            <tr><td>თაკო - გათბობის სეზონის ვიდეო</td><td>Thermorum</td><td class="num">15,633</td><td class="num">16,568</td><td class="num">1,132</td><td class="num">$0.24</td><td class="num currency">$4</td></tr>
+            <tr><td>თაკო - გათბობის სეზონის ვიდეო</td><td>Thermorum</td><td class="num">1,238</td><td class="num">1,330</td><td class="num">679</td><td class="num">$0.94</td><td class="num currency">$1</td></tr>
+            <tr><td>თორნიკე - Caleffi-ის რადიატორის სარქველზე</td><td>Caleffi</td><td class="num">676</td><td class="num">691</td><td class="num">438</td><td class="num">$1.77</td><td class="num currency">$1</td></tr>
+            <tr><td>სიახლე - თერმორუმი და ნემო - ახალი პარტნიორობა!</td><td>Thermorum</td><td class="num">4,285</td><td class="num">4,285</td><td class="num">1</td><td class="num">$0.17</td><td class="num currency">$1</td></tr>
+        </tbody>
+    </table>
+    <div class="chart-row">
+        <div class="chart-container"><canvas id="metaImpressions"></canvas></div>
+        <div class="chart-container"><canvas id="metaReach"></canvas></div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+<!-- Slide 3: Google Overview -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 272 92" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/><path fill="#EA4335" d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/><path fill="#FBBC05" d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z"/><path fill="#4285F4" d="M225 3v65h-9.5V3h9.5z"/><path fill="#34A853" d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z"/><path fill="#EA4335" d="M35.29 41.41V32H67c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 34.91.36 15.93 16.32.47 35.3.47c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-22.49.01z"/></svg>
+        <h2>Performance Overview</h2>
+    </div>
+    <div class="stats-grid">
+        <div class="stat-card"><div class="value">120,886</div><div class="label">Total Impressions</div></div>
+        <div class="stat-card cyan"><div class="value">8,387</div><div class="label">Total Clicks</div></div>
+        <div class="stat-card"><div class="value">6.94%</div><div class="label">Avg. CTR</div></div>
+        <div class="stat-card cyan"><div class="value">$265.00</div><div class="label">Total Spend</div></div>
+    </div>
+    <table>
+        <thead>
+            <tr><th>Campaign</th><th class="num">Impressions</th><th class="num">Clicks</th><th class="num">CTR</th><th class="num">Avg. CPC</th><th class="num">Spend</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Sime PROMO October 2026</td><td class="num">21,945</td><td class="num">1,891</td><td class="num">8.62%</td><td class="num">$0.04</td><td class="num currency">$66.19</td></tr>
+            <tr><td>Macro PROMO October 2026</td><td class="num">30,338</td><td class="num">1,970</td><td class="num">6.49%</td><td class="num">$0.02</td><td class="num currency">$48.17</td></tr>
+            <tr><td>kalde Image post Sempteber 2026</td><td class="num">28,136</td><td class="num">1,514</td><td class="num">5.38%</td><td class="num">$0.03</td><td class="num currency">$46.24</td></tr>
+            <tr><td>TESY promo October 2026</td><td class="num">15,628</td><td class="num">1,182</td><td class="num">7.56%</td><td class="num">$0.03</td><td class="num currency">$39.33</td></tr>
+            <tr><td>Dab Image post September 2026</td><td class="num">11,357</td><td class="num">823</td><td class="num">7.25%</td><td class="num">$0.03</td><td class="num currency">$27.66</td></tr>
+            <tr><td>SIME Image post September 2026</td><td class="num">8,690</td><td class="num">678</td><td class="num">7.80%</td><td class="num">$0.04</td><td class="num currency">$26.79</td></tr>
+            <tr><td>Macro Image post September 2026</td><td class="num">3,095</td><td class="num">204</td><td class="num">6.59%</td><td class="num">$0.04</td><td class="num currency">$7.62</td></tr>
+            <tr><td>სიახლე - თერმორუმი და ნემო - ახალი პარტნიორობა!</td><td class="num">1,697</td><td class="num">125</td><td class="num">7.37%</td><td class="num">$0.02</td><td class="num currency">$3.01</td></tr>
+        </tbody>
+    </table>
+    <div class="chart-row">
+        <div class="chart-container"><canvas id="googleImpressions"></canvas></div>
+        <div class="chart-container"><canvas id="googleClicks"></canvas></div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+
+<!-- Slide: Meta Photo Ads (1-4 of 12) -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="metaGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0668E1"/><stop offset="50%" stop-color="#7319E8"/><stop offset="100%" stop-color="#F70A8D"/></linearGradient></defs><text x="0" y="16" font-family="Montserrat, sans-serif" font-size="18" font-weight="800" fill="url(#metaGrad)">Meta</text></svg>
+        <h2>Photo Ads (1-4 of 12)</h2>
+    </div>
+    <div class="preview-grid">
+        <div class="preview-card">
+            <div class="header">
+                <h4>kalde Image post Sempteber 2026</h4>
+                <span class="spend">$69.82</span>
+            </div>
+            <div class="iframe-wrap photo">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1506581111502218%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>Sime PROMO October 2026</h4>
+                <span class="spend">$51.70</span>
+            </div>
+            <div class="iframe-wrap photo">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1523982386428757%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>Dab Image post September 2026</h4>
+                <span class="spend">$43.46</span>
+            </div>
+            <div class="iframe-wrap photo">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1499612542199075%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>TESY promo October 2026</h4>
+                <span class="spend">$29.35</span>
+            </div>
+            <div class="iframe-wrap photo">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1533996215427374%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+<!-- Slide: Meta Photo Ads (5-8 of 12) -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="metaGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0668E1"/><stop offset="50%" stop-color="#7319E8"/><stop offset="100%" stop-color="#F70A8D"/></linearGradient></defs><text x="0" y="16" font-family="Montserrat, sans-serif" font-size="18" font-weight="800" fill="url(#metaGrad)">Meta</text></svg>
+        <h2>Photo Ads (5-8 of 12)</h2>
+    </div>
+    <div class="preview-grid">
+        <div class="preview-card">
+            <div class="header">
+                <h4>SIME Image post September 2026</h4>
+                <span class="spend">$26.65</span>
+            </div>
+            <div class="iframe-wrap photo">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1494889239338072%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>Sime PROMO October 2026</h4>
+                <span class="spend">$26.04</span>
+            </div>
+            <div class="iframe-wrap photo">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1523982386428757%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>Macro PROMO October 2026</h4>
+                <span class="spend">$20.98</span>
+            </div>
+            <div class="iframe-wrap photo">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1531031662390496%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>TESY promo October 2026</h4>
+                <span class="spend">$13.47</span>
+            </div>
+            <div class="iframe-wrap photo">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1533996215427374%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+<!-- Slide: Meta Photo Ads (9-12 of 12) -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="metaGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0668E1"/><stop offset="50%" stop-color="#7319E8"/><stop offset="100%" stop-color="#F70A8D"/></linearGradient></defs><text x="0" y="16" font-family="Montserrat, sans-serif" font-size="18" font-weight="800" fill="url(#metaGrad)">Meta</text></svg>
+        <h2>Photo Ads (9-12 of 12)</h2>
+    </div>
+    <div class="preview-grid">
+        <div class="preview-card">
+            <div class="header">
+                <h4>Macro PROMO October 2026</h4>
+                <span class="spend">$13.22</span>
+            </div>
+            <div class="iframe-wrap photo">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1531031662390496%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>Macro Image post September 2026</h4>
+                <span class="spend">$10.32</span>
+            </div>
+            <div class="iframe-wrap photo">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1490431693117160%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>Macro PROMO October 2026</h4>
+                <span class="spend">$6.31</span>
+            </div>
+            <div class="iframe-wrap photo">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1531031662390496%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>სიახლე - თერმორუმი და ნემო - ახალი პარტნიორობა!</h4>
+                <span class="spend">$0.72</span>
+            </div>
+            <div class="iframe-wrap photo">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1487610850065911%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+<!-- Slide: Meta Video Ads (1-2 of 14) -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="metaGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0668E1"/><stop offset="50%" stop-color="#7319E8"/><stop offset="100%" stop-color="#F70A8D"/></linearGradient></defs><text x="0" y="16" font-family="Montserrat, sans-serif" font-size="18" font-weight="800" fill="url(#metaGrad)">Meta</text></svg>
+        <h2>Video Ads (1-2 of 14)</h2>
+    </div>
+    <div class="preview-grid videos">
+        <div class="preview-card">
+            <div class="header">
+                <h4>თაკო - 3 რჩევა ტუმბოზე</h4>
+                <span class="spend">$68.39</span>
+            </div>
+            <div class="iframe-wrap video">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1514847937342202%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>თაკო - Simeს ქვაბის განხილვა</h4>
+                <span class="spend">$53.47</span>
+            </div>
+            <div class="iframe-wrap video">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1523167083176954%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+<!-- Slide: Meta Video Ads (3-4 of 14) -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="metaGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0668E1"/><stop offset="50%" stop-color="#7319E8"/><stop offset="100%" stop-color="#F70A8D"/></linearGradient></defs><text x="0" y="16" font-family="Montserrat, sans-serif" font-size="18" font-weight="800" fill="url(#metaGrad)">Meta</text></svg>
+        <h2>Video Ads (3-4 of 14)</h2>
+    </div>
+    <div class="preview-grid videos">
+        <div class="preview-card">
+            <div class="header">
+                <h4>DAB Image VIDEO October 2026</h4>
+                <span class="spend">$36.30</span>
+            </div>
+            <div class="iframe-wrap video">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1530380339122295%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>თაკო - აქციის ანონსი</h4>
+                <span class="spend">$33.13</span>
+            </div>
+            <div class="iframe-wrap video">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1500405898786406%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+<!-- Slide: Meta Video Ads (5-6 of 14) -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="metaGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0668E1"/><stop offset="50%" stop-color="#7319E8"/><stop offset="100%" stop-color="#F70A8D"/></linearGradient></defs><text x="0" y="16" font-family="Montserrat, sans-serif" font-size="18" font-weight="800" fill="url(#metaGrad)">Meta</text></svg>
+        <h2>Video Ads (5-6 of 14)</h2>
+    </div>
+    <div class="preview-grid videos">
+        <div class="preview-card">
+            <div class="header">
+                <h4>თაკო - 3 რჩევა ტუმბოზე</h4>
+                <span class="spend">$29.74</span>
+            </div>
+            <div class="iframe-wrap video">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1514847937342202%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>თაკო - Simeს ქვაბის განხილვა</h4>
+                <span class="spend">$27.38</span>
+            </div>
+            <div class="iframe-wrap video">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1523167083176954%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+<!-- Slide: Meta Video Ads (7-8 of 14) -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="metaGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0668E1"/><stop offset="50%" stop-color="#7319E8"/><stop offset="100%" stop-color="#F70A8D"/></linearGradient></defs><text x="0" y="16" font-family="Montserrat, sans-serif" font-size="18" font-weight="800" fill="url(#metaGrad)">Meta</text></svg>
+        <h2>Video Ads (7-8 of 14)</h2>
+    </div>
+    <div class="preview-grid videos">
+        <div class="preview-card">
+            <div class="header">
+                <h4>ბათუმის ხიმშიაშვილის პროექტი</h4>
+                <span class="spend">$23.76</span>
+            </div>
+            <div class="iframe-wrap video">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1496969912463338%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>DAB Image VIDEO October 2026</h4>
+                <span class="spend">$16.59</span>
+            </div>
+            <div class="iframe-wrap video">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1530380339122295%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+<!-- Slide: Meta Video Ads (9-10 of 14) -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="metaGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0668E1"/><stop offset="50%" stop-color="#7319E8"/><stop offset="100%" stop-color="#F70A8D"/></linearGradient></defs><text x="0" y="16" font-family="Montserrat, sans-serif" font-size="18" font-weight="800" fill="url(#metaGrad)">Meta</text></svg>
+        <h2>Video Ads (9-10 of 14)</h2>
+    </div>
+    <div class="preview-grid videos">
+        <div class="preview-card">
+            <div class="header">
+                <h4>თაკო - აქციის ანონსი</h4>
+                <span class="spend">$12.66</span>
+            </div>
+            <div class="iframe-wrap video">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1500405898786406%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>ბათუმის ხიმშიაშვილის პროექტი</h4>
+                <span class="spend">$8.60</span>
+            </div>
+            <div class="iframe-wrap video">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1496969912463338%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+<!-- Slide: Meta Video Ads (11-12 of 14) -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="metaGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0668E1"/><stop offset="50%" stop-color="#7319E8"/><stop offset="100%" stop-color="#F70A8D"/></linearGradient></defs><text x="0" y="16" font-family="Montserrat, sans-serif" font-size="18" font-weight="800" fill="url(#metaGrad)">Meta</text></svg>
+        <h2>Video Ads (11-12 of 14)</h2>
+    </div>
+    <div class="preview-grid videos">
+        <div class="preview-card">
+            <div class="header">
+                <h4>თორნიკე - Caleffi-ის რადიატორის სარქველზე</h4>
+                <span class="spend">$7.49</span>
+            </div>
+            <div class="iframe-wrap video">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1490634489763547%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>თაკო - გათბობის სეზონის ვიდეო</h4>
+                <span class="spend">$3.96</span>
+            </div>
+            <div class="iframe-wrap video">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1545682340925428%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+<!-- Slide: Meta Video Ads (13-14 of 14) -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="metaGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0668E1"/><stop offset="50%" stop-color="#7319E8"/><stop offset="100%" stop-color="#F70A8D"/></linearGradient></defs><text x="0" y="16" font-family="Montserrat, sans-serif" font-size="18" font-weight="800" fill="url(#metaGrad)">Meta</text></svg>
+        <h2>Video Ads (13-14 of 14)</h2>
+    </div>
+    <div class="preview-grid videos">
+        <div class="preview-card">
+            <div class="header">
+                <h4>თაკო - გათბობის სეზონის ვიდეო</h4>
+                <span class="spend">$1.25</span>
+            </div>
+            <div class="iframe-wrap video">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1545682340925428%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+        <div class="preview-card">
+            <div class="header">
+                <h4>თორნიკე - Caleffi-ის რადიატორის სარქველზე</h4>
+                <span class="spend">$1.22</span>
+            </div>
+            <div class="iframe-wrap video">
+                <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3D1490634489763547%26id%3D483547718503422&width=500&show_text=true" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+
+<!-- Slide: Google Creatives (1-3 of 8) -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 272 92" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/><path fill="#EA4335" d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/><path fill="#FBBC05" d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z"/><path fill="#4285F4" d="M225 3v65h-9.5V3h9.5z"/><path fill="#34A853" d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z"/><path fill="#EA4335" d="M35.29 41.41V32H67c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 34.91.36 15.93 16.32.47 35.3.47c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-22.49.01z"/></svg>
+        <h2>Ad Creatives (1-3 of 8)</h2>
+    </div>
+    <div class="google-section">
+        <h4>Sime PROMO October 2026</h4>
+        <div class="stats">Impressions: <span>21,945</span> | Spend: <span>$66.19</span></div>
+        <div class="formats-row">
+            <div class="format-item"><div class="format-label">square</div>
+                <div class="g-card sq"><img src="https://tpc.googlesyndication.com/simgad/2758606408870997229"><div class="content"><span class="ad-tag">Ad</span><h5>Special Offers on SIME Boilers</h5><p>Save on Italian SIME gas boilers with special prices on selected models.</p></div></div>
+            </div>
+            <div class="format-item"><div class="format-label">landscape</div>
+                <div class="g-card ls"><img src="https://tpc.googlesyndication.com/simgad/6662668755695981132"><div class="content"><span class="ad-tag">Ad</span><h5>Special Offers on SIME Boilers</h5><p>Save on Italian SIME gas boilers with special prices on selected models.</p></div></div>
+            </div>
+            <div class="format-item"><div class="format-label">portrait</div>
+                <div class="g-card pt"><img src="https://tpc.googlesyndication.com/simgad/13840322448721055307"><div class="content"><span class="ad-tag">Ad</span><h5>SIME</h5><p>Save on Italian SIME gas boilers with special prices on selected models.</p></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="google-section">
+        <h4>Macro PROMO October 2026</h4>
+        <div class="stats">Impressions: <span>30,338</span> | Spend: <span>$48.17</span></div>
+        <div class="formats-row">
+            <div class="format-item"><div class="format-label">square</div>
+                <div class="g-card sq"><img src="https://tpc.googlesyndication.com/simgad/1658620131936473375"><div class="content"><span class="ad-tag">Ad</span><h5>MACRO</h5><p>Bring Warmth into Your Room</p></div></div>
+            </div>
+            <div class="format-item"><div class="format-label">landscape</div>
+                <div class="g-card ls"><img src="https://tpc.googlesyndication.com/simgad/17752722072536419809"><div class="content"><span class="ad-tag">Ad</span><h5>MACRO</h5><p>Bring Warmth into Your Room</p></div></div>
+            </div>
+            <div class="format-item"><div class="format-label">portrait</div>
+                <div class="g-card pt"><img src="https://tpc.googlesyndication.com/simgad/12543536067084566700"><div class="content"><span class="ad-tag">Ad</span><h5>MACRO</h5><p>Bring Warmth into Your Room</p></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="google-section">
+        <h4>kalde Image post Sempteber 2026</h4>
+        <div class="stats">Impressions: <span>28,136</span> | Spend: <span>$46.24</span></div>
+        <div class="formats-row">
+            <div class="format-item"><div class="format-label">square</div>
+                <div class="g-card sq"><img src="https://tpc.googlesyndication.com/simgad/17772565604934980674"><div class="content"><span class="ad-tag">Ad</span><h5>DAB DTron Submersible Pumps</h5><p>Shop reliable Kalde panel radiators at Thermorum with a 5-year warranty.</p></div></div>
+            </div>
+            <div class="format-item"><div class="format-label">landscape</div>
+                <div class="g-card ls"><img src="https://tpc.googlesyndication.com/simgad/11471964939343002682"><div class="content"><span class="ad-tag">Ad</span><h5>DAB DTron Submersible Pumps</h5><p>Shop reliable Kalde panel radiators at Thermorum with a 5-year warranty.</p></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+<!-- Slide: Google Creatives (4-6 of 8) -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 272 92" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/><path fill="#EA4335" d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/><path fill="#FBBC05" d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z"/><path fill="#4285F4" d="M225 3v65h-9.5V3h9.5z"/><path fill="#34A853" d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z"/><path fill="#EA4335" d="M35.29 41.41V32H67c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 34.91.36 15.93 16.32.47 35.3.47c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-22.49.01z"/></svg>
+        <h2>Ad Creatives (4-6 of 8)</h2>
+    </div>
+    <div class="google-section">
+        <h4>TESY promo October 2026</h4>
+        <div class="stats">Impressions: <span>15,628</span> | Spend: <span>$39.33</span></div>
+        <div class="formats-row">
+            <div class="format-item"><div class="format-label">square</div>
+                <div class="g-card sq"><img src="https://tpc.googlesyndication.com/simgad/3229784521116611129"><div class="content"><span class="ad-tag">Ad</span><h5>TESY Electric Convector Sale</h5><p>Save on TESY electric convectors at Thermorum. Shop online at trm.ge today!</p></div></div>
+            </div>
+            <div class="format-item"><div class="format-label">landscape</div>
+                <div class="g-card ls"><img src="https://tpc.googlesyndication.com/simgad/1682781337779820848"><div class="content"><span class="ad-tag">Ad</span><h5>TESY Electric Convector Sale</h5><p>Save on TESY electric convectors at Thermorum. Shop online at trm.ge today!</p></div></div>
+            </div>
+            <div class="format-item"><div class="format-label">portrait</div>
+                <div class="g-card pt"><img src="https://tpc.googlesyndication.com/simgad/749064824384924988"><div class="content"><span class="ad-tag">Ad</span><h5>Tesy</h5><p>Save on TESY electric convectors at Thermorum. Shop online at trm.ge today!</p></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="google-section">
+        <h4>Dab Image post September 2026</h4>
+        <div class="stats">Impressions: <span>11,357</span> | Spend: <span>$27.66</span></div>
+        <div class="formats-row">
+            <div class="format-item"><div class="format-label">square</div>
+                <div class="g-card sq"><img src="https://tpc.googlesyndication.com/simgad/2223172645043365633"><div class="content"><span class="ad-tag">Ad</span><h5>DAB DTron Submersible Pumps</h5><p>Built-in automatic control with protection against dry running and overload.</p></div></div>
+            </div>
+            <div class="format-item"><div class="format-label">landscape</div>
+                <div class="g-card ls"><img src="https://tpc.googlesyndication.com/simgad/772233691294360350"><div class="content"><span class="ad-tag">Ad</span><h5>DAB DTron Submersible Pumps</h5><p>Built-in automatic control with protection against dry running and overload.</p></div></div>
+            </div>
+            <div class="format-item"><div class="format-label">portrait</div>
+                <div class="g-card pt"><img src="https://tpc.googlesyndication.com/simgad/1622563173657318732"><div class="content"><span class="ad-tag">Ad</span><h5>DAB</h5><p>Built-in automatic control with protection against dry running and overload.</p></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="google-section">
+        <h4>SIME Image post September 2026</h4>
+        <div class="stats">Impressions: <span>8,690</span> | Spend: <span>$26.79</span></div>
+        <div class="formats-row">
+            <div class="format-item"><div class="format-label">square</div>
+                <div class="g-card sq"><img src="https://tpc.googlesyndication.com/simgad/11146816699667940132"><div class="content"><span class="ad-tag">Ad</span><h5>SIME</h5><p>Get ready for the heating season with Italian SIME gas boilers at special prices.</p></div></div>
+            </div>
+            <div class="format-item"><div class="format-label">landscape</div>
+                <div class="g-card ls"><img src="https://tpc.googlesyndication.com/simgad/1311591526805749593"><div class="content"><span class="ad-tag">Ad</span><h5>SIME</h5><p>Get ready for the heating season with Italian SIME gas boilers at special prices.</p></div></div>
+            </div>
+            <div class="format-item"><div class="format-label">portrait</div>
+                <div class="g-card pt"><img src="https://tpc.googlesyndication.com/simgad/13840322448721055307"><div class="content"><span class="ad-tag">Ad</span><h5>SIME</h5><p>Get ready for the heating season with Italian SIME gas boilers at special prices.</p></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+<!-- Slide: Google Creatives (7-8 of 8) -->
+<div class="slide">
+    <div class="section-header">
+        <svg class="platform-logo" viewBox="0 0 272 92" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/><path fill="#EA4335" d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/><path fill="#FBBC05" d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z"/><path fill="#4285F4" d="M225 3v65h-9.5V3h9.5z"/><path fill="#34A853" d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z"/><path fill="#EA4335" d="M35.29 41.41V32H67c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 34.91.36 15.93 16.32.47 35.3.47c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-22.49.01z"/></svg>
+        <h2>Ad Creatives (7-8 of 8)</h2>
+    </div>
+    <div class="google-section">
+        <h4>Macro Image post September 2026</h4>
+        <div class="stats">Impressions: <span>3,095</span> | Spend: <span>$7.62</span></div>
+        <div class="formats-row">
+            <div class="format-item"><div class="format-label">square</div>
+                <div class="g-card sq"><img src="https://tpc.googlesyndication.com/simgad/8593918678620747804"><div class="content"><span class="ad-tag">Ad</span><h5>New Macro Boiler</h5><p>Trusted products</p></div></div>
+            </div>
+            <div class="format-item"><div class="format-label">landscape</div>
+                <div class="g-card ls"><img src="https://tpc.googlesyndication.com/simgad/13779226293319204922"><div class="content"><span class="ad-tag">Ad</span><h5>New Macro Boiler</h5><p>Trusted products</p></div></div>
+            </div>
+            <div class="format-item"><div class="format-label">portrait</div>
+                <div class="g-card pt"><img src="https://tpc.googlesyndication.com/simgad/12543536067084566700"><div class="content"><span class="ad-tag">Ad</span><h5>MACRO</h5><p>Trusted products</p></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="google-section">
+        <h4>სიახლე - თერმორუმი და ნემო - ახალი პარტნიორობა!</h4>
+        <div class="stats">Impressions: <span>1,697</span> | Spend: <span>$3.01</span></div>
+        <div class="formats-row">
+            <div class="format-item"><div class="format-label">square</div>
+                <div class="g-card sq"><img src="https://tpc.googlesyndication.com/simgad/3375575762874227961"><div class="content"><span class="ad-tag">Ad</span><h5>THERMORUM</h5><p>Discover DAB Pumps at Nemo stores across Georgia, supplied by Thermoroom.</p></div></div>
+            </div>
+            <div class="format-item"><div class="format-label">landscape</div>
+                <div class="g-card ls"><img src="https://tpc.googlesyndication.com/simgad/4013627322337259947"><div class="content"><span class="ad-tag">Ad</span><h5>THERMORUM</h5><p>Discover DAB Pumps at Nemo stores across Georgia, supplied by Thermoroom.</p></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"><div class="brand"><span class="yellow">MARTIVI</span> <span class="blue">DIGITAL</span></div><div>October 2026</div></div>
+</div>
+
+
+<script>
+Chart.defaults.color = '#888';
+Chart.defaults.borderColor = 'rgba(255,199,17,0.1)';
+const Y = '#ffc711', C = '#3cc5ee';
+
+// Meta: Top Ads by Impressions
+new Chart(document.getElementById('metaImpressions'), {
+    type: 'bar',
+    data: {
+        labels: ["\u10d7\u10d0\u10d9\u10dd - 3 \u10e0\u10e9\u10d4\u10d5\u10d0 \u10e2\u10e3\u10db\u10d1\u10dd\u10d6\u10d4", "Sime PROMO October 2026", "\u10d7\u10d0\u10d9\u10dd - Sime\u10e1 \u10e5\u10d5\u10d0\u10d1\u10d8\u10e1 \u10d2\u10d0\u10dc\u10ee\u10d8", "DAB Image VIDEO October 2", "TESY promo October 2026", "\u10d7\u10d0\u10d9\u10dd - \u10d0\u10e5\u10ea\u10d8\u10d8\u10e1 \u10d0\u10dc\u10dd\u10dc\u10e1\u10d8", "\u10d1\u10d0\u10d7\u10e3\u10db\u10d8\u10e1 \u10ee\u10d8\u10db\u10e8\u10d8\u10d0\u10e8\u10d5\u10d8\u10da\u10d8\u10e1 \u10de\u10e0\u10dd\u10d4", "kalde Image post Semptebe", "Macro PROMO October 2026", "DAB Image VIDEO October 2"],
+        datasets: [{ label: 'Impressions', data: [285777, 243470, 228543, 157586, 139930, 137987, 104297, 77000, 57246, 33792], backgroundColor: Y, borderRadius: 6, borderSkipped: false }]
+    },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false }, title: { display: true, text: 'Top Ads by Impressions', font: { family: 'Montserrat', size: 14, weight: 'bold' }, color: Y, padding: { bottom: 15 }}},
+        scales: { x: { grid: { color: '#333' }, ticks: { callback: v => v >= 1000 ? (v/1000)+'K' : v }}, y: { grid: { display: false }, ticks: { font: { size: 10 }}}}
+    }
+});
+
+// Meta: Top Ads by Reach
+new Chart(document.getElementById('metaReach'), {
+    type: 'bar',
+    data: {
+        labels: ["\u10d7\u10d0\u10d9\u10dd - 3 \u10e0\u10e9\u10d4\u10d5\u10d0 \u10e2\u10e3\u10db\u10d1\u10dd\u10d6\u10d4", "Sime PROMO October 2026", "\u10d7\u10d0\u10d9\u10dd - Sime\u10e1 \u10e5\u10d5\u10d0\u10d1\u10d8\u10e1 \u10d2\u10d0\u10dc\u10ee\u10d8", "TESY promo October 2026", "DAB Image VIDEO October 2", "\u10d7\u10d0\u10d9\u10dd - \u10d0\u10e5\u10ea\u10d8\u10d8\u10e1 \u10d0\u10dc\u10dd\u10dc\u10e1\u10d8", "\u10d1\u10d0\u10d7\u10e3\u10db\u10d8\u10e1 \u10ee\u10d8\u10db\u10e8\u10d8\u10d0\u10e8\u10d5\u10d8\u10da\u10d8\u10e1 \u10de\u10e0\u10dd\u10d4", "Macro PROMO October 2026", "kalde Image post Semptebe", "\u10d7\u10dd\u10e0\u10dc\u10d8\u10d9\u10d4 - Caleffi-\u10d8\u10e1 \u10e0\u10d0\u10d3\u10d8"],
+        datasets: [{ label: 'Reach', data: [138672, 136326, 125495, 104574, 91194, 81669, 76667, 46715, 39211, 30359], backgroundColor: C, borderRadius: 6, borderSkipped: false }]
+    },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false }, title: { display: true, text: 'Top Ads by Reach', font: { family: 'Montserrat', size: 14, weight: 'bold' }, color: C, padding: { bottom: 15 }}},
+        scales: { x: { grid: { color: '#333' }, ticks: { callback: v => v >= 1000 ? (v/1000)+'K' : v }}, y: { grid: { display: false }, ticks: { font: { size: 10 }}}}
+    }
+});
+
+// Google: Campaigns by Impressions
+new Chart(document.getElementById('googleImpressions'), {
+    type: 'bar',
+    data: {
+        labels: ["Macro PROMO October 2026", "kalde Image post Sempteber 202", "Sime PROMO October 2026", "TESY promo October 2026", "Dab Image post September 2026", "SIME Image post September 2026", "Macro Image post September 202", "\u10e1\u10d8\u10d0\u10ee\u10da\u10d4 - \u10d7\u10d4\u10e0\u10db\u10dd\u10e0\u10e3\u10db\u10d8 \u10d3\u10d0 \u10dc\u10d4\u10db\u10dd - \u10d0"],
+        datasets: [{ label: 'Impressions', data: [30338, 28136, 21945, 15628, 11357, 8690, 3095, 1697], backgroundColor: Y, borderRadius: 6, borderSkipped: false }]
+    },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false }, title: { display: true, text: 'Campaigns by Impressions', font: { family: 'Montserrat', size: 14, weight: 'bold' }, color: Y, padding: { bottom: 15 }}},
+        scales: { x: { grid: { color: '#333' }, ticks: { callback: v => v >= 1000 ? (v/1000)+'K' : v }}, y: { grid: { display: false }, ticks: { font: { size: 10 }}}}
+    }
+});
+
+// Google: Campaigns by Clicks
+new Chart(document.getElementById('googleClicks'), {
+    type: 'bar',
+    data: {
+        labels: ["Macro PROMO October 2026", "Sime PROMO October 2026", "kalde Image post Sempteber 202", "TESY promo October 2026", "Dab Image post September 2026", "SIME Image post September 2026", "Macro Image post September 202", "\u10e1\u10d8\u10d0\u10ee\u10da\u10d4 - \u10d7\u10d4\u10e0\u10db\u10dd\u10e0\u10e3\u10db\u10d8 \u10d3\u10d0 \u10dc\u10d4\u10db\u10dd - \u10d0"],
+        datasets: [{ label: 'Clicks', data: [1970, 1891, 1514, 1182, 823, 678, 204, 125], backgroundColor: C, borderRadius: 6, borderSkipped: false }]
+    },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false }, title: { display: true, text: 'Campaigns by Clicks', font: { family: 'Montserrat', size: 14, weight: 'bold' }, color: C, padding: { bottom: 15 }}},
+        scales: { x: { grid: { color: '#333' }, ticks: { callback: v => v >= 1000 ? (v/1000)+'K' : v }}, y: { grid: { display: false }, ticks: { font: { size: 10 }}}}
+    }
+});
+</script>
+</body>
+</html>
